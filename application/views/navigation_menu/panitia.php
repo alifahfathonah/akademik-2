@@ -14,7 +14,7 @@
             <span class='title'> Informasi </span>
             <i class='fa fa-angle-down' aria-hidden='true'></i>
             <span class='selected'></span>
-        </a>
+        </a> 
         <ul class='sub-menu'>
             <li>
                 <a href="#"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>

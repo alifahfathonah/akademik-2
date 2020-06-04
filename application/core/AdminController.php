@@ -16,7 +16,7 @@ class AdminController extends MY_Controller
             return;
         }
 
-        if ($level !== 'Admin') {
+        if ($level !== 'admin') {
             redirect(base_url());
             return;
         }

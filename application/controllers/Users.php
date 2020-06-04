@@ -1,5 +1,5 @@
 <?php
-
+// Tabel Personal PSB 2020
 Class Users extends AdminController {
 
     function __construct() {
@@ -10,16 +10,16 @@ Class Users extends AdminController {
 
     function data() {
         // nama tabel
-        $table = 'v_tbl_user';
+        $table = 'tb_personal';
         // nama PK
-        $primaryKey = 'id_user';
+        $primaryKey = 'id_personal';
         // list field
         $columns = array(
-            array('db' => 'foto', 'dt' => 'foto'),
-            array('db' => 'nama_lengkap', 'dt' => 'nama_lengkap'),
-            array('db' => 'nama_level', 'dt' => 'nama_level'),
+            array('db' => 'pas_photo', 'dt' => 'pas_photo'),
+            array('db' => 'nama_personal', 'dt' => 'nama_personal'),
+            array('db' => 'level', 'dt' => 'level'),
             array(
-                'db' => 'id_user',
+                'db' => 'id_personal',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";

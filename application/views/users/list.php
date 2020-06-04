@@ -46,9 +46,9 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_lengkap"
+                        "data": "nama_personal"
                     },
-                    { "data": "nama_level" },
+                    { "data": "level" },
                     { "data": "aksi","width": "80px" },
                 ]
             } );
