@@ -17,22 +17,22 @@
                     </a>
                     <ul class='sub-menu'>
                         <li>
-                            <a href="#"><i class='fa fa-cubes'></i><span class='title'> Gelombang</a></span>
+                            <a href="<?=site_url('gelombang');?>"><i class='fa fa-cubes'></i><span class='title'> Gelombang</a></span>
                         </li>
                         <li>
-                            <a href="#"><i class='fa fa fa-th-large'></i><span class='title'> Jurusan</a></span>
+                            <a href="<?=site_url('jurusan');?>"><i class='fa fa fa-th-large'></i><span class='title'> Jurusan</a></span>
                         </li>
                         <li>
-                            <a href="#"><i class='fa fa-building'></i><span class='title'> Kelas</a></span>
+                            <a href="<?=site_url('kelas');?>"><i class='fa fa-building'></i><span class='title'> Kelas</a></span>
                         </li>
                         <li>
-                            <a href="#"><i class='fa fa-ticket'></i><span class='title'> Potongan</a></span>
+                            <a href="<?=site_url('potongan');?>"><i class='fa fa-ticket'></i><span class='title'> Potongan</a></span>
                         </li>
                         <li>
                             <a href="<?=site_url('users');?>"><i class='fa fa fa-users'></i><span class='title'> Data Personal</a></span>
                         </li>
                         <li>
-                            <a href="#"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>
+                            <a href="<?=site_url('siswa');?>"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>
                         </li>
 
                     </ul>
