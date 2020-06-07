@@ -22,10 +22,24 @@ Class Pendaftaran extends  CI_Controller {
         $time_now = '07:00:01' /* date('H:i:s') */;
         $data = array(
             'no_daftar' => 4948985994, 
-            'gelombang' => $this->Model_gelombang->where('tgl_awal <=',$date_now)->where('tgl_akhir >=',$date_now)->where('waktu_awal <=',$time_now)->where('waktu_akhir >=',$time_now)->where('status','aktif')->getAll(),
+            'gelombang' => $this->Model_gelombang->where('tgl_awal <=',$date_now)->where('waktu_awal <=',$time_now)->where('waktu_akhir >=',$time_now)->where('status','aktif')->getAll(),
         );
         $this->load->view('siswa/pendaftaran',$data);
     
+    }
+
+    
+    function dataRange($data){
+        
+        $date_now = date('Y-m-d');
+        $time_now = '07:00:01' /* date('H:i:s') */;
+        // $wa = tgl awal'
+        // $ba = tgl akhir;
+        foreach ($data as $a) {
+            if ( ($a->tgl_awal < $date_now) AND ($a->tgl_akhir > $date_now) ) {
+                return $a->nama_gelombang;
+            }
+        }
     }
 
     public function simpan()

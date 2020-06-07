@@ -25,9 +25,9 @@ class MY_Model extends CI_Model
     | Retrieve.
     |-----------------------------------------------------------------
     */
-    public function find($id)
+    public function find($colomn,$id)
     {
-        return $this->db->where("$this->table.ID", $id)
+        return $this->db->where($colomn, $id)
                         ->get($this->table)
                         ->row();
     }
@@ -94,15 +94,15 @@ class MY_Model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function update($id, $data)
+    public function update($id, $data,$colomn)
     {
-        $this->db->where("$this->table.ID", $id);
+        $this->db->where($colomn, $id);
         return $this->db->update($this->table, $data);
     }
 
-    public function delete($id)
+    public function delete($primary,$id)
     {
-        $this->db->where("$this->table.ID", $id);
+        $this->db->where($primary, $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }

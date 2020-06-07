@@ -45,10 +45,10 @@ function setValidationIcon($field)
 
     $validationIcon = '';
     if (form_error($field)) {
-        $validationIcon = '<span class="fa fa-times form-control-feedback" aria-hidden="true" style="margin-top: -16px;
+        $validationIcon = '<span class="fa fa-times form-control-feedback" aria-hidden="true" style="margin-top: -1px;
         margin-right: 8px;"></span>';
     } else {
-        $validationIcon = '<span class="fa fa-check form-control-feedback" aria-hidden="true" style="margin-top: -16px;
+        $validationIcon = '<span class="fa fa-check form-control-feedback" aria-hidden="true" style="margin-top: -1px;
         margin-right: 8px;"></span>';
     }
 

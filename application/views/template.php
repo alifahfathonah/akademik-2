@@ -201,15 +201,7 @@ font-weight: 600; -->
                         <div class="col-sm-12">
                             <!-- start: PAGE TITLE & BREADCRUMB -->
                             <ol class="breadcrumb">
-                                <li>
-                                    <i class="fa fa-home" aria-hidden="true"></i>
-                                    <a href="#">
-                                        Home
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    Dashboard
-                                </li>
+                                <?=$heading;?>
                                 <li class="search-box">
                                     <form class="sidebar-search">
                                         <div class="form-group">
@@ -310,7 +302,23 @@ margin-left: 1282px;">
                     Main.init();
                     Index.init();
                 });
+
+                /* Menu */
+                
+            <?php 
+    
+            if ( isset($menu) ) { ?>
+                $('#<?=$menu?>').addClass("active open");
+            <?php 
+            }
+                if (isset($sub_menu)) {
+                    echo "$('#$sub_menu').addClass('active')";
+                }
+            
+
+            ?>
             </script>
+
 
     </body>
 

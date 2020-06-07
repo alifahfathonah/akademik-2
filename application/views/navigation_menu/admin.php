@@ -1,4 +1,7 @@
 
+
+    
+
                 <li class="">
                     <a href="#" class="text-center" style="font-size: 1.5em;background-color: #8bf79cc4;font-weight: 600;" >
                         <span class="title">
@@ -6,17 +9,17 @@
                         </span>
                     </a>
                 </li>
-                <li class="active"><a href="<?php echo base_url() ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
+                <li ><a href="<?php echo base_url() ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
                 
-                <li>
+                <li id="master" class="">
                     <a href='javascript:void(0)'>
                         <i class='fa fa-bars'></i>
                         <span class='title'> Master </span>
                         <i class='fa fa-angle-down' aria-hidden='true'></i>
                         <span class='selected'></span>
                     </a>
-                    <ul class='sub-menu'>
-                        <li>
+                    <ul class='sub-menu '>
+                        <li id="gelombang" class="">
                             <a href="<?=site_url('gelombang');?>"><i class='fa fa-cubes'></i><span class='title'> Gelombang</a></span>
                         </li>
                         <li>

@@ -9,6 +9,8 @@ Class Gelombang extends OperatorController {
         // }
         //chekAksesModule();
         $this->load->library('ssp');
+        $this->menu = "master";
+        $this->sub_menu = "gelombang";
         // $this->load->model('Model_gelombang');
     }
 
@@ -34,8 +36,8 @@ Class Gelombang extends OperatorController {
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('guru/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('guru/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                    return anchor('gelombang/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('gelombang/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
                 }
             )
         );
@@ -53,18 +55,113 @@ Class Gelombang extends OperatorController {
     }
 
     function index() {
-        $this->template->load('template', 'gelombang/list');
+        $data['heading']    = $this->link('Gelombang ');
+        $data['menu'] = $this->menu;
+        $data['sub_menu'] = $this->sub_menu;
+        $this->template->load('template', 'gelombang/list' ,$data);
     }
 
     
     function add() {
-        if (isset($_POST['submit'])) {
-            $uplodFoto = $this->upload_foto_user();
-            $this->Model_users->save($uplodFoto);
-            redirect('users');
+        // if (isset($_POST['submit'])) {
+        //     $uplodFoto = $this->upload_foto_user();
+        //     $this->Model_users->save($uplodFoto);
+        //     redirect('users');
+        // } else {
+            // $data['Judul'] = 'Tambah Data';
+            // $this->template->load('template', 'gelombang/add',$data);
+        // }
+        
+        if (!$_POST) {
+            $data['input'] = (object) $this->Model_gelombang->getDefaultValues();
         } else {
-            $this->template->load('template', 'users/add');
+            $data['input'] = (object) $this->input->post(null, true);
         }
+
+        if (!$this->Model_gelombang->validate()) {
+            // $halaman     = $this->halaman;
+            $data['mainView']   = 'gelombang/add';
+            $data['heading']    = $this->link('Gelombang > Tambah');
+            $data['formAction'] = "gelombang/add";
+            $data['buttonText'] = 'Tambah';
+            $data['menu']       = $this->menu;
+            $data['sub_menu']   = $this->sub_menu;
+            $this->template->load('template', $data['mainView'],$data);
+            // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
+            return;
+        }
+
+        if ($this->Model_gelombang->insert($data['input'])) {
+            $this->session->set_flashdata('success', 'Data gelombang berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data kelas gagal disimpan.');
+        }
+
+        redirect('gelobang');
+    }
+
+    
+    public function edit($id = null)
+    {
+        $gelombang = $this->Model_gelombang->find('id_gelombang',$id);
+        if (!$gelombang) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('gelombang', 'refresh');
+        }
+
+        $data['input'] = (object) $this->input->post(null, true);
+        if (! $_POST) {
+            $data['input'] = (object) $gelombang;
+        }
+
+        $validate = $this->Model_gelombang->validate();
+        if (! $validate) {
+            $data['mainView']   = 'gelombang/add';
+            $data['heading']    = $this->link('Gelombang > Edit ');
+            $data['formAction'] = "gelombang/edit/$id";
+            $data['buttonText'] = 'Update';
+            $data['menu'] = $this->menu;
+            $data['sub_menu'] = $this->sub_menu;
+            $this->template->load('template', $data['mainView'] ,$data);
+            return;
+        }
+
+        $update = $this->Model_gelombang->update($id, $data['input'],'id_gelombang');
+        if (! $update) {
+            flashMessage('error', 'Data gagal diupdate!');
+        } else {
+            flashMessage('success', 'Data berhasil diupdate.');
+        }
+
+        redirect('gelombang', 'refresh');
+    }
+
+
+    function link($data = ''){
+        $b =  '
+        <li>
+            <i class="fa fa-home" aria-hidden="true"></i>
+            <a href="#">
+                Home
+            </a>
+        </li>
+        ';
+        $sumber = explode(">",$data);
+        $j = count($sumber);
+        $i=0; foreach ($sumber as $k) {
+            $i++;
+            $active = ($i == $j) ? 'active' : '' ;
+            $link = ($i != $j) ? '<a href="'.site_url(strtolower($k)).'">
+                '.$k.'
+            </a>' : $k ;
+            $b .= '
+            <li class="'.$active.'">
+                '.$link.'
+            </li>';
+        }
+
+        return $b;
+        
     }
 
 }

@@ -117,7 +117,7 @@
                                 <div class="form-group row <?= setValidationStyle('tempat_lahir') ?>">
                                     <label for="nama" class="col-sm-4 control-label">Tempat Lahir</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
+                                            <input type="text" value="<?=$input->tempat_lahir?? '';?>" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir">
                                             <?= setValidationIcon('tempat_lahir') ?>
                                             <?= form_error('tempat_lahir');?>
                                         </div>

@@ -1,3 +1,8 @@
+<br>
+<br>
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
     <div class="panel panel-default">
