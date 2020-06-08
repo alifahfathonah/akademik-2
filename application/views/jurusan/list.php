@@ -1,3 +1,8 @@
+<br>
+<br>
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
    
@@ -18,8 +23,9 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>KODE JURUSAN</th>
-                        <th>NAMA JURUSAN</th>
+                        <th>ID JURUSAN</th>
+                        <th>NAMA SINGKATAN</th>
+                        <th>BIDANG KEAHLIAN</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,12 +51,13 @@
                         "sClass": "text-center",
                         "orderable": false,
                     },
+                    { "data": "nama_singkat" },
+                    { "data": "bidang_keahlian" },
                     {
-                        "data": "kd_jurusan",
-                        "width": "120px",
+                        "data": "program_keahlian",
+                        "width": "250px",
                         "sClass": "text-center"
                     },
-                    { "data": "nama_jurusan" },
                     { "data": "aksi","width": "80px" },
                 ]
             } );

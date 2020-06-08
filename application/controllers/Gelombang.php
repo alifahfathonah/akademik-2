@@ -37,7 +37,7 @@ Class Gelombang extends OperatorController {
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
                     return anchor('gelombang/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('gelombang/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                        '.anchor('gelombang/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -55,7 +55,7 @@ Class Gelombang extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->link('Gelombang ');
+        $data['heading']    = $this->template->link('Gelombang ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'gelombang/list' ,$data);
@@ -81,7 +81,7 @@ Class Gelombang extends OperatorController {
         if (!$this->Model_gelombang->validate()) {
             // $halaman     = $this->halaman;
             $data['mainView']   = 'gelombang/add';
-            $data['heading']    = $this->link('Gelombang > Tambah');
+            $data['heading']    = $this->template->link('Gelombang > Tambah');
             $data['formAction'] = "gelombang/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
@@ -117,7 +117,7 @@ Class Gelombang extends OperatorController {
         $validate = $this->Model_gelombang->validate();
         if (! $validate) {
             $data['mainView']   = 'gelombang/add';
-            $data['heading']    = $this->link('Gelombang > Edit ');
+            $data['heading']    = $this->template->link('Gelombang > Edit ');
             $data['formAction'] = "gelombang/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
@@ -136,32 +136,23 @@ Class Gelombang extends OperatorController {
         redirect('gelombang', 'refresh');
     }
 
-
-    function link($data = ''){
-        $b =  '
-        <li>
-            <i class="fa fa-home" aria-hidden="true"></i>
-            <a href="#">
-                Home
-            </a>
-        </li>
-        ';
-        $sumber = explode(">",$data);
-        $j = count($sumber);
-        $i=0; foreach ($sumber as $k) {
-            $i++;
-            $active = ($i == $j) ? 'active' : '' ;
-            $link = ($i != $j) ? '<a href="'.site_url(strtolower($k)).'">
-                '.$k.'
-            </a>' : $k ;
-            $b .= '
-            <li class="'.$active.'">
-                '.$link.'
-            </li>';
+    public function delete($id)
+    {
+        $gelombang = $this->Model_gelombang->find('id_gelombang',$id);
+        if (!$gelombang) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('gelombang', 'refresh');
         }
 
-        return $b;
+        $hapus = $this->Model_gelombang->where('id_gelombang',$id)->delete();
+
+        if (!$hapus) {
+            flashMessage('error', 'Data gagal dihapus!');
+        } else {
+            flashMessage('success', 'Data berhasil dihapus.');
+        }
         
+        redirect('gelombang', 'refresh');
     }
 
 }

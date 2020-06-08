@@ -100,9 +100,8 @@ class MY_Model extends CI_Model
         return $this->db->update($this->table, $data);
     }
 
-    public function delete($primary,$id)
+    public function delete()
     {
-        $this->db->where($primary, $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }

@@ -22,7 +22,8 @@ class Welcome extends OperatorController {
     public function index() {
         // $this->output->delete_cache();
         //$this->load->view('template');
-        $this->template->load('template', 'welcome_message');
+        $data['heading'] = $this->template->link('Dashboard ');
+        $this->template->load('template', 'welcome_message',$data);
     }
 
     function guzzle() {

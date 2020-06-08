@@ -9,7 +9,7 @@
                         </span>
                     </a>
                 </li>
-                <li ><a href="<?php echo base_url() ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
+                <li ><a href="<?php echo base_url('welcome') ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
                 
                 <li id="master" class="">
                     <a href='javascript:void(0)'>
@@ -22,19 +22,19 @@
                         <li id="gelombang" class="">
                             <a href="<?=site_url('gelombang');?>"><i class='fa fa-cubes'></i><span class='title'> Gelombang</a></span>
                         </li>
-                        <li>
+                        <li id="jurusan">
                             <a href="<?=site_url('jurusan');?>"><i class='fa fa fa-th-large'></i><span class='title'> Jurusan</a></span>
                         </li>
-                        <li>
+                        <li id="kelas">
                             <a href="<?=site_url('kelas');?>"><i class='fa fa-building'></i><span class='title'> Kelas</a></span>
-                        </li>
-                        <li>
+                        </li >
+                        <li id="potongan">
                             <a href="<?=site_url('potongan');?>"><i class='fa fa-ticket'></i><span class='title'> Potongan</a></span>
                         </li>
-                        <li>
+                        <li id="users">
                             <a href="<?=site_url('users');?>"><i class='fa fa fa-users'></i><span class='title'> Data Personal</a></span>
                         </li>
-                        <li>
+                        <li id="siswa">
                             <a href="<?=site_url('siswa');?>"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>
                         </li>
 
