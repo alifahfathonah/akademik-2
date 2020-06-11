@@ -1,8 +1,8 @@
 <?php
 
-class Model_kelas extends MY_Model {
+class Model_potongan extends MY_Model {
 
-    public $table ="tb_kelas";
+    public $table ="tb_potongan";
     
     // function save() {
     //     $data = array(
@@ -37,19 +37,19 @@ class Model_kelas extends MY_Model {
     {
         $validationRules = [
             [
-                'field' => 'nama_kelas',
-                'label' => 'Nama Kelas',
-                'rules' => 'trim|required|min_length[1]|max_length[30]'
+                'field' => 'nama_potongan',
+                'label' => 'Nama Potongan',
+                'rules' => 'trim|required|min_length[1]|max_length[40]'
             ],
             [
-                'field' => 'status_kelas',
-                'label' => 'Status Kelas',
+                'field' => 'jenis_potongan',
+                'label' => 'Jenis Potongan',
                 'rules' => 'trim|required|min_length[1]'
             ],
             [
-                'field' => 'id_personal',
-                'label' => 'Personal',
-                'rules' => 'trim|required|min_length[1]'
+                'field' => 'biaya_potongan',
+                'label' => 'Biaya Potongan',
+                'rules' => 'trim|required|numeric'
             ],
         ];
 
@@ -59,9 +59,9 @@ class Model_kelas extends MY_Model {
     public function getDefaultValues()
     {
         return [
-            'nama_kelas'    => '',
-            'status_kelas'    => '',
-            'id_personal'    => '',
+            'nama_potongan'    => '',
+            'biaya_potongan'    => '',
+            'jenis_potongan'    => '',
         ];
     }
 

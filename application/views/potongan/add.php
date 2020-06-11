@@ -32,51 +32,41 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('nama_potongan') ?>">
+                <label class="col-sm-2 control-label" for="nama_potongan">
+                    Nama Potongan
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                    <input type="text" value="<?=$input->nama_potongan?>" name="nama_potongan" placeholder="" id="Nama Potongan" class="form-control">
+                    <?= setValidationIcon('nama_potongan') ?>
+                    <?=form_error('nama_potongan');?>
                 </div>
             </div>
             
             
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
+            <div class="form-group <?= setValidationStyle('jenis_potongan') ?>">
+                <label class="col-sm-2 control-label" for="jenis_potongan">
+                    Jenis Potongan
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
+                    <input type="text" value="<?=$input->jenis_potongan?>" name="jenis_potongan" placeholder="" id="Jenis potongan" class="form-control">
+                    <?= setValidationIcon('jenis_potongan') ?>
+                    <?=form_error('jenis_potongan');?>
                 </div>
             </div>
             
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
-                    <div class="col-sm-10">
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
-                            </label>
-                        </div>
-                        
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
-                        
-                        
-                    </div>
+            <div class="form-group <?= setValidationStyle('biaya_potongan') ?>">
+                <label class="col-sm-2 control-label" for="biaya_potongan">
+                    Biaya Potongan
+                </label>
+                <div class="col-sm-9">
+                    <input type="number" value="<?=$input->biaya_potongan?>" name="biaya_potongan" placeholder="" id="Biaya Potongan" class="form-control">
+                    <?= setValidationIcon('biaya_potongan') ?>
+                    <?=form_error('biaya_potongan');?>
+                </div>
             </div>
+            
+        
 
             
             <div class="form-group">

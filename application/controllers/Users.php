@@ -5,7 +5,9 @@ Class Users extends AdminController {
     function __construct() {
         parent::__construct();
         $this->load->library('ssp');
-        $this->load->model('Model_users');
+        // $this->load->model('Model_users');
+        $this->menu = "master";
+        $this->sub_menu = "users";
     }
 
     function data() {
@@ -42,40 +44,98 @@ Class Users extends AdminController {
     }
 
     function index() {
-        $this->template->load('template', 'users/list');
+        $data['heading']    = $this->template->link('Personal ');
+        $data['menu'] = $this->menu;
+        $data['sub_menu'] = $this->sub_menu;
+        $this->template->load('template', 'users/list',$data);
     }
 
+    
     function add() {
-        if (isset($_POST['submit'])) {
-            $uplodFoto = $this->upload_foto_user();
-            $this->Model_users->save($uplodFoto);
-            redirect('users');
+        
+        if (!$_POST) {
+            $data['input'] = (object) $this->Model_users->getDefaultValues();
         } else {
-            $this->template->load('template', 'users/add');
+            $data['input'] = (object) $this->input->post(null, true);
         }
+
+        if (!$this->Model_users->validate()) {
+            // $halaman     = $this->halaman;
+            $data['mainView']   = 'users/add';
+            $data['heading']    = $this->template->link('Potongan > Tambah');
+            $data['formAction'] = "users/add";
+            $data['buttonText'] = 'Tambah';
+            $data['menu']       = $this->menu;
+            $data['sub_menu']   = $this->sub_menu;
+            $this->template->load('template', $data['mainView'],$data);
+            // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
+            return;
+        }
+
+        if ($this->Model_users->insert($data['input'])) {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        }
+
+        redirect($this->sub_menu);
     }
+
     
-    function edit(){
-        if(isset($_POST['submit'])){
-            $uplodFoto = $this->upload_foto_user();
-            $this->Model_users->update($uplodFoto);
-            redirect('users');
-        }else{
-            $id_user       = $this->uri->segment(3);
-            $data['user']  = $this->db->get_where('tbl_user',array('id_user'=>$id_user))->row_array();
-            $this->template->load('template', 'users/edit',$data);
+    public function edit($id = null)
+    {
+        $potongan = $this->Model_users->find('id_potongan',$id);
+        if (!$potongan) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('potongan', 'refresh');
         }
-    }
-    
-    function delete(){
-        $id_user = $this->uri->segment(3);
-        if(!empty($id_user)){
-            // proses delete data
-            $this->db->where('id_user',$id_user);
-            $this->db->delete('tbl_user');
+
+        $data['input'] = (object) $this->input->post(null, true);
+        if (! $_POST) {
+            $data['input'] = (object) $potongan;
         }
-        redirect('users');
+
+        $validate = $this->Model_users->validate();
+        if (! $validate) {
+            $data['mainView']   = 'potongan/add';
+            $data['heading']    = $this->template->link('Potongan > Edit ');
+            $data['formAction'] = "potongan/edit/$id";
+            $data['buttonText'] = 'Update';
+            $data['menu'] = $this->menu;
+            $data['sub_menu'] = $this->sub_menu;
+            $this->template->load('template', $data['mainView'] ,$data);
+            return;
+        }
+
+        $update = $this->Model_users->update($id, $data['input'],'id_potongan');
+        if (! $update) {
+            flashMessage('error', 'Data gagal diupdate!');
+        } else {
+            flashMessage('success', 'Data berhasil diupdate.');
+        }
+
+        redirect($this->sub_menu, 'refresh');
     }
+
+    public function delete($id)
+    {
+        $potongan = $this->Model_users->find('id_potongan',$id);
+        if (!$potongan) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('potongan', 'refresh');
+        }
+
+        $hapus = $this->Model_users->where('id_potongan',$id)->delete();
+
+        if (!$hapus) {
+            flashMessage('error', 'Data gagal dihapus!');
+        } else {
+            flashMessage('success', 'Data berhasil dihapus.');
+        }
+        
+        redirect($this->sub_menu, 'refresh');
+    }
+
     
     
      function upload_foto_user(){

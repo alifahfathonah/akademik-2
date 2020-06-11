@@ -1,6 +1,10 @@
+<br>
+<br>
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
-   <?php echo anchor('users/rule','RULE USER',array('class'=>'btn btn-danger btn-sm'));?>
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table

@@ -9,7 +9,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
-                <?php echo anchor('kelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('potongan/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -22,8 +22,9 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>NAMA KELAS</th>
-                        <th>STATUS KELAS</th>
+                        <th>NAMA POTONGAN</th>
+                        <th>BIAYA POTONGAN</th>
+                        <th>JENIS POTONGAN</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -40,7 +41,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('potongan/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -50,10 +51,13 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "nama_potongan"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "biaya_potongan"
+                    },
+                    {
+                        "data": "jenis_potongan"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

@@ -1,6 +1,8 @@
 <?php
 class Model_user extends MY_Model{
     
+    /* Buat Login Personal */
+
     public $table ="tb_personal";
     
     function chekLogin($username,$password,$status){
