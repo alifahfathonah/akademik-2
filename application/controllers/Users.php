@@ -8,6 +8,10 @@ Class Users extends AdminController {
         // $this->load->model('Model_users');
         $this->menu = "master";
         $this->sub_menu = "users";
+        
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
     }
 
     function data() {
@@ -20,13 +24,15 @@ Class Users extends AdminController {
             array('db' => 'pas_photo', 'dt' => 'pas_photo'),
             array('db' => 'nama_personal', 'dt' => 'nama_personal'),
             array('db' => 'level', 'dt' => 'level'),
+            array('db' => 'jabatan', 'dt' => 'jabatan'),
+            array('db' => 'status', 'dt' => 'status'),
             array(
                 'db' => 'id_personal',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
                     return anchor('users/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('users/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                        '.anchor('users/delete/'.$d,'<i class="fa fa-trash"  ></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,10 +65,21 @@ Class Users extends AdminController {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_users->validate()) {
+        /* Cek FILE Upload gambar */
+        if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
+            $upload = $this->upload_foto_user();
+
+            if ($upload) {
+                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+                
+            }
+
+        }
+
+        if (!$this->Model_users->validate() || $this->form_validation->error_array() ) {
             // $halaman     = $this->halaman;
             $data['mainView']   = 'users/add';
-            $data['heading']    = $this->template->link('Potongan > Tambah');
+            $data['heading']    = $this->template->link('Users > Tambah');
             $data['formAction'] = "users/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
@@ -71,6 +88,7 @@ Class Users extends AdminController {
             // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
             return;
         }
+
 
         if ($this->Model_users->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
@@ -84,22 +102,34 @@ Class Users extends AdminController {
     
     public function edit($id = null)
     {
-        $potongan = $this->Model_users->find('id_potongan',$id);
-        if (!$potongan) {
+        $personal = $this->Model_users->find('id_personal',$id);
+        if (!$personal) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('potongan', 'refresh');
+            redirect($this->sub_menu, 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $potongan;
+            $data['input'] = (object) $personal;
+        }
+
+        
+        /* Cek FILE Upload gambar */
+        if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
+            $upload = $this->upload_foto_user();
+
+            if ($upload) {
+                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+                
+            }
+
         }
 
         $validate = $this->Model_users->validate();
-        if (! $validate) {
-            $data['mainView']   = 'potongan/add';
-            $data['heading']    = $this->template->link('Potongan > Edit ');
-            $data['formAction'] = "potongan/edit/$id";
+        if (! $validate || $this->form_validation->error_array() ) {
+            $data['mainView']   = 'users/add';
+            $data['heading']    = $this->template->link('Users > Edit ');
+            $data['formAction'] = "users/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -107,7 +137,7 @@ Class Users extends AdminController {
             return;
         }
 
-        $update = $this->Model_users->update($id, $data['input'],'id_potongan');
+        $update = $this->Model_users->update($id, $data['input'],'id_personal');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -119,13 +149,13 @@ Class Users extends AdminController {
 
     public function delete($id)
     {
-        $potongan = $this->Model_users->find('id_potongan',$id);
-        if (!$potongan) {
+        $personal = $this->Model_users->find('id_personal',$id);
+        if (!$personal) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('potongan', 'refresh');
+            redirect($this->sub_menu, 'refresh');
         }
 
-        $hapus = $this->Model_users->where('id_potongan',$id)->delete();
+        $hapus = $this->Model_users->where('id_personal',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');
@@ -139,14 +169,24 @@ Class Users extends AdminController {
     
     
      function upload_foto_user(){
-        $config['upload_path']          = './uploads/foto_user/';
-        $config['allowed_types']        = 'jpg|png';
-        $config['max_size']             = 1024; // imb
+        $config['upload_path']      = './uploads/foto_user/';
+        $config['allowed_types']    = 'jpg|png';
+        $config['max_size']         = 2024;                    // 2mb
+        $config['max_width']        = 0;
+        $config['max_height']       = 0;
+        $config['overwrite']        = true;
+        $config['file_ext_tolower'] = true;
+        // proses upload
+        
         $this->load->library('upload', $config);
-            // proses upload
-        $this->upload->do_upload('userfile');
-        $upload = $this->upload->data();
-        return $upload['file_name'];
+        if ($this->upload->do_upload('pas_photo')) {
+            // Upload OK, return uploaded file info.
+            return $this->upload->data();
+        } else {
+            // Add error to $_error_array
+            $this->form_validation->add_to_error_array('pas_photo', $this->upload->display_errors('', ''));
+            return false;
+        }
     }
     
     

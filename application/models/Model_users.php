@@ -21,8 +21,50 @@ class Model_users extends MY_Model {
             ],
             [
                 'field' => 'password',
-                'label' => 'Biaya Personal',
+                'label' => 'Password',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'no_hp',
+                'label' => 'No Hp',
                 'rules' => 'trim|required|numeric'
+            ],
+            [
+                'field' => 'jenis_kelamin',
+                'label' => 'Jenis Kelamin',
+                'rules' => 'trim|required|alpha',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                ),
+            ],
+            [
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'status',
+                'label' => 'Status',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
+            ],
+            [
+                'field' => 'level',
+                'label' => 'Level',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
+            ],
+            [
+                'field' => 'jabatan',
+                'label' => 'Jabatan',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
             ],
         ];
 

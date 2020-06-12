@@ -54,3 +54,17 @@ function setValidationIcon($field)
 
     return $validationIcon;
 }
+
+/* Validasi Upload */
+
+// Show form error validation message for "file" input.
+function fileFormError($field, $prefix = '', $suffix = '')
+{
+    $CI =& get_instance();
+    $error_field = $CI->form_validation->error_array();
+
+    if (!empty($error_field[$field])) {
+        return $prefix . $error_field[$field] . $suffix;
+    }
+    return '';
+}

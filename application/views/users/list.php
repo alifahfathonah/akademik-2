@@ -1,8 +1,8 @@
 <br>
 <br>
-<?php if(showFlashMessage()){
+<?php 
     echo showFlashMessage();
-};?>
+?>
 <div class="col-md-12">
     <!-- start: DYNAMIC TABLE PANEL -->
     <div class="panel panel-default">
@@ -24,6 +24,8 @@
                         <th>NO</th>
                         <th>NAMA LENGKAP</th>
                         <th>LEVEL</th>
+                        <th>JABATAN</th>
+                        <th>STATUS</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -41,7 +43,7 @@
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
                 "ajax": '<?php echo site_url('users/data'); ?>',
-                "order": [[ 2, 'asc' ]],
+                "order": [[ 1, 'asc' ]],
                 "columns": [
                     {
                         "data": null,
@@ -52,7 +54,15 @@
                     {
                         "data": "nama_personal"
                     },
+                    
                     { "data": "level" },
+
+                    {
+                        "data": "jabatan"
+                    },
+                    {
+                        "data": "status"
+                    },
                     { "data": "aksi","width": "80px" },
                 ]
             } );
