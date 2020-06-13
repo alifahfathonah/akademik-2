@@ -168,7 +168,7 @@ Class Users extends AdminController {
 
     
     
-     function upload_foto_user(){
+    function upload_foto_user(){
         $config['upload_path']      = './uploads/foto_user/';
         $config['allowed_types']    = 'jpg|png';
         $config['max_size']         = 2024;                    // 2mb

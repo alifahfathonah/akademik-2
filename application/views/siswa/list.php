@@ -1,9 +1,6 @@
+<br>
+<br>
 <div class="col-md-12">
-    <!-- start: DYNAMIC TABLE PANEL -->
-   <?php echo anchor('siswa/add','Input Data Baru',array('class'=>'btn btn-danger btn-sm'))?>
-   <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Import Data Excel Dari Dapodik</button>
-
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -22,11 +19,12 @@
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>FOTO</th>
-                        <th>NIM</th>
-                        <th>NAMA</th>
+                        <th>NISN</th>
+                        <th>NAMA SISWA</th>
+                        <th>JENIS KELAMIN</th>
                         <th>TEMPAT LAHIR</th>
                         <th>TANGGAL LAHIR</th>
+                        <th>STATUS</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -52,15 +50,16 @@
                         "sClass": "text-center",
                         "orderable": false,
                     },
-                    { "data": "foto" },
+                    { "data": "nisn" },
                     {
-                        "data": "nim",
+                        "data": "nama_siswa",
                         "width": "120px",
                         "sClass": "text-center"
                     },
-                    { "data": "nama" },
+                    { "data": "jenis_kelamin" },
                     { "data": "tempat_lahir" },
-                    { "data": "tanggal_lahir", "width": "150px" },
+                    { "data": "tgl_lahir", "width": "150px" },
+                    { "data": "status" },
                     { "data": "aksi","width": "75px" },
                 ]
             } );

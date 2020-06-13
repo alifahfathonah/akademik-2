@@ -9,7 +9,8 @@ Class Siswa extends OperatorController {
         // }
         //chekAksesModule();
         $this->load->library('ssp');
-        $this->load->model('Model_siswa');
+        $this->menu = "master";
+        $this->sub_menu = "siswa";
     }
 
     
@@ -17,32 +18,33 @@ Class Siswa extends OperatorController {
     function data() {
    
         // nama tabel
-        $table = 'tbl_siswa';
+        $table = 'tb_siswa';
         // nama PK
-        $primaryKey = 'nim';
+        $primaryKey = 'id_siswa';
         // list field
         $columns = array(
-            array('db' => 'foto',
-                'dt' => 'foto',
+            array('db' => 'jenis_kelamin',
+                'dt' => 'jenis_kelamin',
                 'formatter' => function( $d) {
-                   if(empty($d)){
-                       return "<img width='60px' src='".  base_url()."uploads/user-siluet.png'>";
+                   if($d == 'L'){
+                       return "Laki-laki";
                    }else{
-                       return "<img width='60px' src='".  base_url()."/uploads/".$d."'>";
+                       return "Perempuan";
                    }   
                 }
             ),
-            array('db' => 'nim', 'dt' => 'nim'),
-            array('db' => 'nama', 'dt' => 'nama'),
+            array('db' => 'nisn', 'dt' => 'nisn'),
+            array('db' => 'nama_siswa', 'dt' => 'nama_siswa'),
             array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
-            array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
+            array('db' => 'tgl_lahir', 'dt' => 'tgl_lahir'),
+            array('db' => 'status', 'dt' => 'status'),
             array(
-                'db' => 'nim',
+                'db' => 'id_siswa',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
                     return anchor('siswa/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete"');
+                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')" ');
                 }
             )
         );
@@ -60,17 +62,53 @@ Class Siswa extends OperatorController {
     }
 
     function index() {
-        $this->template->load('template', 'siswa/home');
+        $data['heading']    = $this->template->link('Siswa ');
+        $data['menu'] = $this->menu;
+        $data['sub_menu'] = $this->sub_menu;
+        $this->template->load('template', 'siswa/list' ,$data);
     }
 
+    
     function add() {
-        if (isset($_POST['submit'])) {
-            $uploadFoto = $this->upload_foto_siswa();
-            $this->Model_siswa->save($uploadFoto);
-            redirect('siswa');
+        
+        if (!$_POST) {
+            $data['input'] = (object) $this->Model_siswa->getDefaultValues();
         } else {
-            $this->template->load('template', 'siswa/add');
+            $data['input'] = (object) $this->input->post(null, true);
         }
+
+        /* Cek FILE Upload gambar */
+        if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
+            $upload = $this->upload_foto_user();
+
+            if ($upload) {
+                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+                
+            }
+
+        }
+
+        if (!$this->Model_siswa->validate() || $this->form_validation->error_array() ) {
+            // $halaman     = $this->halaman;
+            $data['mainView']   = 'siswa/add';
+            $data['heading']    = $this->template->link('Siswa > Tambah');
+            $data['formAction'] = "siswa/add";
+            $data['buttonText'] = 'Tambah';
+            $data['menu']       = $this->menu;
+            $data['sub_menu']   = $this->sub_menu;
+            $this->template->load('template', $data['mainView'],$data);
+            // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
+            return;
+        }
+
+
+        if ($this->Model_siswa->insert($data['input'])) {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        }
+
+        redirect($this->sub_menu);
     }
     
     function edit(){
@@ -95,15 +133,26 @@ Class Siswa extends OperatorController {
         redirect('siswa');
     }
     
-    function upload_foto_siswa(){
-        $config['upload_path']          = './uploads/';
-        $config['allowed_types']        = 'jpg|png';
-        $config['max_size']             = 1024; // imb
+    
+    function upload_foto_user(){
+        $config['upload_path']      = './uploads/foto_user/';
+        $config['allowed_types']    = 'jpg|png';
+        $config['max_size']         = 2024;                    // 2mb
+        $config['max_width']        = 0;
+        $config['max_height']       = 0;
+        $config['overwrite']        = true;
+        $config['file_ext_tolower'] = true;
+        // proses upload
+        
         $this->load->library('upload', $config);
-            // proses upload
-        $this->upload->do_upload('userfile');
-        $upload = $this->upload->data();
-        return $upload['file_name'];
+        if ($this->upload->do_upload('pas_photo')) {
+            // Upload OK, return uploaded file info.
+            return $this->upload->data();
+        } else {
+            // Add error to $_error_array
+            $this->form_validation->add_to_error_array('pas_photo', $this->upload->display_errors('', ''));
+            return false;
+        }
     }
     
     

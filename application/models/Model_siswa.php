@@ -1,57 +1,89 @@
 <?php
 
-class Model_siswa extends CI_Model {
+class Model_siswa extends MY_Model {
 
-    public $table ="tbl_siswa";
+    public $table ="tb_siswa";
     
-    function save($foto) {
-        $data = array(
-            'nim'           => $this->input->post('nim', TRUE),
-            'kd_agama'      => $this->input->post('agama', TRUE),
-            'nama'          => $this->input->post('nama', TRUE),
-            'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
-            'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
-            'gender'        => $this->input->post('gender', TRUE),
-            'foto'          => $foto,
-            'id_rombel'     => $this->input->post('rombel',TRUE)
-        );
-        $this->db->insert($this->table,$data);
-        
-        $tahun_akademik = $this->db->get_where('tbl_tahun_akademik',array('is_aktif'=>'y'))->row_array();
-        
-        $history =  array(
-            'nim'                 =>  $this->input->post('nim', TRUE),
-            'id_tahun_akademik'   =>  $tahun_akademik['id_tahun_akademik'],
-            'id_rombel'           =>  $this->input->post('rombel', TRUE)
-            );
-        $this->db->insert('tbl_history_kelas',$history);
-    }
     
-    function update($foto) {
-        if(empty($foto)){
-            // update without foto
-            $data = array(
-            'nama'          => $this->input->post('nama', TRUE),
-            'kd_agama'      => $this->input->post('agama', TRUE),
-            'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
-            'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
-            'gender'        => $this->input->post('gender', TRUE)
-        );
-        }else{
-            // update with foto
-            $data = array(
-            'nama'          => $this->input->post('nama', TRUE),
-            'kd_agama'      => $this->input->post('agama', TRUE),
-            'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
-            'tempat_lahir'  => $this->input->post('tempat_lahir', TRUE),
-            'gender'        => $this->input->post('gender', TRUE),
-            'foto'          => $foto,
-            'id_rombel'     => $this->input->post('rombel',TRUE)
-        );
-        }
-        $nim   = $this->input->post('nim');
-        $this->db->where('nim',$nim);
-        $this->db->update($this->table,$data);
+    public function getValidationRules()
+    {
+        $validationRules = [
+            [
+                'field' => 'nama_personal',
+                'label' => 'Nama Personal',
+                'rules' => 'trim|required|min_length[1]|max_length[40]'
+            ],
+            [
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'trim|required|min_length[1]'
+            ],
+            [
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'no_hp',
+                'label' => 'No Hp',
+                'rules' => 'trim|required|numeric'
+            ],
+            [
+                'field' => 'jenis_kelamin',
+                'label' => 'Jenis Kelamin',
+                'rules' => 'trim|required|alpha',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                ),
+            ],
+            [
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'status',
+                'label' => 'Status',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
+            ],
+            [
+                'field' => 'level',
+                'label' => 'Level',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
+            ],
+            [
+                'field' => 'jabatan',
+                'label' => 'Jabatan',
+                'rules' => 'trim|required',
+                'errors' => array(
+                    'required' => 'Kamu Harus pilih  %s.',
+                )
+            ],
+        ];
+
+        return $validationRules;
     }
+
+    public function getDefaultValues()
+    {
+        return [
+            'nama_personal' => '',
+            'jenis_kelamin' => '',
+            'password'      => '',
+            'username'      => '',
+            'no_hp'         => '',
+            'email'         => '',
+            'status'        => '',
+            'level'         => '',
+            'jabatan'       => '',
+        ];
+    }
+
 
 }
