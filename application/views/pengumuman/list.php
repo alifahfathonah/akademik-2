@@ -57,7 +57,7 @@
                     {
                         "data": "judul_pengumuman"
                     },
-                    { "data": "id_personal" },
+                    { "data": "nama_personal" },
                     { "data": "status" },
                     { "data": "aksi","width": "80px" },
                 ]

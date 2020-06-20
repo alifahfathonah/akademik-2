@@ -17,7 +17,7 @@ Class Pengumuman extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_pengumuman';
+        $table = 'pengumuman';
         // nama PK
         $primaryKey = 'id_pengumuman';
         // list field
@@ -25,7 +25,7 @@ Class Pengumuman extends OperatorController {
             array('db' => 'id_pengumuman', 'dt' => 'id_pengumuman'),
             array('db' => 'tgl_pengumuman', 'dt' => 'tgl_pengumuman'),
             array('db' => 'judul_pengumuman', 'dt' => 'judul_pengumuman'),
-            array('db' => 'id_personal', 'dt' => 'id_personal'),
+            array('db' => 'nama_personal', 'dt' => 'nama_personal'),
             // array('db' => 'nama_personal', 'dt' => 4,'field' => 'name','as' => 'nama_personal'),
             array('db' => 'status', 
                   'dt' => 'status',
