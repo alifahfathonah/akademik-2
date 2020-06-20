@@ -40,7 +40,7 @@
 
                     </ul>
                 </li> 
-                <li>
+                <li id="informasi">
                     <a href='javascript:void(0)'>
                         <i class='fa fa-info'></i>
                         <span class='title'> Informasi </span>
@@ -48,8 +48,8 @@
                         <span class='selected'></span>
                     </a>
                     <ul class='sub-menu'>
-                        <li>
-                            <a href="#"><i class='fa fa-book'></i><span class='title'> pengumuman</a></span>
+                        <li id="pengumuman">
+                            <a href="<?=base_url('pengumuman');?>"><i class='fa fa-book'></i><span class='title'> pengumuman</a></span>
                         </li>
                         <li>
                             <a href="#"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>

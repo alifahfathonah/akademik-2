@@ -28,7 +28,7 @@
             
             <ul class="nav nav-pills nav-justified">
                 <li role="presentation" class="active"><a data-toggle="tab" href="#data-diri">Data Diri</a></li>
-                <li role="presentation"><a data-toggle="tab" href="#orang-tua">Orang Tua</a></li>
+                <li role="presentation" class="orang"><a data-toggle="tab" href="#orang-tua">Orang Tua</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#prestasi">Prestasi</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#berkas">Berkas</a></li>
             </ul>
@@ -196,7 +196,7 @@
 
                         </label>
                         <div class="col-sm-2">
-                        <a class="btn " data-toggle="tab" href="#orang-tua">Selanjutnya</a>
+                        <a data-toggle="tab" id="orang" href="#orang-tua">Orang Tua</a>
                         </div>
                         <div class="col-sm-3">
                             <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
@@ -205,10 +205,15 @@
 
                 </div>
 
-
                 <div id="orang-tua" class="tab-pane fade">
-                    <h3>Orang Tua</h3>
-                    <p>Tutorial pemrograman web, mobile dan design</p>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1">
+                            Nama Ayah
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="file" name="userfile">
+                        </div>
+                    </div>
                 </div>
                 <div id="prestasi" class="tab-pane fade">
                     <h3>Prestasi</h3>
@@ -226,3 +231,16 @@
     </div>
     <!-- end: TEXT FIELDS PANEL -->
 </div>
+
+<script>
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  e.target // newly activated tab
+  e.relatedTarget // previous active tab
+    //   console.log(e.target.id)
+    // let li = e.target.id;
+    // $('.'+li).addClass('active');
+    $(e.target).addClass('active');
+})
+
+</script>
