@@ -11,13 +11,13 @@ Class Pengumuman extends OperatorController {
         $this->load->library('ssp');
         $this->menu = "informasi";
         $this->sub_menu = "pengumuman";
-        // $this->load->model('Model_gelombang');
+        // $this->load->model('Model_pengumuman');
     }
 
     
     function data() {
         // nama tabel
-        $table = 'pengumuman';
+        $table = 'tb_pengumuman';
         // nama PK
         $primaryKey = 'id_pengumuman';
         // list field
@@ -25,7 +25,7 @@ Class Pengumuman extends OperatorController {
             array('db' => 'id_pengumuman', 'dt' => 'id_pengumuman'),
             array('db' => 'tgl_pengumuman', 'dt' => 'tgl_pengumuman'),
             array('db' => 'judul_pengumuman', 'dt' => 'judul_pengumuman'),
-            array('db' => 'nama_personal', 'dt' => 'nama_personal'),
+            array('db' => 'id_personal', 'dt' => 'nama_personal'),
             // array('db' => 'nama_personal', 'dt' => 4,'field' => 'name','as' => 'nama_personal'),
             array('db' => 'status', 
                   'dt' => 'status',
@@ -75,16 +75,16 @@ Class Pengumuman extends OperatorController {
         // }
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_gelombang->getDefaultValues();
+            $data['input'] = (object) $this->Model_pengumuman->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_gelombang->validate()) {
+        if (!$this->Model_pengumuman->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'gelombang/add';
-            $data['heading']    = $this->template->link('Gelombang > Tambah');
-            $data['formAction'] = "gelombang/add";
+            $data['mainView']   = 'pengumuman/add';
+            $data['heading']    = $this->template->link('Pengumuman > Tambah');
+            $data['formAction'] = "pengumuman/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -93,34 +93,34 @@ Class Pengumuman extends OperatorController {
             return;
         }
 
-        if ($this->Model_gelombang->insert($data['input'])) {
+        if ($this->Model_pengumuman->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data gelombang berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data kelas gagal disimpan.');
         }
 
-        redirect('gelobang');
+        redirect('pengumuman');
     }
 
     
     public function edit($id = null)
     {
-        $gelombang = $this->Model_gelombang->find('id_pengumuman',$id);
-        if (!$gelombang) {
+        $pengumuman = $this->Model_pengumuman->find('id_pengumuman',$id);
+        if (!$pengumuman) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('gelombang', 'refresh');
+            redirect('pengumuman', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $gelombang;
+            $data['input'] = (object) $pengumuman;
         }
 
-        $validate = $this->Model_gelombang->validate();
+        $validate = $this->Model_pengumuman->validate();
         if (! $validate) {
-            $data['mainView']   = 'gelombang/add';
-            $data['heading']    = $this->template->link('Gelombang > Edit ');
-            $data['formAction'] = "gelombang/edit/$id";
+            $data['mainView']   = 'pengumuman/add';
+            $data['heading']    = $this->template->link('Pengumuman > Edit ');
+            $data['formAction'] = "pengumuman/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -128,25 +128,25 @@ Class Pengumuman extends OperatorController {
             return;
         }
 
-        $update = $this->Model_gelombang->update($id, $data['input'],'id_pengumuman');
+        $update = $this->Model_pengumuman->update($id, $data['input'],'id_pengumuman');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect('gelombang', 'refresh');
+        redirect('pengumuman', 'refresh');
     }
 
     public function delete($id)
     {
-        $gelombang = $this->Model_gelombang->find('id_pengumuman',$id);
-        if (!$gelombang) {
+        $pengumuman = $this->Model_pengumuman->find('id_pengumuman',$id);
+        if (!$pengumuman) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('gelombang', 'refresh');
+            redirect('pengumuman', 'refresh');
         }
 
-        $hapus = $this->Model_gelombang->where('id_pengumuman',$id)->delete();
+        $hapus = $this->Model_pengumuman->where('id_pengumuman',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');
@@ -154,7 +154,7 @@ Class Pengumuman extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect('gelombang', 'refresh');
+        redirect('pengumuman', 'refresh');
     }
 
 }

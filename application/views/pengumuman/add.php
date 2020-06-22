@@ -32,77 +32,46 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_gelombang') ?>">
-                <label class="col-sm-2 control-label" for="nama_gelombang">
-                    Nama Gelombang
+            <div class="form-group <?= setValidationStyle('id_personal') ?>">
+                <label class="col-sm-2 control-label" for="id_personal">
+                    Nama Personal
                 </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_gelombang?>" name="nama_gelombang" placeholder="" id="nama_gelombang" class="form-control">
-                    <?= setValidationIcon('nama_gelombang') ?>
-                    <?=form_error('nama_gelombang');?>
+                <div class="col-sm-5">
+                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    
+                    <?= setValidationIcon('id_personal') ?>
+                    <?=form_error('id_personal');?>
                 </div>
             </div>
-            <div class="form-group <?= setValidationStyle('tahun_pelajaran') ?>">
-                <label class="col-sm-2 control-label" for="tahun_pelajaran">
-                    Tahun Pelajaran
+            <div class="form-group <?= setValidationStyle('tgl_pengumuman') ?>">
+                <label class="col-sm-2 control-label" for="tgl_pengumuman">
+                    Tanggal Pengumuman
                 </label>
-                <div class="col-sm-9">
-                    <input name="tahun_pelajaran" type="text" value="<?=$input->tahun_pelajaran;?>" placeholder="" id="tahun_pelajaran" class="form-control">
+                <div class="col-sm-3">
+                    <input name="tgl_pengumuman" type="date" value="<?=$input->tgl_pengumuman;?>" placeholder="" id="tgl_pengumuman" class="form-control">
                     
-                    <?= setValidationIcon('tahun_pelajaran') ?>
-                    <?=form_error('tahun_pelajaran');?>
+                    <?= setValidationIcon('tgl_pengumuman') ?>
+                    <?=form_error('tgl_pengumuman');?>
                 </div>
             </div>
             
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group row <?= setValidationStyle('tgl_awal') ?> ">
-                        <label for="tgl_awal" class="col-sm-4 control-label">Tanggal Mulai</label>
-                            <div class="col-sm-8">
-                                <input type="date" value="<?=$input->tgl_awal;?>" class="form-control" name="tgl_awal" placeholder="">
-                                
-                                <?= setValidationIcon('tgl_awal') ?>
-                                <?=form_error('tgl_awal');?>
-                            </div>
+            <div class="form-group row <?= setValidationStyle('judul_pengumuman') ?> ">
+                <label for="judul_pengumuman" class="col-sm-2 control-label">Judul</label>
+                    <div class="col-sm-8">
+                        <input type="text" value="<?=$input->judul_pengumuman;?>" class="form-control" name="judul_pengumuman" placeholder="">
+                        
+                        <?= setValidationIcon('judul_pengumuman') ?>
+                        <?=form_error('judul_pengumuman');?>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                
-                    <div class="form-group row <?= setValidationStyle('tgl_akhir') ?>">
-                        <label for="tgl_akhir" class="col-sm-4 control-label">Tanggal Akhir</label>
-                            <div class="col-sm-6">
-                                <input type="date" value="<?=$input->tgl_akhir;?>" class="form-control" name="tgl_akhir" placeholder="">
-                                
-                                <?= setValidationIcon('tgl_akhir') ?>
-                                <?=form_error('tgl_akhir');?>
-                            </div>
-                    </div>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group row  <?= setValidationStyle('waktu_awal') ?> ">
-                        <label for="waktu_awal" class="col-sm-4 control-label">Waktu Mulai</label>
-                            <div class="col-sm-8">
-                                <input id="waktu_awal" type="time" class="form-control" value="<?=$input->waktu_awal;?>" name="waktu_awal" placeholder="">
-                                            
-                                <?= setValidationIcon('waktu_awal') ?>
-                                <?=form_error('waktu_awal');?>
-                            </div>
+
+            <div class="form-group row  <?= setValidationStyle('isi_pengumuman') ?> ">
+                <label for="isi_pengumuman" class="col-sm-2 control-label">Isi Pengumuman</label>
+                    <div class="col-sm-10">
+                        <textarea name="isi_pengumuman" id="isi_pengumuman" cols="30" rows="10"><?=$input->isi_pengumuman;?></textarea>
+                        <?= setValidationIcon('isi_pengumuman') ?>
+                        <?=form_error('isi_pengumuman');?>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                
-                    <div class="form-group row <?= setValidationStyle('waktu_akhir') ?> ">
-                        <label for="waktu_akhir" class="col-sm-4 control-label">Waktu Akhir</label>
-                            <div class="col-sm-4">
-                                <input id="waktu_akhir" type="time" name="waktu_akhir" value="<?=$input->waktu_akhir;?>" placeholder="">
-                                            
-                                <?= setValidationIcon('waktu_akhir') ?>
-                                <?=form_error('waktu_akhir');?>
-                            </div>
-                    </div>
-                </div>
             </div>
             
             <div class="form-group row <?= setValidationStyle('status') ?> ">
