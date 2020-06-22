@@ -51,8 +51,8 @@
                         <li id="pengumuman">
                             <a href="<?=base_url('pengumuman');?>"><i class='fa fa-book'></i><span class='title'> pengumuman</a></span>
                         </li>
-                        <li>
-                            <a href="#"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>
+                        <li id="validasi">
+                            <a href="<?=base_url();?>validasi"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>
                         </li>
                         <li>
                             <a href="#"><i class='fa fa-id-badge'></i><span class='title'> Pilih Kelas</a></span>
