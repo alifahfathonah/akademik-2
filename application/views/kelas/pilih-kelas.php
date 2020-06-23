@@ -1,12 +1,15 @@
 <br>
 <br>
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
 <div class="col-md-12">
-    <div style="margin-bottom: 10px;"></div>
+    <!-- start: DYNAMIC TABLE PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Dynamic Table
             <div class="panel-tools">
-                <?php echo anchor('siswa/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('kelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -15,18 +18,36 @@
             </div>
         </div>
         <div class="panel-body">
-            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>FOTO</th>
                         <th>NAMA SISWA</th>
-                        <th>JENIS KELAMIN</th>
-                        <th>TEMPAT LAHIR</th>
-                        <th>TANGGAL LAHIR</th>
-                        <th>STATUS</th>
-                        <th></th>
+                        <th>NISN</th>
+                        <th>JK</th>
+                        <th>NAMA JURUSAN</th>
+                        <th>KELAS</th>
+                        
+                        <th>AKSI</th>
                     </tr>
                 </thead>
+                <TBODY>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <img width="40" src="<?=base_url();?>uploads/user.png" alt="" srcset="">
+                        </td>
+                        <td>Budi</td>
+                        <td>9238923</td>
+                        <td>Laki-laki</td>
+                        <td>MULTIMEDIA</td>
+                        <td>NULL</td>
+                        <td>
+                            <a href="<?=base_url();?>pilihkelas/edit/1" class="btn btn-sm btn-info">Ubah</a>
+                        </td>
+                    </tr>
+                </TBODY>
             </table>
         </div>
     </div>
@@ -40,7 +61,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('siswa/data'); ?>',
+                "ajax": '<?php echo site_url('kelas/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -50,15 +71,12 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_siswa",
-                        "width": "120px",
-                        "sClass": "text-center"
+                        "data": "nama_kelas"
                     },
-                    { "data": "jenis_kelamin" },
-                    { "data": "tempat_lahir" },
-                    { "data": "tanggal_lahir", "width": "150px" },
-                    { "data": "status" },
-                    { "data": "aksi","width": "75px" },
+                    {
+                        "data": "status_kelas"
+                    },
+                    { "data": "aksi","width": "120px" },
                 ]
             } );
                
@@ -69,27 +87,3 @@
             } ).draw();
         } );
     </script>
-    <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Form Upload</h4>
-      </div>
-      <div class="modal-body">
-          <p>Silahkan pilih file excel hasil export data siswa dari aplikasi dapodik.</p>
-          <table class="table table-bordered">
-              <tr><td width="100">Pilih File</td><td><input type="file" name="file"></td></tr>
-          </table>
-      </div>
-      <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-sm">Upload Data</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-
-  </div>
-</div>

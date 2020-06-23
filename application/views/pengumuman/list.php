@@ -26,7 +26,7 @@
                         <th>JUDUL</th>
                         <th>PERSONAL</th>
                         <th>STATUS</th>
-                        <th></th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
             </table>

@@ -18,9 +18,9 @@ Class Siswa extends OperatorController {
     function data() {
    
         // nama tabel
-        $table = 'tb_siswa';
+        $table = 'tb_pendaftaran';
         // nama PK
-        $primaryKey = 'id_siswa';
+        $primaryKey = 'id_pendaftaran';
         // list field
         $columns = array(
             array('db' => 'jenis_kelamin',
@@ -33,13 +33,12 @@ Class Siswa extends OperatorController {
                    }   
                 }
             ),
-            array('db' => 'nisn', 'dt' => 'nisn'),
             array('db' => 'nama_siswa', 'dt' => 'nama_siswa'),
             array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
-            array('db' => 'tgl_lahir', 'dt' => 'tgl_lahir'),
+            array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
             array('db' => 'status', 'dt' => 'status'),
             array(
-                'db' => 'id_siswa',
+                'db' => 'id_pendaftaran',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
