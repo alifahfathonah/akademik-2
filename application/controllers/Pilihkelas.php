@@ -89,16 +89,16 @@ Class Pilihkelas extends OperatorController {
     
     public function edit($id = null)
     {
-        // $kelas = $this->Model_pilihkelas->find('id_siswa',$id);
-        // if (!$kelas) {
-        //     flashMessage('error', 'Data tidak ditemukan!');
-        //     redirect('pilihkelas', 'refresh');
-        // }
+        $kelas = $this->Model_pilihkelas->find('id_siswa',$id);
+        if (!$kelas) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('pilihkelas', 'refresh');
+        }
 
         $data['input'] = (object) $this->input->post(null, true);
-        // if (! $_POST) {
-        //     $data['input'] = (object) $kelas;
-        // }
+        if (! $_POST) {
+            $data['input'] = (object) $kelas;
+        }
 
         $validate = $this->Model_pilihkelas->validate();
         if (! $validate) {
