@@ -33,7 +33,6 @@
                 <li role="presentation"><a data-toggle="tab" href="#berkas">Berkas</a></li>
             </ul>
             <br>
-            
             <?php
             echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
             ?>
@@ -45,7 +44,7 @@
                             No Pendaftaran 
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
+                            <input type="text" name="nama" placeholder="" id="form-field-1" value="<?=$input->no_pendaftaran;?>" class="form-control">
                         </div>
                     </div>
 
@@ -55,10 +54,16 @@
                             NIM / NISN
                         </label>
                         <div class="col-sm-4">
-                            <input type="text" name="nim" placeholder="MASUKAN NIM" id="form-field-1" class="form-control">
+                            <input type="text" name="nisn" value="<?=$input->nisn?>" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
                         </div>
-                        <div class="col-sm-5">
-                            <input type="text" name="nisn" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="form-field-1">
+                            Asal Sekolah
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="nisn" value="<?=$input->asal_sekolah?>" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
                         </div>
                     </div>
 
@@ -67,7 +72,7 @@
                             NAMA 
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" class="form-control">
+                            <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" value="<?=$input->nama_siswa?>" class="form-control">
                         </div>
                     </div>
 
@@ -76,10 +81,10 @@
                             TTL
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="tempat_lahir" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
+                            <input type="text" name="tempat_lahir" value="<?=$input->tempat_lahir?>" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="date" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
+                            <input type="date" value="<?=$input->tanggal_lahir?>" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -88,7 +93,7 @@
                         </label>
                         <div class="col-sm-5">
                             <?php
-                            echo form_dropdown('gender', array('P' => 'LAKI LAKI', 'W' => 'PEREMPUAN'), null, "class='form-control'");
+                            echo form_dropdown('gender', array('L' => 'LAKI LAKI', 'P' => 'PEREMPUAN'), $input->jenis_kelamin, "class='form-control'");
                             ?>
                         </div>
                     </div>
@@ -97,8 +102,16 @@
                             AGAMA
                         </label>
                         <div class="col-sm-5">
-                            <?php
-                            echo '';
+                        <?php
+                            
+                            echo form_dropdown('agama', [
+                                'Islam' => 'Islam',
+                                'Kristen' => 'Kristen',
+                                'Katholik' => 'Katholik',
+                                'Hindu' => 'Hindu',
+                                'Budha' => 'Budha',
+                                
+                            ], $input->agama, "class='form-control'");
                             ?>
                         </div>
                     </div>
@@ -111,86 +124,119 @@
                         </div>
                     </div>
 
+                    <h3>Alamat</h3>
+                    <hr>
+
+
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            ROMBEL
+                        <label class="col-sm-3 control-label" for="">
+                            Dukuh
                         </label>
                         <div class="col-sm-6">
-                            <?php echo ''; ?>
+                            <input type="text" value="" name="dukuh" placeholder="Dukuh" id="" class="form-control">
                         </div>
                     </div>
 
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            Alamat
-                        </label>
-                        <div class="col-sm-6">
-                            <textarea class="form-control"></textarea>
-                        </div>
-
-                    </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
+                        <label class="col-sm-3 control-label" for="">
                             RT / RW
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" name="nama" placeholder="RT" id="form-field-1" class="form-control">
+                            <input type="text" name="sis_rt" placeholder="RT" id="" class="form-control">
                         </div>
-                                        <div class="col-sm-3">
-                            <input type="text" name="nama" placeholder="RW" id="form-field-1" class="form-control">
+                        <div class="col-sm-3">
+                            <input type="text" name="sis_rw" placeholder="RW" id="" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            TTL
+                        <label class="col-sm-3 control-label" for="">
+                            Kelurahan / Kecamatan
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="tempat_lahir" placeholder="TEMPAT LAHIR" id="form-field-1" class="form-control">
+                            <input type="text" name="sis_kelurahan" placeholder="" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="date" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="form-field-1" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            JENIS KELAMIN
-                        </label>
-                        <div class="col-sm-5">
-                            <?php
-                            echo form_dropdown('gender', array('P' => 'LAKI LAKI', 'W' => 'PEREMPUAN'), null, "class='form-control'");
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            AGAMA
-                        </label>
-                        <div class="col-sm-5">
-                            <?php
-                            echo '';
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            Foto
-                        </label>
-                        <div class="col-sm-2">
-                            <input type="file" name="userfile">
+                            <input type="text" name="sis_kecamatan" placeholder="" id="" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label" for="form-field-1">
-                            ROMBEL
+                        <label class="col-sm-3 control-label" for="">
+                            Kabupaten / Provinsi
                         </label>
-                        <div class="col-sm-6">
-                            <?php echo ''; ?>
+                        <div class="col-sm-5">
+                            <input type="text" name="sis_kabupaten" placeholder="Kabupaten" id="" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="date" name="sis_provinsi" placeholder="Provinsi" id="" class="form-control">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            No Seri Ijazah / No. SKHUN
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" name="seri_ijasah_smp" placeholder="No Ijasah SMP" id="" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" name="seri_skhun_smp" placeholder="No .SKHUN" id="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            Pilihan 1
+                        </label>
+                        <div class="col-sm-5">
+                            
+                            <?= form_dropdown('pil_1', getDropdownList('tb_jurusan',['kompetensi_keahlian','kompetensi_keahlian']), $input->pil_1?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            Pilihan 2
+                        </label>
+                        <div class="col-sm-5">
+                            
+                            <?= form_dropdown('pil_2', getDropdownList('tb_jurusan',['kompetensi_keahlian','kompetensi_keahlian']), $input->pil_2?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            Pilihan 3
+                        </label>
+                        <div class="col-sm-5">
+                            
+                            <?= form_dropdown('pil_3', getDropdownList('tb_jurusan',['kompetensi_keahlian','kompetensi_keahlian']), $input->pil_3?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            Username
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">
+                            Password
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="password" name="tanggal_lahir" placeholder="Password" id="" class="form-control">
+                        </div>
+                    </div>
+
+
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="form-field-1">
 

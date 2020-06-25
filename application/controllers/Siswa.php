@@ -36,14 +36,21 @@ Class Siswa extends OperatorController {
             array('db' => 'nama_siswa', 'dt' => 'nama_siswa'),
             array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
             array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
-            array('db' => 'status', 'dt' => 'status'),
+            array(
+                'db'        => 'status',
+                'dt'        => 'status',
+                'formatter' => function($d) {
+                    return $status = ($d == 'aktif') ? anchor('siswa/edit/'.$d,'<i class="fa fa-check-square-o"></i>','class="btn btn-xs btn-success tooltips" data-placement="top" data-original-title="Ubah"'):
+                        anchor('siswa/edit/'.$d,'<i class="fa fa-square-o"></i>','class="btn btn-xs btn-warning tooltips" data-placement="top" data-original-title="Ubah"');
+                }
+            ),
             array(
                 'db' => 'id_pendaftaran',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
                     return anchor('siswa/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')" ');
+                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Ubah status?\')" ');
                 }
             )
         );
@@ -110,16 +117,53 @@ Class Siswa extends OperatorController {
         redirect($this->sub_menu);
     }
     
-    function edit(){
-        if(isset($_POST['submit'])){
-            $uploadFoto = $this->upload_foto_siswa();
-            $this->Model_siswa->update($uploadFoto);
-            redirect('siswa');
-        }else{
-            $nim           = $this->uri->segment(3);
-            $data['siswa'] = $this->db->get_where('tbl_siswa',array('nim'=>$nim))->row_array();
-            $this->template->load('template', 'siswa/edit',$data);
+    function edit($id=null){
+
+        $pendaftaran = $this->Model_siswa->query("select * from tb_pendaftaran where id_pendaftaran = '$id' ")->result();
+        if (!$pendaftaran) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('siswa', 'refresh');
         }
+        // $siswa = $this->Model_siswa->find('id_siswa',$id);
+        $data_siswa = $this->db->where('id',$id)->get('data_siswa')->row();
+        if (!$_POST) {
+            $data['input'] = (object) $data_siswa;
+        } else {
+            $data['input'] = (object) $this->input->post(null, true);
+        }
+
+        /* Cek FILE Upload gambar */
+        if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
+            $upload = $this->upload_foto_user();
+
+            if ($upload) {
+                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+                
+            }
+
+        }
+
+        if (!$this->Model_siswa->validate() || $this->form_validation->error_array() ) {
+            // $halaman     = $this->halaman;
+            $data['mainView']   = 'siswa/add';
+            $data['heading']    = $this->template->link('Siswa > Tambah');
+            $data['formAction'] = "siswa/add";
+            $data['buttonText'] = 'Tambah';
+            $data['menu']       = $this->menu;
+            $data['sub_menu']   = $this->sub_menu;
+            $this->template->load('template', $data['mainView'],$data);
+            // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
+            return;
+        }
+
+
+        if ($this->Model_siswa->insert($data['input'])) {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        }
+
+        redirect($this->sub_menu);
     }
     
     function delete(){

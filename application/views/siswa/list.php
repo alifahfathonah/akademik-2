@@ -1,5 +1,8 @@
 <br>
 <br>
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
 <div class="col-md-12">
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
@@ -57,7 +60,7 @@
                     { "data": "jenis_kelamin" },
                     { "data": "tempat_lahir" },
                     { "data": "tanggal_lahir", "width": "150px" },
-                    { "data": "status" },
+                    { "data": "status","sClass": "text-center" },
                     { "data": "aksi","width": "75px" },
                 ]
             } );
