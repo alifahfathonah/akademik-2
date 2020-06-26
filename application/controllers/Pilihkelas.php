@@ -17,21 +17,23 @@ Class Pilihkelas extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'pilih_kelas';
         // nama PK
         $primaryKey = 'id_kelas';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_pilih_kelas', 'dt' => 'id_pilih_kelas'),
+            array('db' => 'nama_pilih_kelas', 'dt' => 'nama_pilih_kelas'),
+            array('db' => 'nama_kelas', 'dt' => 'id_kelas'),
+            array('db' => 'nama_siswa', 'dt' => 'id_siswa'),
+            array('db' => 'status_pilih_kelas', 'dt' => 'status_pilih_kelas'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_pilih_kelas',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('pilihkelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('pilihkelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -66,9 +68,9 @@ Class Pilihkelas extends OperatorController {
 
         if (!$this->Model_pilihkelas->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
+            $data['mainView']   = 'kelas/addPilihKelas';
             $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['formAction'] = "pilihkelas/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -89,7 +91,7 @@ Class Pilihkelas extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_pilihkelas->find('id_siswa',$id);
+        $kelas = $this->Model_pilihkelas->find('id_pilih_kelas',$id);
         if (!$kelas) {
             flashMessage('error', 'Data tidak ditemukan!');
             redirect('pilihkelas', 'refresh');

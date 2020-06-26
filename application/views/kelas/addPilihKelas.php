@@ -31,37 +31,82 @@
             echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
             ?>
 
+            <?php 
+                // Jika Edit
+                if (isset($input->idkelas )) { ?>
+                    <div class="form-group <?= setValidationStyle('id_kelas') ?>">
+                        <label class="col-sm-2 control-label" for="id_kelas">
+                            Nama Kelas
+                        </label>
+                        <div class="col-sm-9">
+                            <?=form_dropdown('id_kelas',getDropdownList('tb_kelas',['id_kelas','nama_kelas']),$input->idkelas,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                            <?= setValidationIcon('id_kelas') ?>
+                            <?=form_error('id_kelas');?>
+                        </div>
+                    </div>
+                
+            <?php 
+                // Jika Add
+                } else { ?>
+                
+                    <div class="form-group <?= setValidationStyle('id_kelas') ?>">
+                        <label class="col-sm-2 control-label" for="id_kelas">
+                            Nama Kelas
+                        </label>
+                        <div class="col-sm-9">
+                            <?=form_dropdown('id_kelas',getDropdownList('tb_kelas',['id_kelas','nama_kelas']),$input->id_kelas,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                            <?= setValidationIcon('id_kelas') ?>
+                            <?=form_error('id_kelas');?>
+                        </div>
+                    </div>
+                
+            <?php }
+             ?>
+            
+            
+            <?php 
+                // Jika Edit
+                if (isset($input->idkelas )) { ?>
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
-                </label>
-                <div class="col-sm-9">
-                    <?=form_dropdown('nama_kelas',getDropdownList('tb_kelas',['id_kelas','nama_kelas']),$input->nama_kelas,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
-                </div>
-            </div>
+                    <div class="form-group <?= setValidationStyle('id_siswa') ?>">
+                        <label class="col-sm-2 control-label" for="id_siswa">
+                            Nama Siswa
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" value="<?=$input->nama_siswa?>" name="id_siswa" >
+                            <?= setValidationIcon('id_siswa') ?>
+                            <?=form_error('id_siswa');?>
+                        </div>
+                    </div>
             
+            <?php 
+                // Jika ADD
+                } else { ?>
+
+                    <div class="form-group <?= setValidationStyle('id_siswa') ?>">
+                        <label class="col-sm-2 control-label" for="id_siswa">
+                            Nama Siswa
+                        </label>
+                        <div class="col-sm-9">
+                            
+                            <?=form_dropdown('id_siswa',getDropdownList('data_siswa',['id_siswa','nama_siswa']),$input->id_siswa,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                            <?= setValidationIcon('id_siswa') ?>
+                            <?=form_error('id_siswa');?>
+                        </div>
+                    </div>
+
             
-            <div class="form-group <?= setValidationStyle('id_siswa') ?>">
-                <label class="col-sm-2 control-label" for="id_siswa">
-                    Nama Siswa
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" value="" name="id_siswa" >
-                    <?= setValidationIcon('id_siswa') ?>
-                    <?=form_error('id_siswa');?>
-                </div>
-            </div>
+            <?php }
+             ?>
+                
 
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="id_siswa">
-                    Jurusan
+                    Nama Pilih Kelas
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" value="" name="" >
+                    <input type="text" class="form-control" value="<?=$input->nama_pilih_kelas?>" name="nama_pilih_kelas" >
                 </div>
             </div>
             
@@ -96,7 +141,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('pilihkelas', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

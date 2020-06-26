@@ -2,7 +2,7 @@
 
 class Model_pilihkelas extends MY_Model {
 
-    public $table ="tb_pilih_kelas";
+    public $table ="pilih_kelas";
     
     // function save() {
     //     $data = array(
@@ -37,18 +37,18 @@ class Model_pilihkelas extends MY_Model {
     {
         $validationRules = [
             [
-                'field' => 'nama_kelas',
-                'label' => 'Nama Kelas',
+                'field' => 'id_siswa',
+                'label' => 'Siswa',
                 'rules' => 'trim|required|min_length[1]|max_length[30]'
             ],
             [
-                'field' => 'status_kelas',
-                'label' => 'Status Kelas',
+                'field' => 'id_kelas',
+                'label' => 'Kelas',
                 'rules' => 'trim|required|min_length[1]'
             ],
             [
-                'field' => 'id_personal',
-                'label' => 'Personal',
+                'field' => 'status',
+                'label' => 'Status',
                 'rules' => 'trim|required|min_length[1]'
             ],
         ];
@@ -59,9 +59,11 @@ class Model_pilihkelas extends MY_Model {
     public function getDefaultValues()
     {
         return [
-            'nama_kelas'    => '',
-            'status_kelas'    => '',
-            'id_personal'    => '',
+            'nama__pilih_kelas'    => '',
+            'id_kelas'    => '',
+            'id_siswa'    => '',
+            'status_pilih_kelas'    => '',
+            'nama_pilih_kelas'    => '',
         ];
     }
 
