@@ -8,7 +8,7 @@
     <!--<![endif]-->
     <!-- start: HEAD -->
     <head>
-        <title>Login - Sistem Informasi Penerimaan Akademik</title>
+        <title>Login - Sistem Informasi Siswa Baru</title>
         <!-- start: META -->
         <meta charset="utf-8" />
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -69,9 +69,9 @@
                                 <span class="input-icon">
                                     <input type="password" class="form-control password" name="password" placeholder="Password">
                                     <i class="fa fa-lock"></i>
-                                    <a class="forgot" href="#">
+                                  <!--  <a class="forgot" href="#">
                                         I forgot my password
-                                    </a> 
+                                    </a> --> 
                                 </span>
                             </div>
                     </div>
@@ -90,7 +90,7 @@
                 </form>
             </div>
             <div class="copyright">
-                2020 &copy; skindra corporate.
+                2020 &copy; SMK Muhammadiyah 3 Karanganyar.
             </div>
             <!-- end: COPYRIGHT -->
         </div>

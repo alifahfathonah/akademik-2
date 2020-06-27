@@ -7,7 +7,7 @@
     <!--<![endif]-->
 
     <head>
-        <title>SISFO AKADEMIK</title>
+        <title>SISB SMK M3</title>
         <link rel="shortcut icon" href="favicon.ico" />
         <!-- start: META -->
         <meta charset="utf-8" />

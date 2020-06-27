@@ -2,7 +2,7 @@
 <li class="">
     <a href="#" class="text-center" style="font-size: 1.5em;background-color: #8bf79cc4;font-weight: 600;" >
         <span class="title">
-        <?=$level;?>
+        Kepala Sekolah
         </span>
     </a>
 </li>

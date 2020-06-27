@@ -34,7 +34,7 @@
             </ul>
             <br>
             <?php
-            echo form_open_multipart('siswa/add', 'role="form" class="form-horizontal"');
+            echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
             ?>
             <div class="tab-content">
                 <div id="data-diri" class="tab-pane fade in active">
@@ -44,7 +44,8 @@
                             No Pendaftaran 
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama" placeholder="" id="form-field-1" value="<?=$input->no_pendaftaran;?>" class="form-control">
+                            <input type="text" name="nama" placeholder="" id="form-field-1" value="<?=$input->no_pendaftaran ?? '';?>" class="form-control">
+                            <input type="hidden" name="id_pendaftaran" placeholder="" id="" value="<?=$input->id_pendaftaran;?>" class="form-control">
                         </div>
                     </div>
 
@@ -63,7 +64,7 @@
                             Asal Sekolah
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nisn" value="<?=$input->asal_sekolah?>" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
+                            <input type="text" name="asal_sekolah" value="<?=$input->asal_sekolah?>" placeholder="MASUKAN NISN" id="form-field-1" class="form-control">
                         </div>
                     </div>
 
@@ -72,7 +73,7 @@
                             NAMA 
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" value="<?=$input->nama_siswa?>" class="form-control">
+                            <input type="text" name="nama" placeholder="MASUKAN NAMA LENGKAP" id="form-field-1" value="<?=$input->nama_siswa ?? ''?>" class="form-control">
                         </div>
                     </div>
 
@@ -93,7 +94,7 @@
                         </label>
                         <div class="col-sm-5">
                             <?php
-                            echo form_dropdown('gender', array('L' => 'LAKI LAKI', 'P' => 'PEREMPUAN'), $input->jenis_kelamin, "class='form-control'");
+                            echo form_dropdown('gender', array('L' => 'LAKI LAKI', 'P' => 'PEREMPUAN'), $input->jenis_kelamin ?? '', "class='form-control'");
                             ?>
                         </div>
                     </div>
@@ -120,7 +121,7 @@
                             Foto
                         </label>
                         <div class="col-sm-2">
-                            <input type="file" name="userfile">
+                            <input type="file" name="pas_photo">
                         </div>
                     </div>
 
@@ -133,7 +134,7 @@
                             Dukuh
                         </label>
                         <div class="col-sm-6">
-                            <input type="text" value="" name="dukuh" placeholder="Dukuh" id="" class="form-control">
+                            <input type="text" value="<?=$input->sis_dukuh;?>" name="sis_dukuh" placeholder="Dukuh" id="" class="form-control">
                         </div>
                     </div>
 
@@ -144,10 +145,10 @@
                             RT / RW
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" name="sis_rt" placeholder="RT" id="" class="form-control">
+                            <input type="text" name="sis_rt" value="<?=$input->sis_rt;?>" placeholder="RT" id="" class="form-control">
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="sis_rw" placeholder="RW" id="" class="form-control">
+                            <input type="text" name="sis_rw" placeholder="RW" value="<?=$input->sis_rw;?>" id="" class="form-control">
                         </div>
                     </div>
 
@@ -156,10 +157,10 @@
                             Kelurahan / Kecamatan
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="sis_kelurahan" placeholder="" id="" class="form-control">
+                            <input type="text" name="sis_kelurahan" value="<?=$input->sis_kelurahan;?>" placeholder="" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" name="sis_kecamatan" placeholder="" id="" class="form-control">
+                            <input type="text" name="sis_kecamatan" value="<?=$input->sis_kecamatan;?>" placeholder="" id="" class="form-control">
                         </div>
                     </div>
 
@@ -168,10 +169,10 @@
                             Kabupaten / Provinsi
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="sis_kabupaten" placeholder="Kabupaten" id="" class="form-control">
+                            <input type="text" name="sis_kabupaten" placeholder="Kabupaten" value="<?=$input->sis_kabupaten;?>" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="date" name="sis_provinsi" placeholder="Provinsi" id="" class="form-control">
+                            <input type="text" name="sis_provinsi" value="<?=$input->sis_provinsi;?>" placeholder="Provinsi" id="" class="form-control">
                         </div>
                     </div>
 
@@ -180,10 +181,10 @@
                             No Seri Ijazah / No. SKHUN
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="seri_ijasah_smp" placeholder="No Ijasah SMP" id="" class="form-control">
+                            <input type="text" name="seri_ijasah_smp" value="<?=$input->seri_ijasah_smp;?>" placeholder="No Ijasah SMP" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" name="seri_skhun_smp" placeholder="No .SKHUN" id="" class="form-control">
+                            <input type="text" name="seri_skhun_smp" value="<?=$input->seri_skhun_smp;?>" placeholder="No .SKHUN" id="" class="form-control">
                         </div>
                     </div>
 
@@ -222,7 +223,7 @@
                             Username
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="tanggal_lahir" placeholder="TANGGAL LAHIR" id="" class="form-control">
+                            <input type="text" value="<?=$input->username;?>" name="username" placeholder="TANGGAL LAHIR" id="" class="form-control">
                         </div>
                     </div>
 
@@ -231,7 +232,7 @@
                             Password
                         </label>
                         <div class="col-sm-5">
-                            <input type="password" name="tanggal_lahir" placeholder="Password" id="" class="form-control">
+                            <input type="password" value="<?=$input->password;?>" name="password" placeholder="Password" id="" class="form-control">
                         </div>
                     </div>
 
@@ -242,7 +243,7 @@
 
                         </label>
                         <div class="col-sm-2">
-                        <a data-toggle="tab" id="orang" href="#orang-tua">Orang Tua</a>
+                            <button type="submit">Simpan</button>
                         </div>
                         <div class="col-sm-3">
                             <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>

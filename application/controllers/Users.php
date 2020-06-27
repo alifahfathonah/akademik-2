@@ -50,7 +50,7 @@ Class Users extends AdminController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Personal ');
+        $data['heading']    = $this->template->link('Master - Data Personal ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'users/list',$data);

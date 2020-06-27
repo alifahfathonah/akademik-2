@@ -55,7 +55,7 @@ Class Potongan extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Potongan ');
+        $data['heading']    = $this->template->link('Master - Potongan ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'potongan/list' ,$data);

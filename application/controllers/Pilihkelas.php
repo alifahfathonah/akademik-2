@@ -51,7 +51,7 @@ Class Pilihkelas extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Pilih Kelas ');
+        $data['heading']    = $this->template->link('Informasi - Pilih Kelas ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'kelas/pilih-kelas' ,$data);

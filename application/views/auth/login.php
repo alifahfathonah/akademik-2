@@ -8,7 +8,7 @@
     <!--<![endif]-->
     <!-- start: HEAD -->
     <head>
-        <title>Login - Sistem Informasi Penerimaan Akademik</title>
+        <title>Login - Sistem Informasi Siswa Baru</title>
         <!-- start: META -->
         <meta charset="utf-8" />
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -72,9 +72,9 @@
                                 <span class="input-icon">
                                     <input type="password" class="form-control password" name="password" placeholder="Password">
                                     <i class="fa fa-lock"></i>
-                                    <a class="forgot" href="#">
+                                <!--    <a class="forgot" href="#">
                                         I forgot my password
-                                    </a> 
+                                    </a>  -->
                                 </span>
                             
                             <?= setValidationIcon('password') ?>
@@ -98,10 +98,10 @@
                     </div>
 
                     <div class="form-actions">
-                        <label for="remember" class="checkbox-inline">
+                    <!--    <label for="remember" class="checkbox-inline">
                             <input type="checkbox" class="grey remember" id="remember" name="remember">
                             Keep me signed in
-                        </label>
+                        </label> -->
                         <button type="submit" name="submit" class="btn btn-bricky pull-right">
                             Login <i class="fa fa-arrow-circle-right"></i>
                         </button>
@@ -211,7 +211,7 @@
             <!-- end: REGISTER BOX -->
             <!-- start: COPYRIGHT -->
             <div class="copyright">
-                2020 &copy; skindra corporate.
+                2020 &copy; SMK Muhammadiyah 3 Karanganyar.
             </div>
             <!-- end: COPYRIGHT -->
         </div>

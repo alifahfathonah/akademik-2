@@ -57,7 +57,7 @@ Class Pengumuman extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Pengumuman ');
+        $data['heading']    = $this->template->link('Informasi - Pengumuman ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'pengumuman/list' ,$data);

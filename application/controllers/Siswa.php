@@ -68,7 +68,7 @@ Class Siswa extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Siswa ');
+        $data['heading']    = $this->template->link('Master - Data Siswa ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'siswa/list' ,$data);
@@ -147,7 +147,7 @@ Class Siswa extends OperatorController {
             // $halaman     = $this->halaman;
             $data['mainView']   = 'siswa/add';
             $data['heading']    = $this->template->link('Siswa > Tambah');
-            $data['formAction'] = "siswa/add";
+            $data['formAction'] = "siswa/edit/".$id;
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -156,8 +156,26 @@ Class Siswa extends OperatorController {
             return;
         }
 
+        $simpan = [
 
-        if ($this->Model_siswa->insert($data['input'])) {
+            'id_pendaftaran'  => $_POST['id_pendaftaran'],
+            'nisn'            => $_POST['nisn'],
+            'sis_dukuh'       => $_POST['sis_dukuh'],
+            'sis_rt'          => $_POST['sis_rt'],
+            'sis_rw'          => $_POST['sis_rw'],
+            'sis_kelurahan'   => $_POST['sis_kelurahan'],
+            'sis_kecamatan'   => $_POST['sis_kecamatan'],
+            'sis_kabupaten'   => $_POST['sis_kabupaten'],
+            'sis_provinsi'    => $_POST['sis_provinsi'],
+            'seri_ijasah_smp' => $_POST['seri_ijasah_smp'],
+            'seri_skhun_smp'  => $_POST['seri_skhun_smp'],
+            'no_un_smp'       => $_POST['no_un_smp'],
+            'status'          => 'aktif',
+
+        ];
+
+
+        if ($this->Model_siswa->insert($simpan)) {
             $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data  gagal disimpan.');

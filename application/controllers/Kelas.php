@@ -49,7 +49,7 @@ Class Kelas extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Kelas ');
+        $data['heading']    = $this->template->link('Master - Kelas ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'kelas/list' ,$data);

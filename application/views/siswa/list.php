@@ -7,9 +7,9 @@
     <div style="margin-bottom: 10px;"></div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Tabel Siswa
             <div class="panel-tools">
-                <?php echo anchor('siswa/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('siswa/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -27,7 +27,7 @@
                         <th>TEMPAT LAHIR</th>
                         <th>TANGGAL LAHIR</th>
                         <th>STATUS</th>
-                        <th></th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
             </table>

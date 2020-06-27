@@ -56,7 +56,7 @@ Class Validasi extends AdminController {
     }
 
     function index() {
-        $data['heading']  = $this->template->link('Validasi ');
+        $data['heading']  = $this->template->link('Informasi - Validasi ');
         $data['menu']     = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'validasi/list' ,$data);

@@ -8,7 +8,7 @@
     <!--<![endif]-->
     <!-- start: HEAD -->
     <head>
-        <title>Login - Sistem Informasi Penerimaan Akademik</title>
+        <title>Login - Sistem Informasi Siswa Baru</title>
         <!-- start: META -->
         <meta charset="utf-8" />
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
@@ -61,8 +61,8 @@
                     <fieldset>
                         <div class="form-group row">
                                 <div class="col-sm-4">
-                                        <label for="no_daftar"  style="padding-right: unset;" class="col-sm-5 control-label">No Pendaftaran</label>
-                                        <div class="col-sm-7">
+                                        <label for="no_daftar"  style="padding-right: unset;" class="col-sm-4 control-label">No Pendaft</label>
+                                        <div class="col-sm-8">
                                             <input type="text" name="no_daftar" class="form-control" id="no_daftar" placeholder="No Pendaftaran" value="<?=$no_daftar ?? $input->no_daftar;?>" readonly>
                                         </div>
                                 </div>
@@ -76,8 +76,8 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="tanggal" class="col-sm-5 control-label">Tanggal</label>
-                                        <div class="col-sm-7">
+                                        <label for="tanggal" class="col-sm-3 control-label">Tanggal</label>
+                                        <div class="col-sm-8">
                                             <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="Tanggal" value="<?=date('Y-m-d');?>" readonly>
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@
                             <div class="form-group row <?= setValidationStyle('pilihan1') ?>"  >
                                 <label for="nama" class="col-sm-2 control-label">Pilihan 1</label>
                                 <div class="col-sm-10">
-                                    <?= form_dropdown('pilihan1', getDropdownList('tb_jurusan',['id_jurusan','nama_singkat']), $input->pilihan1?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?> 
+                                    <?= form_dropdown('pilihan1', getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']), $input->pilihan1?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?> 
                                         <?= setValidationIcon('pilihan1') ?>
                                         <?= form_error('pilihan1');?>
                                 </div>
@@ -242,7 +242,7 @@
                             <div class="form-group row <?= setValidationStyle('pilihan2') ?>" >
                                 <label for="nama" class="col-sm-2 control-label">Pilihan 2</label>
                                 <div class="col-sm-10">
-                                    <?= form_dropdown('pilihan2', getDropdownList('tb_jurusan',['id_jurusan','nama_singkat']),$input->pilihan2?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                                    <?= form_dropdown('pilihan2', getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),$input->pilihan2?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
                                         <?= setValidationIcon('pilihan2') ?>
                                         <?= form_error('pilihan2');?>
                                 </div>
@@ -250,7 +250,7 @@
                             <div class="form-group row <?= setValidationStyle('pilihan3') ?>" >
                                 <label for="nama" class="col-sm-2 control-label">Pilihan 3</label>
                                 <div class="col-sm-10">
-                                    <?= form_dropdown('pilihan3', getDropdownList('tb_jurusan',['id_jurusan','nama_singkat']), $input->pilihan3?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                                    <?= form_dropdown('pilihan3', getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']), $input->pilihan3?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
                                         <?= setValidationIcon('pilihan3') ?>
                                         <?= form_error('pilihan3');?>
                                 </div>
@@ -272,7 +272,7 @@
             <!-- end: REGISTER BOX -->
             <!-- start: COPYRIGHT -->
             <div class="copyright">
-                2020 &copy; skindra corporate.
+                2020 &copy; SMK Muhammadiyah 3 Karanganyar.
             </div>
             <!-- end: COPYRIGHT -->
         </div>

@@ -7,7 +7,7 @@
     <!-- start: DYNAMIC TABLE PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Tabel Validasi
         </div>
         <div class="panel-body">
             <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
@@ -19,7 +19,7 @@
                         <th>NO HP</th>
                         <th>ASAL SEKOLAH</th>
                         <th>VALIDASI</th>
-                        <th>UBAH</th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
             </table>

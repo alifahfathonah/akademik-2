@@ -7,7 +7,7 @@
     <!--<![endif]-->
 
     <head>
-        <title>SISFO AKADEMIK</title>
+        <title>SISB SMK M3</title>
         <link rel="shortcut icon" href="favicon.ico" />
         <!-- start: META -->
         <meta charset="utf-8" />
@@ -636,7 +636,7 @@
                 <div class="footer-inner">
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> &copy; clip-one by cliptheme.
+                    </script> &copy; SMK Muhammadiyah 3 Karanganyar.
                 </div>
                 <div class="footer-items">
                     <span class="go-top"><i class="clip-chevron-up"></i></span>

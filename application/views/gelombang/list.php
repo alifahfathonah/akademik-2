@@ -7,9 +7,9 @@
     <!-- start: DYNAMIC TABLE PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-external-link-square"></i> Dynamic Table
+            <i class="fa fa-external-link-square"></i> Tabel Gelombang
             <div class="panel-tools">
-                <?php echo anchor('gelombang/add','<i class="fa fa-pencil-square-o" aria-hidden="true"></i>',"title='Dambah Data'");?>
+                <?php echo anchor('gelombang/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -25,7 +25,7 @@
                         <th>NAMA GELOMBANG</th>
                         <th>TAHUN PELAJARAN</th>
                         <th>STATUS</th>
-                        <th></th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
             </table>

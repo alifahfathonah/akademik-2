@@ -55,7 +55,7 @@ Class Gelombang extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Gelombang ');
+        $data['heading']    = $this->template->link('Master - Gelombang ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'gelombang/list' ,$data);

@@ -45,7 +45,7 @@ Class Jurusan extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Jurusan ');
+        $data['heading']    = $this->template->link('Master - Jurusan ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'jurusan/list',$data);
