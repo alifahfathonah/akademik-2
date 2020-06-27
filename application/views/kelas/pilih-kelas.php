@@ -24,7 +24,7 @@
                         <th>NO</th>
                         <th>NAMA SISWA</th>
                         <th>NAMA KELAS</th>
-                        <th>JURUSAN</th>
+                        <th>NAMA PILIH KELAS</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>

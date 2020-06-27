@@ -73,7 +73,8 @@
                             Nama Siswa
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?=$input->nama_siswa?>" name="id_siswa" >
+                            <input type="text" class="form-control" value="<?=$input->nama_siswa?>" name="" >
+                            <input type="hidden" class="form-control" value="<?=$input->id_siswa?>" name="id_siswa" >
                             <?= setValidationIcon('id_siswa') ?>
                             <?=form_error('id_siswa');?>
                         </div>

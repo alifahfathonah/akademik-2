@@ -39,7 +39,7 @@ class Model_pilihkelas extends MY_Model {
             [
                 'field' => 'id_siswa',
                 'label' => 'Siswa',
-                'rules' => 'trim|required|min_length[1]|max_length[30]'
+                'rules' => 'trim|required'
             ],
             [
                 'field' => 'id_kelas',
@@ -47,7 +47,7 @@ class Model_pilihkelas extends MY_Model {
                 'rules' => 'trim|required|min_length[1]'
             ],
             [
-                'field' => 'status',
+                'field' => 'status_pilih_kelas',
                 'label' => 'Status',
                 'rules' => 'trim|required|min_length[1]'
             ],

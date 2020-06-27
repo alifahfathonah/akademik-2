@@ -54,7 +54,7 @@
                         <li id="validasi">
                             <a href="<?=base_url();?>validasi"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>
                         </li>
-                        <li id="pilih-kelas">
+                        <li id="pilihkelas">
                             <a href="<?=base_url()?>pilihkelas"><i class='fa fa-id-badge'></i><span class='title'> Pilih Kelas</a></span>
                         </li>
                         

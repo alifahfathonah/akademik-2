@@ -10,7 +10,7 @@ Class Pilihkelas extends OperatorController {
         //chekAksesModule();
         $this->load->library('ssp');
         $this->menu = "informasi";
-        $this->sub_menu = "pilih-kelas";
+        $this->sub_menu = "pilihkelas";
         // $this->load->model('Model_gelombang');
     }
 
@@ -108,13 +108,17 @@ Class Pilihkelas extends OperatorController {
             $data['heading']    = $this->template->link('Pilih Kelas > Edit ');
             $data['formAction'] = "pilihkelas/edit/$id";
             $data['buttonText'] = 'Update';
-            $data['menu'] = $this->menu;
-            $data['sub_menu'] = $this->sub_menu;
+            $data['menu']       = $this->menu;
+            $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'] ,$data);
             return;
         }
 
-        $update = $this->Model_pilihkelas->update($id, $data['input'],'id_kelas');
+        $simpan = [
+            'nama_pilih_kelas' => $data['input']->nama_pilih_kelas,
+        ];
+
+        $update = $this->db->where('id_pilih_kelas',$id)->update('tb_pilih_kelas',$simpan);
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
