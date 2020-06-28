@@ -63,14 +63,6 @@ Class Gelombang extends OperatorController {
 
     
     function add() {
-        // if (isset($_POST['submit'])) {
-        //     $uplodFoto = $this->upload_foto_user();
-        //     $this->Model_users->save($uplodFoto);
-        //     redirect('users');
-        // } else {
-            // $data['Judul'] = 'Tambah Data';
-            // $this->template->load('template', 'gelombang/add',$data);
-        // }
         
         if (!$_POST) {
             $data['input'] = (object) $this->Model_gelombang->getDefaultValues();
@@ -94,10 +86,10 @@ Class Gelombang extends OperatorController {
         if ($this->Model_gelombang->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data gelombang berhasil disimpan.');
         } else {
-            $this->session->set_flashdata('error', 'Data kelas gagal disimpan.');
+            $this->session->set_flashdata('error', 'Data gelombang gagal disimpan.');
         }
 
-        redirect('gelobang');
+        redirect('gelombang');
     }
 
     

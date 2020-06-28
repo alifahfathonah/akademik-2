@@ -77,9 +77,9 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="utility_lock_screen.html">
+                                <!--    <a href="utility_lock_screen.html">
                                         <i class="clip-locked"></i> &nbsp;Lock Screen
-                                    </a>
+                                    </a> -->
                                 </li>
                                 <li>
 
@@ -233,7 +233,7 @@ font-weight: 600; -->
                 <div class=" text-center">
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> &copy; clip-one by cliptheme.
+                    </script> &copy; SMK Muhammadiyah 3 Karanganyar.
                 </div>
                 <div class="" style="position: absolute;
 margin-top: -24px;

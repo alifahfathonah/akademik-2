@@ -392,9 +392,9 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="utility_lock_screen.html">
+                                <!--    <a href="utility_lock_screen.html">
                                         <i class="clip-locked"></i> &nbsp;Lock Screen
-                                    </a>
+                                    </a> -->
                                 </li>
                                 <li>
 

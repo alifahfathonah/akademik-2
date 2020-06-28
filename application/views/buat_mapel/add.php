@@ -32,42 +32,72 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
+                <label class="col-sm-2 control-label" for="id_gelombang">
+                    Gelombang
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                    <?= form_dropdown('id_gelombang',getDropdownList('tb_gelombang',['id_gelombang','nama_gelombang']),$input->id_gelombang,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    <?= setValidationIcon('id_gelombang') ?>
+                    <?=form_error('id_gelombang');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('nama_mapel') ?>">
+                <label class="col-sm-2 control-label" for="nama_mapel">
+                    Nama Mapel
+                </label>
+                <div class="col-sm-9">
+                    <input value="<?=$input->nama_mapel;?>" type="text" name="nama_mapel" placeholder="Tulis Nama Mapel" id="nama_mapel" class="form-control">
+                    <?= setValidationIcon('nama_mapel') ?>
+                    <?=form_error('nama_mapel');?>
                 </div>
             </div>
             
-            
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
+            <div class="form-group <?= setValidationStyle('jml_soal') ?>">
+                <label class="col-sm-2 control-label" for="jml_soal">
+                    Jumlah Soal
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
+                    <input value="<?=$input->jml_soal;?>" type="text" name="jml_soal" placeholder="Tulis Jumlah Soal" id="jml_soal" class="form-control">
+                    <?= setValidationIcon('jml_soal') ?>
+                    <?=form_error('jml_soal');?>
                 </div>
             </div>
-            
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
+
+            <div class="form-group <?= setValidationStyle('tampil_soal') ?>">
+                <label class="col-sm-2 control-label" for="tampil_soal">
+                    Tampil Soal
+                </label>
+                <div class="col-sm-9">
+                    <input value="<?=$input->tampil_soal;?>" type="text" name="tampil_soal" placeholder="Tulis Tampil Soal" id="tampil_soal" class="form-control">
+                    <?= setValidationIcon('tampil_soal') ?>
+                    <?=form_error('tampil_soal');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('bobot_soal') ?>">
+                <label class="col-sm-2 control-label" for="bobot_soal">
+                    Bobot Soal
+                </label>
+                <div class="col-sm-9">
+                    <input value="<?=$input->bobot_soal;?>" type="text" name="bobot_soal" placeholder="Tulis Bobot Soal" id="bobot_soal" class="form-control">
+                    <?= setValidationIcon('bobot_soal') ?>
+                    <?=form_error('bobot_soal');?>
+                </div>
+            </div>
+
+            <div class="form-group row <?= setValidationStyle('status_soal') ?> ">
+                <label for="nama" class="col-sm-2 control-label">Status Soal</label>
                     <div class="col-sm-10">
                         <div>
                             <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
+                                <input type="radio" class="grey" value="aktif" name="status_soal" <?php echo (!empty($input->status_kelas) and ($input->status_soal == 'aktif') ) ? "checked" :"" ;?> >
+                                Aktif
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
+                                <input type="radio" class="grey"  value="non aktif" name="status_soal" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
+                                Tidak Aktif
                             </label>
                         </div>
                         

@@ -6,7 +6,7 @@
         </span>
     </a>
 </li>
-<li class="active"><a href="<?php echo base_url() ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
+<li class="active"><a href="<?php echo base_url('welcome') ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
 
 <li>
     <a href='javascript:void(0)'>

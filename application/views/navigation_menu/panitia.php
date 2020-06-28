@@ -6,9 +6,9 @@
             </span>
         </a>
     </li>
-    <li class="active"><a href="<?php echo base_url() ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
+    <li class="active"><a href="<?php echo base_url('welcome') ?>"><i class="fa fa-tachometer"></i><span class="title">Dashboard</span></a></li>
     
-    <li>
+    <li id="informasi">
         <a href='javascript:void(0)'>
             <i class='fa fa-info'></i>
             <span class='title'> Informasi </span>
@@ -16,23 +16,23 @@
             <span class='selected'></span>
         </a> 
         <ul class='sub-menu'>
-            <li>
-                <a href="#"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>
+            <li id="siswa">
+                <a href="<?=site_url('siswa');?>"><i class='fa fa-user-circle-o'></i><span class='title'> Data Siswa</a></span>
             </li>
-            <li>
-                <a href="#"><i class='fa fa-book'></i><span class='title'> Pengumuman</a></span>
+            <li id="pengumuman">
+                <a href="<?=base_url('pengumuman');?>"><i class='fa fa-book'></i><span class='title'> Pengumuman</a></span>
             </li>
-            <li>
-                <a href="#"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>
+            <li id="validasi">
+                <a href="<?=base_url('validasi')?>"><i class='fa fa-id-card'></i><span class='title'> Validasi</a></span>
             </li>
-            <li>
-                <a href="#"><i class='fa fa-id-badge'></i><span class='title'> Pilih Kelas</a></span>
+            <li id="pilihkelas">
+                <a href="<?=base_url('pilihkelas')?>"><i class='fa fa-id-badge'></i><span class='title'> Pilih Kelas</a></span>
             </li>
             
 
         </ul>
     </li> 
-    <li>
+    <li id="akademik">
         <a href='javascript:void(0)'>
             <i class='fa fa-mortar-board'></i>
             <span class='title'> Akademik </span>
@@ -40,17 +40,17 @@
             <span class='selected'></span>
         </a>
         <ul class='sub-menu'>
-            <li>
-                <a href="#"><i class='fa fa-file-text'></i><span class='title'> Buat Soal</a></span>
+            <li id="buat-soal">
+                <a href="<?=base_url('Buat_soal')?>"><i class='fa fa-file-text'></i><span class='title'> Buat Soal</a></span>
             </li>
-            <li>
-                <a href="#"><i class='fa fa-file-code-o'></i><span class='title'> Rekap Nilai</a></span>
+            <li id="rekap-nilai">
+                <a href="<?=base_url('Rekap_nilai')?>"><i class='fa fa-file-code-o'></i><span class='title'> Rekap Nilai</a></span>
             </li>
             
 
         </ul>
     </li> 
-    <li>
+    <li id="wawancara">
         <a href='javascript:void(0)'>
             <i class='fa fa-comments'></i>
             <span class='title'> Wawancara </span>
@@ -58,8 +58,8 @@
             <span class='selected'></span>
         </a>
         <ul class='sub-menu'>
-            <li>
-                <a href="#"><i class='fa fa-book'></i><span class='title'> Buat Wawancara</a></span>
+            <li id="buat-wawancara">
+                <a href="<?=base_url()?>Buat_wawancara"><i class='fa fa-book'></i><span class='title'> Buat Wawancara</a></span>
             </li>
             
         </ul>

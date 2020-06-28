@@ -70,7 +70,7 @@ Class Users extends AdminController {
             $upload = $this->upload_foto_user();
 
             if ($upload) {
-                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+                $simpan['pas_photo'] =  $upload['file_name']; // Data for column "cover".
                 
             }
 
@@ -89,8 +89,22 @@ Class Users extends AdminController {
             return;
         }
 
+        //simpan array data
+        $simpan = [
+            'nama_personal' => $_POST['nama_personal'],
+            'username' => $_POST['username'],
+            'password' => md5($_POST['password']),
+            'jenis_kelamin' => $_POST['jenis_kelamin'],
+            'no_hp' => $_POST['no_hp'],
+            'email' => $_POST['email'],
+            'status' => $_POST['status'],
+            'level' => $_POST['level'],
+            'jabatan' => $_POST['jabatan'],
+            
+        ];
 
-        if ($this->Model_users->insert($data['input'])) {
+
+        if ($this->Model_users->insert($simpan)) {
             $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data  gagal disimpan.');
@@ -136,6 +150,8 @@ Class Users extends AdminController {
             $this->template->load('template', $data['mainView'] ,$data);
             return;
         }
+
+        $data['input']->password = md5($_POST['password']);
 
         $update = $this->Model_users->update($id, $data['input'],'id_personal');
         if (! $update) {

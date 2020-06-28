@@ -9,16 +9,16 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Tabel Mata Pelajaran
             <div class="panel-tools">
-                <?php echo anchor('pilihkelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
-                <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
+                <?php echo anchor('buat_mapel/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
+            <!--    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
                 <a class="btn btn-xs btn-link panel-expand" href="#"> <i class="fa fa-resize-full"></i> </a>
-                <a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a>
+                <a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i> </a> -->
             </div>
         </div>
         <div class="panel-body">
-            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -31,6 +31,20 @@
                         <th>AKSI</th>
                     </tr>
                 </thead>
+                <tbody >
+                    <tr>
+                        <td>1</td>
+                        <td>Gelombang 1</td>
+                        <td>Ujian Akademik</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>100%</td>
+                        <td>aktif</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" href="#">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

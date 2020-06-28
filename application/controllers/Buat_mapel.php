@@ -11,27 +11,31 @@ Class Buat_mapel extends OperatorController {
         $this->load->library('ssp');
         $this->menu = "akademik";
         $this->sub_menu = "buat-mapel";
-        // $this->load->model('Model_gelombang');
+        $this->load->model('Model_mapel','Model_mapel',true);
     }
 
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'tb_mapel';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_mapel';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_mapel', 'dt' => 'id_mapel'),
+            array('db' => 'id_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'nama_mapel', 'dt' => 'nama_mapel'),
+            array('db' => 'jml_soal', 'dt' => 'jml_soal'),
+            array('db' => 'tampil_soal', 'dt' => 'tampil_soal'),
+            array('db' => 'bobot_soal', 'dt' => 'bobot_soal'),
+            array('db' => 'status_soal', 'dt' => 'status_soal'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_mapel',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('buat_mapel/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('buat_mapel/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,16 +63,16 @@ Class Buat_mapel extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_mapel->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_mapel->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['mainView']   = 'buat_mapel/add';
+            $data['heading']    = $this->template->link('Buat Mapel > Tambah');
+            $data['formAction'] = "buat_mapel/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -77,7 +81,7 @@ Class Buat_mapel extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_mapel->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
@@ -89,22 +93,22 @@ Class Buat_mapel extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_mapel = $this->Model_mapel->find('id_mapel',$id);
+        if (!$buat_mapel) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_mapel', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $buat_mapel;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_mapel->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'buat_mapel/add';
+            $data['heading']    = $this->template->link('buat_mapel > Edit ');
+            $data['formAction'] = "buat/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,7 +116,7 @@ Class Buat_mapel extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_mapel->update($id, $data['input'],'id_mapel');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -124,13 +128,13 @@ Class Buat_mapel extends OperatorController {
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_mapel = $this->Model_mapel->find('id_mapel',$id);
+        if (!$buat_mapel) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_mapel', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_mapel->where('id_mapel',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');

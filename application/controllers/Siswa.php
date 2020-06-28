@@ -18,9 +18,9 @@ Class Siswa extends OperatorController {
     function data() {
    
         // nama tabel
-        $table = 'tb_pendaftaran';
+        $table = 'data_siswa';
         // nama PK
-        $primaryKey = 'id_pendaftaran';
+        $primaryKey = 'id';
         // list field
         $columns = array(
             array('db' => 'jenis_kelamin',
@@ -37,15 +37,15 @@ Class Siswa extends OperatorController {
             array('db' => 'tempat_lahir', 'dt' => 'tempat_lahir'),
             array('db' => 'tanggal_lahir', 'dt' => 'tanggal_lahir'),
             array(
-                'db'        => 'status',
+                'db'        => 'id_siswa',
                 'dt'        => 'status',
                 'formatter' => function($d) {
-                    return $status = ($d == 'aktif') ? anchor('siswa/edit/'.$d,'<i class="fa fa-check-square-o"></i>','class="btn btn-xs btn-success tooltips" data-placement="top" data-original-title="Ubah"'):
-                        anchor('siswa/edit/'.$d,'<i class="fa fa-square-o"></i>','class="btn btn-xs btn-warning tooltips" data-placement="top" data-original-title="Ubah"');
+                    return $status = ($d !== null) ? anchor('siswa/edit/'.$d,'<i class="fa fa-check-square-o"></i>','class="btn btn-xs btn-success tooltips" data-placement="top" data-original-title="Ubah"'):
+                        anchor('siswa/edit/'.$d,'<i class="fa fa-square-o"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Ubah"');
                 }
             ),
             array(
-                'db' => 'id_pendaftaran',
+                'db' => 'id',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
@@ -68,7 +68,7 @@ Class Siswa extends OperatorController {
     }
 
     function index() {
-        $data['heading']    = $this->template->link('Master - Data Siswa ');
+        $data['heading']    = $this->template->link('Data Siswa ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'siswa/list' ,$data);
@@ -158,7 +158,7 @@ Class Siswa extends OperatorController {
 
         $simpan = [
 
-            'id_pendaftaran'  => $_POST['id_pendaftaran'],
+            'id_pendaftaran'  => $id,
             'nisn'            => $_POST['nisn'],
             'sis_dukuh'       => $_POST['sis_dukuh'],
             'sis_rt'          => $_POST['sis_rt'],

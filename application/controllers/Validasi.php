@@ -1,6 +1,6 @@
 <?php
 
-Class Validasi extends AdminController {
+Class Validasi extends OperatorController {
 
     function __construct() {
         parent::__construct();
