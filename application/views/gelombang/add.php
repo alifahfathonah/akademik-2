@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+        <!--    <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -79,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group row  <?= setValidationStyle('waktu_awal') ?> ">
@@ -92,7 +93,6 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                
                     <div class="form-group row <?= setValidationStyle('waktu_akhir') ?> ">
                         <label for="waktu_akhir" class="col-sm-4 control-label">Waktu Akhir</label>
                             <div class="col-sm-4">

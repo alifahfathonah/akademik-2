@@ -11,6 +11,7 @@ Class Siswa extends OperatorController {
         $this->load->library('ssp');
         $this->menu = "master";
         $this->sub_menu = "siswa";
+        $this->load->library('form_validation');
     }
 
     
@@ -126,6 +127,9 @@ Class Siswa extends OperatorController {
         }
         // $siswa = $this->Model_siswa->find('id_siswa',$id);
         $data_siswa = $this->db->where('id',$id)->get('data_siswa')->row();
+        $data['data_ortu'] = $this->db->where('id_pendaf',$id)->get('data_ortu')->row();
+        $data['data_prestasi'] = $this->db->where('id_pendaftaran',$id)->get('data_prestasi')->row();
+        
         if (!$_POST) {
             $data['input'] = (object) $data_siswa;
         } else {
@@ -145,12 +149,15 @@ Class Siswa extends OperatorController {
 
         if (!$this->Model_siswa->validate() || $this->form_validation->error_array() ) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'siswa/add';
-            $data['heading']    = $this->template->link('Siswa > Tambah');
-            $data['formAction'] = "siswa/edit/".$id;
-            $data['buttonText'] = 'Tambah';
-            $data['menu']       = $this->menu;
-            $data['sub_menu']   = $this->sub_menu;
+            $data['mainView']           = 'siswa/add';
+            $data['heading']            = $this->template->link('Siswa > Tambah');
+            $data['formAction']         = "siswa/edit/".$id;
+            $data['formActionOrtu']     = "siswa/ortu/".$id;
+            $data['formActionPrestasi'] = "siswa/prestasi/".$id;
+            $data['formActionBerkas']   = "siswa/berkas/".$id;
+            $data['buttonText']         = 'Tambah';
+            $data['menu']               = $this->menu;
+            $data['sub_menu']           = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
             // $this->load->view('template', compact('halaman', 'main_view', 'form_action', 'input'));
             return;
@@ -183,6 +190,98 @@ Class Siswa extends OperatorController {
 
         redirect($this->sub_menu);
     }
+
+    public function ortu($id=null)
+    {
+        
+        $simpan = [
+
+            'nama_ayah'       => $_POST['nama_ayah'],
+            'no_hp_ayah'      => $_POST['no_hp_ayah'],
+            'pekerjaan_ayah'  => $_POST['pekerjaan_ayah'],
+            'status_ayah'     => $_POST['status_ayah'],
+            'nama_ibu'        => $_POST['nama_ibu'],
+            'no_hp_ibu'       => $_POST['no_hp_ibu'],
+            'pekerjaan_ibu'   => $_POST['pekerjaan_ibu'],
+            'status_ibu'      => $_POST['status_ibu'],
+            'pendapatan_ortu' => $_POST['pendapatan_ortu'],
+
+            'ortu_dukuh'     => $_POST['ortu_dukuh'],
+            'ortu_rt'        => $_POST['ortu_rt'],
+            'ortu_rw'        => $_POST['ortu_rw'],
+            'ortu_kelurahan' => $_POST['ortu_kelurahan'],
+            'ortu_kecamatan' => $_POST['ortu_kecamatan'],
+            'ortu_kabupaten' => $_POST['ortu_kabupaten'],
+            'ortu_provinsi'  => $_POST['ortu_provinsi'],
+            'nama_wali'      => $_POST['nama_wali'],
+            'no_hp_wali'     => $_POST['no_hp_wali'],
+            'pekerjaan_wali' => $_POST['pekerjaan_wali'],
+            'alamat_wali'    => $_POST['alamat_wali'],
+            'id_siswa'       => $_POST['id_siswa'],
+
+        ];
+
+
+        if ($this->db->insert('tb_orang_tua',$simpan)) {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        }
+
+        redirect('siswa/edit/'.$id);
+        
+    }
+
+    public function prestasi($id=null)
+    {
+        $simpan = array(
+            'nama_prestasi'      => $_POST['nama_prestasi'],
+            'tahun_prestasi'     => $_POST['tahun_prestasi'],
+            'tingkat_prestasi'   => $_POST['tingkat_prestasi'],
+            'peringkat_prestasi' => $_POST['peringkat_prestasi'],
+            'id_siswa'           => $_POST['id_siswa'],
+        );
+
+        
+        if ($this->db->insert('tb_prestasi',$simpan)) {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        } else {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        }
+
+        redirect('siswa/edit/'.$id);
+
+
+    }
+
+    public function berkas($id=null)
+    {
+        /* Cek FILE Upload gambar */
+        if (!empty($_FILES) && $_FILES['upload_file']['size'] > 0) {
+            $upload = $this->upload_berkas_siswa();
+
+            if ($upload) {
+                $simpan['upload_file'] =  $upload['file_name']; // Data for column "cover".
+                
+            }
+
+        }
+
+        $simpan = [
+            'id_siswa'   => $_POST['id_siswa'],
+            'nama_file'  => $_POST['nama_file'],
+            'tgl_upload' => $_POST['tgl_upload'],
+        ];
+
+        $save = $this->db->insert('tb_berkas_siswa',$simpan);
+        if (  !$save || $this->form_validation->error_array() ) {
+            $this->session->set_flashdata('error', 'Data  gagal disimpan.');
+        } else {
+            $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
+        }
+
+        redirect('siswa/edit/'.$id);
+    }
     
     function delete(){
         $nim = $this->uri->segment(3);
@@ -212,6 +311,27 @@ Class Siswa extends OperatorController {
         } else {
             // Add error to $_error_array
             $this->form_validation->add_to_error_array('pas_photo', $this->upload->display_errors('', ''));
+            return false;
+        }
+    }
+    
+    function upload_berkas_siswa(){
+        $config['upload_path']      = './uploads/berkas/';
+        $config['allowed_types']    = 'jpg|png';
+        $config['max_size']         = 4024;                    // 2mb
+        $config['max_width']        = 0;
+        $config['max_height']       = 0;
+        $config['overwrite']        = true;
+        $config['file_ext_tolower'] = true;
+        // proses upload
+        
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('upload_file')) {
+            // Upload OK, return uploaded file info.
+            return $this->upload->data();
+        } else {
+            // Add error to $_error_array
+            $this->form_validation->add_to_error_array('upload_file', $this->upload->display_errors('', ''));
             return false;
         }
     }

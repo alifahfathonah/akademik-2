@@ -17,21 +17,24 @@ Class Buat_wawancara extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'tb_wawancara';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_wawancara';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_wawancara', 'dt' => 'id_wawancara'),
+            array('db' => 'nama_wawancara', 'dt' => 'nama_wawancara'),
+            array('db' => 'kriteria_wawancara', 'dt' => 'kriteria_wawancara'),
+            array('db' => 'ket_wawancara', 'dt' => 'ket_wawancara'),
+            array('db' => 'id_jurusan', 'dt' => 'id_jurusan'),
+            array('db' => 'status', 'dt' => 'status'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_wawancara',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('buat_wawancara/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('buat_wawancara/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,16 +62,16 @@ Class Buat_wawancara extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_buat_wawancara->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_buat_wawancara->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['mainView']   = 'buat_wawancara/add';
+            $data['heading']    = $this->template->link('buat_wawancara > Tambah');
+            $data['formAction'] = "buat_wawancara/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -77,7 +80,7 @@ Class Buat_wawancara extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_buat_wawancara->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
@@ -89,22 +92,22 @@ Class Buat_wawancara extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_wawancara = $this->Model_buat_wawancara->find('id_wawancara',$id);
+        if (!$buat_wawancara) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_wawancara', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $buat_wawancara;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_buat_wawancara->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'buat_wawancara/add';
+            $data['heading']    = $this->template->link('buat_wawancara > Edit ');
+            $data['formAction'] = "buat_wawancara/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,7 +115,7 @@ Class Buat_wawancara extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_buat_wawancara->update($id, $data['input'],'id_wawancara');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -124,13 +127,13 @@ Class Buat_wawancara extends OperatorController {
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_wawancara = $this->Model_buat_wawancara->find('id_wawancara',$id);
+        if (!$buat_wawancara) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_wawancara', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_buat_wawancara->where('id_wawancara',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');

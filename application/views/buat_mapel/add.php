@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+        <!--    <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -34,7 +34,7 @@
 
             <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
                 <label class="col-sm-2 control-label" for="id_gelombang">
-                    Gelombang
+                    GELOMBANG
                 </label>
                 <div class="col-sm-9">
                     <?= form_dropdown('id_gelombang',getDropdownList('tb_gelombang',['id_gelombang','nama_gelombang']),$input->id_gelombang,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
@@ -45,10 +45,10 @@
 
             <div class="form-group <?= setValidationStyle('nama_mapel') ?>">
                 <label class="col-sm-2 control-label" for="nama_mapel">
-                    Nama Mapel
+                    NAMA MAPEL
                 </label>
                 <div class="col-sm-9">
-                    <input value="<?=$input->nama_mapel;?>" type="text" name="nama_mapel" placeholder="Tulis Nama Mapel" id="nama_mapel" class="form-control">
+                    <input value="<?=$input->nama_mapel;?>" type="text" name="nama_mapel" placeholder="Ketik Nama Mapel" id="nama_mapel" class="form-control">
                     <?= setValidationIcon('nama_mapel') ?>
                     <?=form_error('nama_mapel');?>
                 </div>
@@ -56,10 +56,10 @@
             
             <div class="form-group <?= setValidationStyle('jml_soal') ?>">
                 <label class="col-sm-2 control-label" for="jml_soal">
-                    Jumlah Soal
+                    JUMLAH SOAL
                 </label>
                 <div class="col-sm-9">
-                    <input value="<?=$input->jml_soal;?>" type="text" name="jml_soal" placeholder="Tulis Jumlah Soal" id="jml_soal" class="form-control">
+                    <input value="<?=$input->jml_soal;?>" type="text" name="jml_soal" placeholder="Ketik Jumlah Soal" id="jml_soal" class="form-control">
                     <?= setValidationIcon('jml_soal') ?>
                     <?=form_error('jml_soal');?>
                 </div>
@@ -67,10 +67,10 @@
 
             <div class="form-group <?= setValidationStyle('tampil_soal') ?>">
                 <label class="col-sm-2 control-label" for="tampil_soal">
-                    Tampil Soal
+                    TAMPIL SOAL
                 </label>
                 <div class="col-sm-9">
-                    <input value="<?=$input->tampil_soal;?>" type="text" name="tampil_soal" placeholder="Tulis Tampil Soal" id="tampil_soal" class="form-control">
+                    <input value="<?=$input->tampil_soal;?>" type="text" name="tampil_soal" placeholder="Ketik Tampil Soal" id="tampil_soal" class="form-control">
                     <?= setValidationIcon('tampil_soal') ?>
                     <?=form_error('tampil_soal');?>
                 </div>
@@ -78,10 +78,10 @@
 
             <div class="form-group <?= setValidationStyle('bobot_soal') ?>">
                 <label class="col-sm-2 control-label" for="bobot_soal">
-                    Bobot Soal
+                    BOBOT SOAL
                 </label>
                 <div class="col-sm-9">
-                    <input value="<?=$input->bobot_soal;?>" type="text" name="bobot_soal" placeholder="Tulis Bobot Soal" id="bobot_soal" class="form-control">
+                    <input value="<?=$input->bobot_soal;?>" type="text" name="bobot_soal" placeholder="Ketik Bobot Soal" id="bobot_soal" class="form-control">
                     <?= setValidationIcon('bobot_soal') ?>
                     <?=form_error('bobot_soal');?>
                 </div>

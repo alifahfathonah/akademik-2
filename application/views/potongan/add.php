@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+        <!--    <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -37,7 +37,7 @@
                     Nama Potongan
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_potongan?>" name="nama_potongan" placeholder="" id="Nama Potongan" class="form-control">
+                    <input type="text" value="<?=$input->nama_potongan?>" name="nama_potongan" placeholder="Ketik Nama Potongan" id="Nama Potongan" class="form-control">
                     <?= setValidationIcon('nama_potongan') ?>
                     <?=form_error('nama_potongan');?>
                 </div>
@@ -49,7 +49,7 @@
                     Jenis Potongan
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->jenis_potongan?>" name="jenis_potongan" placeholder="" id="Jenis potongan" class="form-control">
+                    <input type="text" value="<?=$input->jenis_potongan?>" name="jenis_potongan" placeholder="Ketik Jenis Potongan" id="Jenis potongan" class="form-control">
                     <?= setValidationIcon('jenis_potongan') ?>
                     <?=form_error('jenis_potongan');?>
                 </div>
@@ -60,7 +60,7 @@
                     Biaya Potongan
                 </label>
                 <div class="col-sm-9">
-                    <input type="number" value="<?=$input->biaya_potongan?>" name="biaya_potongan" placeholder="" id="Biaya Potongan" class="form-control">
+                    <input type="number" value="<?=$input->biaya_potongan?>" name="biaya_potongan" placeholder="Ketik Biaya Potongan" id="Biaya Potongan" class="form-control">
                     <?= setValidationIcon('biaya_potongan') ?>
                     <?=form_error('biaya_potongan');?>
                 </div>

@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+            <!-- <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -32,19 +32,40 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('nama_wawancara') ?>">
+                <label class="col-sm-2 control-label" for="nama_wawancara">
+                    NAMA WAWANCARA
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                    <input type="text" value="<?=$input->nama_wawancara?>" name="nama_wawancara" placeholder="Ketik Nama Wawancara" id="nama_wawancara" class="form-control">
+                    <?= setValidationIcon('nama_wawancara') ?>
+                    <?=form_error('nama_wawancara');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('kriteria_wawancara') ?>">
+                <label class="col-sm-2 control-label" for="kriteria_wawancara">
+                    KRITERIA WAWANCARA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->kriteria_wawancara?>" name="kriteria_wawancara" placeholder="Ketik Kriteria Wawancara" id="kriteria_wawancara" class="form-control">
+                    <?= setValidationIcon('kriteria_wawancara') ?>
+                    <?=form_error('kriteria_wawancara');?>
                 </div>
             </div>
             
+            <div class="form-group <?= setValidationStyle('ket_wawancara') ?>">
+                <label class="col-sm-2 control-label" for="ket_wawancara">
+                    KETERANGAN
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->ket_wawancara?>" name="ket_wawancara" placeholder="Ketik Keterangan" id="ket_wawancara" class="form-control">
+                    <?= setValidationIcon('ket_wawancara') ?>
+                    <?=form_error('ket_wawancara');?>
+                </div>
+            </div>
             
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
+            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
                 <label class="col-sm-2 control-label" for="id_personal">
                     Personal
                 </label>
@@ -55,24 +76,24 @@
                     <?=form_error('id_personal');?>
                 </div>
             </div>
+             -->
             
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
+            <div class="form-group row <?= setValidationStyle('status') ?> ">
+                <label for="nama" class="col-sm-2 control-label">STATUS</label>
                     <div class="col-sm-10">
                         <div>
                             <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
+                                <input type="radio" class="grey" value="aktif" name="status" <?php echo (!empty($input->status) and ($input->status == 'aktif') ) ? "checked" :"" ;?> >
+                                AKTIF
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
+                                <input type="radio" class="grey"  value="non aktif" name="status" <?php echo (!empty($input->status) and ($input->status == 'non aktif') ) ? "checked" :"" ;?> >
+                                TIDAK AKTIF
                             </label>
                         </div>
                         
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
+                        <?= setValidationIcon('status') ?>
+                        <?=form_error('status');?>
                         
                         
                     </div>

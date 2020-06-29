@@ -1,6 +1,9 @@
 <br>
 <br>
 <div class="col-sm-12">
+<?php if(showFlashMessage()){
+    echo showFlashMessage();
+};?>
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -271,7 +274,7 @@
                 <div id="orang-tua" class="tab-pane fade">
                     <p>Orang Tua</p>
                     <?php
-                    echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
+                    echo form_open_multipart($formActionOrtu, 'role="form" class="form-horizontal"');
                     ?>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1">
@@ -279,6 +282,7 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text" name="nama" placeholder="" id="form-field-1" value="<?=$input->nama_siswa ?? ''?>" class="form-control">
+                            <input type="hidden" name="id_siswa" value="<?=$data_ortu->idsis ?? '' ?>">
                         </div>
                     </div>
                     
@@ -287,7 +291,7 @@
                             Nama Ayah
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_ayah" placeholder="" id="nama_ayah" value="" class="form-control">
+                            <input type="text" name="nama_ayah" placeholder="" id="nama_ayah" value="<?=$data_ortu->nama_ayah ?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -296,7 +300,7 @@
                             No HP Ayah
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="no_hp_ayah" placeholder="" id="no_hp_ayah" value="" class="form-control">
+                            <input type="number" name="no_hp_ayah" placeholder="" id="no_hp_ayah" value="<?=$data_ortu->no_hp_ayah ?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -305,7 +309,7 @@
                             Pekerjaan Ayah
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="pekerjaan_ayah" placeholder="" id="pekerjaan_ayah" value="" class="form-control">
+                            <input type="text" name="pekerjaan_ayah" placeholder="" id="pekerjaan_ayah" value="<?=$data_ortu->pekerjaan_ayah?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -314,11 +318,16 @@
                             Status Ayah
                         </label>
                         <div class="col-sm-9">
-                            <select name="status_ayah" id="" class="form-control">
-                                <option value="masih hidup">Masih Hidup</option>
-                                <option value="pisah">Pisah</option>
-                                <option value="almarhum">Almarhum</option>
-                            </select>
+                            
+                            <?php 
+                                    $array = [
+                                        '' => '--Pilih--',
+                                        'masih hidup' => 'masih hidup',
+                                        'pisah' => 'pisah',
+                                        'almarhum' => 'almarhum',
+
+                                    ];
+                                echo form_dropdown('status_ayah',$array,$data_ortu->status_ibu ?? '',['class'=>'form-control']) ?>
                         </div>
                     </div>
                     
@@ -327,16 +336,16 @@
                             Nama Ibu
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_ibu" placeholder="" id="nama_ibu" value="" class="form-control">
+                            <input type="text" name="nama_ibu" placeholder="" id="nama_ibu" value="<?=$data_ortu->nama_ibu?? ''?>" class="form-control">
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="no_hp_ibu">
-                            No HP Ayah
+                            No HP Ibu
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="no_hp_ibu" placeholder="" id="no_hp_ibu" value="" class="form-control">
+                            <input type="number" name="no_hp_ibu" placeholder="" id="no_hp_ibu" value="<?=$data_ortu->no_hp_ibu?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -345,7 +354,7 @@
                             Pekerjaan Ibu
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="pekerjaan_ibu" placeholder="" id="pekerjaan_ibu" value="" class="form-control">
+                            <input type="text" name="pekerjaan_ibu" placeholder="" id="pekerjaan_ibu" value="<?=$data_ortu->pekerjaan_ibu?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -354,11 +363,37 @@
                             Status Ibu
                         </label>
                         <div class="col-sm-9">
-                            <select name="status_ibu" id="" class="form-control">
-                                <option value="masih hidup">Masih Hidup</option>
-                                <option value="pisah">Pisah</option>
-                                <option value="almarhum">Almarhum</option>
-                            </select>
+
+                            <?php 
+                                $array = [
+                                    '' => '--Pilih--',
+                                    'masih hidup' => 'masih hidup',
+                                    'pisah' => 'pisah',
+                                    'almarhum' => 'almarhum',
+
+                                ];
+                            echo form_dropdown('status_ibu',$array,$data_ortu->status_ibu ?? '',['class'=>'form-control']) ?>
+
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="pendapatan_ortu">
+                            Pendapatan Orang Tua
+                        </label>
+                        <div class="col-sm-9">
+                            <?php 
+                                $array = [
+                                    '' => '--Pilih--',
+                                    'Kurang Dari Rp. 500.000' => 'Kurang Dari Rp. 500.000',
+                                    'Rp 500.000 s/d Rp. 1.000.000' => 'Rp 500.000 s/d Rp. 1.000.000',
+                                    'Rp. 1.000.000 s/d Rp 2.000.000' => 'Rp. 1.000.000 s/d Rp 2.000.000',
+                                    'Rp. 2.000.000 s/d Rp. 3.000.000' => 'Rp. 2.000.000 s/d Rp. 3.000.000',
+                                    'diatas Rp. 3.000.000' => 'diatas Rp. 3.000.000'
+
+                                ];
+                                echo form_dropdown('pendapatan_ortu',$array,$data_ortu->pendapatan_ortu ?? '',['class'=>'form-control']) ?>
                         </div>
                     </div>
 
@@ -373,7 +408,7 @@
                             Dukuh
                         </label>
                         <div class="col-sm-6">
-                            <input type="text" value="" name="ortu_dukuh" placeholder="Dukuh" id="" class="form-control">
+                            <input type="text" value="<?=$data_ortu->ortu_dukuh?? ''?>" name="ortu_dukuh" placeholder="Dukuh" id="" class="form-control">
                         </div>
                     </div>
                     
@@ -382,10 +417,10 @@
                             RT / RW
                         </label>
                         <div class="col-sm-3">
-                            <input type="text" name="ortu_rt" value="" placeholder="RT" id="" class="form-control">
+                            <input type="number" name="ortu_rt" value="<?=$data_ortu->ortu_rt?? ''?>" placeholder="RT" id="" class="form-control">
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" name="ortu_rw" placeholder="RW" value="" id="" class="form-control">
+                            <input type="number" name="ortu_rw" placeholder="RW" value="<?=$data_ortu->ortu_rw?? ''?>" id="" class="form-control">
                         </div>
                     </div>
 
@@ -394,10 +429,10 @@
                             Kelurahan / Kecamatan
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="ortu_kelurahan" value="" placeholder="" id="" class="form-control">
+                            <input type="text" name="ortu_kelurahan" value="<?=$data_ortu->ortu_kelurahan?? ''?>" placeholder="" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" name="ortu_kecamatan" value="" placeholder="" id="" class="form-control">
+                            <input type="text" name="ortu_kecamatan" value="<?=$data_ortu->ortu_kecamatan?? ''?>" placeholder="" id="" class="form-control">
                         </div>
                     </div>
 
@@ -406,10 +441,10 @@
                             Kabupaten / Provinsi
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="ortu_kabupaten" placeholder="Kabupaten" value="" id="" class="form-control">
+                            <input type="text" name="ortu_kabupaten" placeholder="Kabupaten" value="<?=$data_ortu->ortu_kabupaten?? ''?>" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" name="ortu_provinsi" value="" placeholder="Provinsi" id="" class="form-control">
+                            <input type="text" name="ortu_provinsi" value="<?=$data_ortu->ortu_provinsi?? ''?>" placeholder="Provinsi" id="" class="form-control">
                         </div>
                     </div>
 
@@ -418,10 +453,10 @@
                             Nama Wali / No. Hp Wali
                         </label>
                         <div class="col-sm-5">
-                            <input type="text" name="nama_wali" value="" placeholder="Nama Wali" id="" class="form-control">
+                            <input type="text" name="nama_wali" value="<?=$data_ortu->nama_wali?? ''?>" placeholder="Nama Wali" id="" class="form-control">
                         </div>
                         <div class="col-sm-4">
-                            <input type="number" name="no_hp_wali" value="" placeholder="No .Hp Wali" id="" class="form-control">
+                            <input type="number" name="no_hp_wali" value="<?=$data_ortu->no_hp_wali?? ''?>" placeholder="No .Hp Wali" id="" class="form-control">
                         </div>
                     </div>
 
@@ -431,7 +466,7 @@
                             Pekerjaan Wali
                         </label>
                         <div class="col-sm-6">
-                            <input type="text" value="" name="pekerjaan_wali" placeholder="Pekerjaan Wali" id="" class="form-control">
+                            <input type="text" value="<?=$data_ortu->pekerjaan_wali?? ''?>" name="pekerjaan_wali" placeholder="Pekerjaan Wali" id="" class="form-control">
                         </div>
                     </div>
                     
@@ -440,7 +475,7 @@
                             Alamat Wali
                         </label>
                         <div class="col-sm-9">
-                            <textarea name="alamat_wali"  id="alamat_wali" value="" class="form-control"></textarea>
+                            <textarea name="alamat_wali"  id="alamat_wali" class="form-control"><?=$data_ortu->alamat_wali?? ''?></textarea>
                         </div>
                     </div>
 
@@ -467,14 +502,15 @@
                 <div id="prestasi" class="tab-pane fade">
                     <h3>Prestasi</h3>
                     <?php
-                        echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
+                        echo form_open_multipart($formActionPrestasi, 'role="form" class="form-horizontal"');
                     ?>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1">
                             Nama Siswa
                         </label>
                         <div class="col-sm-9">
-                            <input type="text"  name="nama" placeholder="" id="form-field-1" value="<?=$input->nama_siswa ?? ''?>" class="form-control">
+                            <input type="text"  name="nama" placeholder="" id="form-field-1" value="<?=$data_prestasi->nama_siswa ?? ''?>" class="form-control">
+                            <input type="hidden" name="id_siswa" value="<?=$data_prestasi->idsis ?? '' ?>">
                         </div>
                     </div>
                     
@@ -483,7 +519,7 @@
                             Nama Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_prestasi" placeholder="" id="nama_prestasi" value="" class="form-control">
+                            <input type="text" name="nama_prestasi" value="<?=$data_prestasi->nama_prestasi ?? ''?>" placeholder="" id="nama_prestasi" class="form-control">
                         </div>
                     </div>
                     
@@ -492,7 +528,7 @@
                             Peringkat Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="peringkat_prestasi" placeholder="" id="peringkat_prestasi" value="" class="form-control">
+                            <input type="text" name="peringkat_prestasi" placeholder="" id="peringkat_prestasi" value="<?=$data_prestasi->peringkat_prestasi ?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -501,7 +537,7 @@
                             Tingkat Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="tingkat_prestasi" placeholder="" id="tingkat_prestasi" value="" class="form-control">
+                            <input type="text" name="tingkat_prestasi" placeholder="" id="tingkat_prestasi" value="<?=$data_prestasi->tingkat_prestasi ?? ''?>" class="form-control">
                         </div>
                     </div>
                     
@@ -510,7 +546,21 @@
                             Tahun Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="number" name="tahun_prestasi" placeholder="" id="tahun_prestasi" value="" class="form-control">
+                            <input type="number" name="tahun_prestasi" placeholder="" id="tahun_prestasi" value="<?=$data_prestasi->tahun_prestasi ?? ''?>" class="form-control">
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="form-field-1">
+
+                        </label>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-info">Edit</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-warning btn-sm')); ?>
                         </div>
                     </div>
 
@@ -523,7 +573,7 @@
                     <h3>Berkas</h3>
                     
                     <?php
-                        echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
+                        echo form_open_multipart($formActionBerkas, 'role="form" class="form-horizontal"');
                     ?>
                     <div class="form-group">
                         <label class="col-sm-3 control-label" for="form-field-1">
@@ -531,10 +581,84 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text"  name="nama" placeholder="" id="form-field-1" value="<?=$input->nama_siswa ?? ''?>" class="form-control">
+                            <input type="hidden" value="<?=$input->id_siswa ?? ''; ?>" name="id_siswa">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="tgl_upload">
+                            Tanggal
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="date"  name="tgl_upload" placeholder="" id="tgl_upload" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="nama_file">
+                            Nama Berkas
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text"  name="nama_file" placeholder="" id="nama_file" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="upload_file">
+                            Cari File
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="file" id="upload_file" class="form-control" name="upload_file">
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="form-field-1">
+
+                        </label>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-info">Edit</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-warning btn-sm')); ?>
                         </div>
                     </div>
 
                     </form>
+
+                    <div class="table-responsive">
+                        <?php 
+                            if (isset($input->id_siswa) ) {
+                                $dt_berkas = $this->db->where('id_siswa',$input->id_siswa)->get('tb_berkas_siswa')->result();
+                            }
+                        ?>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Tanggal</td>
+                                    <td>Nama Berkas</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                            if (isset($input->id_siswa) ) { 
+                                $no=0;foreach ($dt_berkas as $b ) {
+                                 
+                            ?>
+                                <tr>
+                                    <td><?=++$no?></td>
+                                    <td><?=$b->tgl_upload?></td>
+                                    <td><?=$b->nama_file;?></td>
+                                </tr>
+                            <?php    
+                                }
+                                } else {
+                                    echo "<tr><td colspan='3'>Data Kosong</td></tr>";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </div>
             </div>
             

@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+        <!--    <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -34,7 +34,7 @@
 
             <div class="form-group <?= setValidationStyle('id_personal') ?>">
                 <label class="col-sm-2 control-label" for="id_personal">
-                    Nama Personal
+                    NAMA PERSONAL
                 </label>
                 <div class="col-sm-5">
                     <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group <?= setValidationStyle('tgl_pengumuman') ?>">
                 <label class="col-sm-2 control-label" for="tgl_pengumuman">
-                    Tanggal Pengumuman
+                    TANGGAL
                 </label>
                 <div class="col-sm-3">
                     <input name="tgl_pengumuman" type="date" value="<?=$input->tgl_pengumuman;?>" placeholder="" id="tgl_pengumuman" class="form-control">
@@ -56,7 +56,7 @@
             </div>
             
             <div class="form-group row <?= setValidationStyle('judul_pengumuman') ?> ">
-                <label for="judul_pengumuman" class="col-sm-2 control-label">Judul</label>
+                <label for="judul_pengumuman" class="col-sm-2 control-label">JUDUL</label>
                     <div class="col-sm-8">
                         <input type="text" value="<?=$input->judul_pengumuman;?>" class="form-control" name="judul_pengumuman" placeholder="">
                         
@@ -66,7 +66,7 @@
             </div>
 
             <div class="form-group row  <?= setValidationStyle('isi_pengumuman') ?> ">
-                <label for="isi_pengumuman" class="col-sm-2 control-label">Isi Pengumuman</label>
+                <label for="isi_pengumuman" class="col-sm-2 control-label">ISI PENGUMUMAN</label>
                     <div class="col-sm-10">
                         <textarea name="isi_pengumuman" id="isi_pengumuman" cols="30" rows="10"><?=$input->isi_pengumuman;?></textarea>
                         <?= setValidationIcon('isi_pengumuman') ?>

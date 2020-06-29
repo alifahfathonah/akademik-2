@@ -26,10 +26,10 @@
                         <th>DURASI</th>
                         <th>TGL MULAI</th>
                         <th>TGL AKHIR</th>
-                        <th>WKT MULAI</th>
-                        <th>WKT AKHIR</th>
+                        <th>WAKTU MULAI</th>
+                        <th>WAKTU AKHIR</th>
                         <th>STATUS</th>
-                        <th>GEL</th>
+                        <th>GELOMBANG</th>
                         <th>MAPEL</th>
                         <th>AKSI</th>
                     </tr>

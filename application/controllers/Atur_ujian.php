@@ -59,16 +59,16 @@ Class Atur_ujian extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_atur_ujian->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_atur_ujian->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['mainView']   = 'atur_ujian/add';
+            $data['heading']    = $this->template->link('atur_ujian > Tambah');
+            $data['formAction'] = "atur_ujian/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -77,7 +77,7 @@ Class Atur_ujian extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_atur_ujian->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');

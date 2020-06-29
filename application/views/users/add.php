@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+        <!--    <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -56,7 +56,7 @@
             
             
             <div class="form-group row <?= setValidationStyle('jenis_kelamin') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Jenis Kelamin</label>
+                <label for="nama" class="col-sm-2 control-label">JENIS KELAMIN</label>
                     <div class="col-sm-10">
                         <div>
                             <label class="radio-inline">

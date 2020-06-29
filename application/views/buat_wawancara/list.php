@@ -9,7 +9,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Tabel Buat Wawancara
             <div class="panel-tools">
-                <?php echo anchor('pilihkelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
+                <?php echo anchor('buat_wawancara/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
             <!--    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -43,7 +43,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('buat_wawancara/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -53,10 +53,19 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "nama_wawancara"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "kriteria_wawancara"
+                    },
+                    {
+                        "data": "ket_wawancara"
+                    },
+                    {
+                        "data": "status"
+                    },
+                    {
+                        "data": "id_jurusan"
                     },
                     { "data": "aksi","width": "120px" },
                 ]
