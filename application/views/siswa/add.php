@@ -1,9 +1,9 @@
 <br>
 <br>
 <div class="col-sm-12">
-<?php if(showFlashMessage()){
+<?php
     echo showFlashMessage();
-};?>
+;?>
     <!-- start: TEXT FIELDS PANEL -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -636,6 +636,7 @@
                                     <td>No</td>
                                     <td>Tanggal</td>
                                     <td>Nama Berkas</td>
+                                    <td>Download</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -648,6 +649,10 @@
                                     <td><?=++$no?></td>
                                     <td><?=$b->tgl_upload?></td>
                                     <td><?=$b->nama_file;?></td>
+                                    <td>
+                                    <a href="<?php echo base_url().'siswa/download/'. $b->upload_file ?>">Download file</a>
+                                       
+                                    </td>
                                 </tr>
                             <?php    
                                 }

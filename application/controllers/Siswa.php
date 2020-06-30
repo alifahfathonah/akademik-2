@@ -120,10 +120,12 @@ Class Siswa extends OperatorController {
     
     function edit($id=null){
 
-        $pendaftaran = $this->Model_siswa->query("select * from tb_pendaftaran where id_pendaftaran = '$id' ")->result();
-        if (!$pendaftaran) {
-            flashMessage('error', 'Data tidak ditemukan!');
+        $pendaftaran_a = $this->Model_siswa->query("select * from tb_pendaftaran where id_pendaftaran = '$id' ");
+        if ($pendaftaran_a->num_rows() < 1 ) {
+            flashMessage('error', 'Data tidak ditemukan ...!');
             redirect('siswa', 'refresh');
+        }else{
+            flashMessage('success', 'Data ditemukan .');
         }
         // $siswa = $this->Model_siswa->find('id_siswa',$id);
         $data_siswa = $this->db->where('id',$id)->get('data_siswa')->row();
@@ -138,10 +140,10 @@ Class Siswa extends OperatorController {
 
         /* Cek FILE Upload gambar */
         if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
-            $upload = $this->upload_foto_user();
+            $upload_s = $this->upload_foto_user();
 
-            if ($upload) {
-                $data['input']->pas_photo =  $upload['file_name']; // Data for column "cover".
+            if ($upload_s) {
+                $simpan['pas_photo'] =  $this->upload->data('file_name');; // Data for column "cover".
                 
             }
 
@@ -178,6 +180,7 @@ Class Siswa extends OperatorController {
             'seri_skhun_smp'  => $_POST['seri_skhun_smp'],
             'no_un_smp'       => $_POST['no_un_smp'],
             'status'          => 'aktif',
+            'pas_photo' =>  $this->upload->data('file_name') ?? '','',
 
         ];
 
@@ -188,7 +191,7 @@ Class Siswa extends OperatorController {
             $this->session->set_flashdata('error', 'Data  gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('siswa/edit/'.$id);
     }
 
     public function ortu($id=null)
@@ -256,24 +259,27 @@ Class Siswa extends OperatorController {
 
     public function berkas($id=null)
     {
+        $simpan_ber = array();
         /* Cek FILE Upload gambar */
         if (!empty($_FILES) && $_FILES['upload_file']['size'] > 0) {
-            $upload = $this->upload_berkas_siswa();
+            $upload_b = $this->upload_berkas_siswa();
 
-            if ($upload) {
-                $simpan['upload_file'] =  $upload['file_name']; // Data for column "cover".
-                
+            if ($upload_b == true) {
+                $simpan_ber['upload_file'] =  $this->upload->data('file_name'); // Data for column "cover".
             }
 
         }
 
-        $simpan = [
+
+        $simpan_ber = [
             'id_siswa'   => $_POST['id_siswa'],
             'nama_file'  => $_POST['nama_file'],
             'tgl_upload' => $_POST['tgl_upload'],
+            'upload_file' =>  $this->upload->data('file_name') ?? '',
         ];
 
-        $save = $this->db->insert('tb_berkas_siswa',$simpan);
+
+        $save = $this->db->insert('tb_berkas_siswa',$simpan_ber);
         if (  !$save || $this->form_validation->error_array() ) {
             $this->session->set_flashdata('error', 'Data  gagal disimpan.');
         } else {
@@ -282,6 +288,10 @@ Class Siswa extends OperatorController {
 
         redirect('siswa/edit/'.$id);
     }
+
+    public function download($name){				
+		force_download('uploads/berkas/'.$name,NULL);
+	}	
     
     function delete(){
         $nim = $this->uri->segment(3);
@@ -328,7 +338,8 @@ Class Siswa extends OperatorController {
         $this->load->library('upload', $config);
         if ($this->upload->do_upload('upload_file')) {
             // Upload OK, return uploaded file info.
-            return $this->upload->data();
+            $this->upload->data();
+            return true;
         } else {
             // Add error to $_error_array
             $this->form_validation->add_to_error_array('upload_file', $this->upload->display_errors('', ''));

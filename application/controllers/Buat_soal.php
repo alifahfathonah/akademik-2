@@ -59,16 +59,16 @@ Class Buat_soal extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_buat_soal->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_buat_soal->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['mainView']   = 'buat_soal/add';
+            $data['heading']    = $this->template->link('buat_soal > Tambah');
+            $data['formAction'] = "buat_soal/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -77,7 +77,7 @@ Class Buat_soal extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_buat_soal->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
@@ -89,22 +89,22 @@ Class Buat_soal extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_soal = $this->Model_buat_soal->find('id_soal',$id);
+        if (!$buat_soal) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_soal', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $buat_soal;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_buat_soal->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'buat_soal/add';
+            $data['heading']    = $this->template->link('buat_soal > Edit ');
+            $data['formAction'] = "buat_soal/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,7 +112,7 @@ Class Buat_soal extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_buat_soal->update($id, $data['input'],'id_soal');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -124,13 +124,13 @@ Class Buat_soal extends OperatorController {
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $buat_soal = $this->Model_buat_soal->find('id_soal',$id);
+        if (!$buat_soal) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('buat_soal', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_buat_soal->where('id_buat_soal',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');

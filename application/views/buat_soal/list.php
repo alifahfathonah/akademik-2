@@ -9,7 +9,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Tabel Buat Soal
             <div class="panel-tools">
-                <?php echo anchor('pilihkelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
+                <?php echo anchor('buat_soal/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
             <!--    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -27,13 +27,40 @@
                         <th>GAMBAR</th>
                         <th>SUARA</th>
                         <th>JWB A</th>
+                        <th>FILE A</th>
                         <th>JWB B</th>
+                        <th>FILE B</th>
                         <th>JWB C</th>
+                        <th>FILE C</th>
                         <th>JWB D</th>
+                        <th>FILE D</th>
                         <th>JWB E</th>
+                        <th>FILE E</th>
+                        <th>JAWABAN</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <th>2-2-2020</th>
+                        <th>Siapa Presiden RI ke 1?</th>
+                        <th>-</th>
+                        <th>-</th>
+                        <th>Joko Widodo</th>
+                        <th>-</th>
+                        <th>Susilo Bambang Yudhoyono</th>
+                        <th>-</th>
+                        <th>Ir Soekarno</th>
+                        <th>-</th>
+                        <th>Soeharto</th>
+                        <th>-</th>
+                        <th>Megawati</th>
+                        <th>-</th>
+                        <th>Ir Soekarno</th>
+                        <th>Edit | Hapus</th>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -47,7 +74,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('buat_soal/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -57,10 +84,16 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "id_mapel"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "nomor"
+                    },
+                    {
+                        "data": "file1"
+                    },
+                    {
+                        "data": "file2"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

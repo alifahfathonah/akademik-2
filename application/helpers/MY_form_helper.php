@@ -87,3 +87,15 @@ function fileFormError($field, $prefix = '', $suffix = '')
     }
     return '';
 }
+
+
+// No Otomatis No pendaftaran
+function pendaftaranNo($id_gelombang)
+{
+    $CI =& get_instance();
+    $no = $CI->db->order_by('id_pendaftaran','DESC')->get('tb_pendaftaran')->row();
+    // str_pad($a,8,'#')
+    $data_no = str_pad($no->id_pendaftaran + 1,3,'0',STR_PAD_LEFT);
+    $year = date('Y',time());
+    return $year.'-0'.$id_gelombang.'-'.$data_no;
+}
