@@ -124,8 +124,12 @@
                         <label class="col-sm-3 control-label" for="form-field-1">
                             Foto
                         </label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <input type="file" name="pas_photo">
+                        </div>
+                        <div class="col-sm-6">
+                            <?php $image = ($input->pas_photo !== '') ? $input->pas_photo : 'user.png' ; ?>
+                            <img width="80" class="img-responsive" src="<?=base_url('uploads/foto_user/'.$image)?>" >
                         </div>
                     </div>
 
@@ -509,8 +513,8 @@
                             Nama Siswa
                         </label>
                         <div class="col-sm-9">
-                            <input type="text"  name="nama" placeholder="" id="form-field-1" value="<?=$data_prestasi->nama_siswa ?? ''?>" class="form-control">
-                            <input type="hidden" name="id_siswa" value="<?=$data_prestasi->idsis ?? '' ?>">
+                            <input type="text"  name="nama" placeholder="" id="form-field-1" value="<?=$input->nama_siswa ?? ''?>" class="form-control">
+                            <input type="hidden" name="id_siswa" value="<?=$input->id_siswa ?? ''; ?>">
                         </div>
                     </div>
                     
@@ -519,7 +523,7 @@
                             Nama Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_prestasi" value="<?=$data_prestasi->nama_prestasi ?? ''?>" placeholder="" id="nama_prestasi" class="form-control">
+                            <input type="text" name="nama_prestasi" value="" placeholder="" id="nama_prestasi" class="form-control">
                         </div>
                     </div>
                     
@@ -528,7 +532,7 @@
                             Peringkat Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="peringkat_prestasi" placeholder="" id="peringkat_prestasi" value="<?=$data_prestasi->peringkat_prestasi ?? ''?>" class="form-control">
+                            <input type="text" name="peringkat_prestasi" placeholder="" id="peringkat_prestasi" value="" class="form-control">
                         </div>
                     </div>
                     
@@ -537,7 +541,7 @@
                             Tingkat Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="tingkat_prestasi" placeholder="" id="tingkat_prestasi" value="<?=$data_prestasi->tingkat_prestasi ?? ''?>" class="form-control">
+                            <input type="text" name="tingkat_prestasi" placeholder="" id="tingkat_prestasi" value="" class="form-control">
                         </div>
                     </div>
                     
@@ -546,7 +550,7 @@
                             Tahun Prestasi
                         </label>
                         <div class="col-sm-9">
-                            <input type="number" name="tahun_prestasi" placeholder="" id="tahun_prestasi" value="<?=$data_prestasi->tahun_prestasi ?? ''?>" class="form-control">
+                            <input type="number" name="tahun_prestasi" placeholder="" id="tahun_prestasi" value="" class="form-control">
                         </div>
                     </div>
 
@@ -557,7 +561,7 @@
 
                         </label>
                         <div class="col-sm-2">
-                            <button type="submit" class="btn btn-info">Edit</button>
+                            <button type="submit" class="btn btn-info">Tambah</button>
                         </div>
                         <div class="col-sm-3">
                             <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-warning btn-sm')); ?>
@@ -565,6 +569,55 @@
                     </div>
 
                     </form>
+
+                    <?php 
+                        //idpendaftaran
+                        $pend = $this->uri->segment('3'); 
+                    ?>
+                    <div class="table-responsive">
+                        <?php 
+                            if (isset($input->id_siswa) ) {
+                                $dt_prestasi = $this->db->where('id_siswa',$input->id_siswa)->get('tb_prestasi')->result();
+                            }
+                        ?>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Nama Prestasi</td>
+                                    <td>Peringkat</td>
+                                    <td>Tingkat </td>
+                                    <td>Tahun</td>
+                                    <td>Aksi</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php 
+                            if (isset($input->id_siswa) ) { 
+                                $no=0;foreach ($dt_prestasi as $b ) {
+                                 
+                            ?>
+                                <tr>
+                                    <td><?=++$no?></td>
+                                    <td><?=$b->nama_prestasi;?></td>
+                                    <td><?=$b->peringkat_prestasi;?></td>
+                                    <td><?=$b->tingkat_prestasi;?></td>
+                                    <td><?=$b->tahun_prestasi?></td>
+                                    <td>
+                                    <a onclick='return("Yakin Hapus??")' href="<?php echo base_url('siswa/hapusPrestasi/'.$pend.'/'.$b->id_prestasi)?>" >Hapus</a>
+                                       
+                                    </td>
+                                </tr>
+                            <?php    
+                                }
+                                } else {
+                                    echo "<tr><td colspan='3'>Data Kosong</td></tr>";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     
                 </div>
                 <!-- END Toggle Prestasi -->
@@ -615,7 +668,7 @@
 
                         </label>
                         <div class="col-sm-2">
-                            <button type="submit" class="btn btn-info">Edit</button>
+                            <button type="submit" class="btn btn-info">Simpan</button>
                         </div>
                         <div class="col-sm-3">
                             <?php echo anchor('siswa', 'Kembali', array('class' => 'btn btn-warning btn-sm')); ?>
@@ -650,7 +703,8 @@
                                     <td><?=$b->tgl_upload?></td>
                                     <td><?=$b->nama_file;?></td>
                                     <td>
-                                    <a href="<?php echo base_url().'siswa/download/'. $b->upload_file ?>">Download file</a>
+                                        <a href="<?php echo base_url().'siswa/download/'. $b->upload_file ?>">Download file</a>
+                                        <a class="text-danger" onclick='return("Yakin Hapus Berkas??")' href="<?php echo base_url('siswa/hapusBerkas/'.$pend.'/'.$b->id_berkas_siswa)?>">Hapus</a>
                                        
                                     </td>
                                 </tr>
@@ -684,5 +738,6 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     // $('.'+li).addClass('active');
     $(e.target).addClass('active');
 })
+
 
 </script>

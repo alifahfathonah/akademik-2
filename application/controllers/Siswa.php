@@ -50,8 +50,9 @@ Class Siswa extends OperatorController {
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
+                    
                     return anchor('siswa/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Ubah status?\')" ');
+                        '.anchor('siswa/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Hapus Data '.$d.'?\')" ');
                 }
             )
         );
@@ -120,17 +121,14 @@ Class Siswa extends OperatorController {
     
     function edit($id=null){
 
-        $pendaftaran_a = $this->Model_siswa->query("select * from tb_pendaftaran where id_pendaftaran = '$id' ");
-        if ($pendaftaran_a->num_rows() < 1 ) {
+        $pendaftaran_a = $this->db->query("select * from tb_pendaftaran where id_pendaftaran = '$id' ")->result();
+        if (!$pendaftaran_a ) {
             flashMessage('error', 'Data tidak ditemukan ...!');
             redirect('siswa', 'refresh');
-        }else{
-            flashMessage('success', 'Data ditemukan .');
         }
         // $siswa = $this->Model_siswa->find('id_siswa',$id);
         $data_siswa = $this->db->where('id',$id)->get('data_siswa')->row();
         $data['data_ortu'] = $this->db->where('id_pendaf',$id)->get('data_ortu')->row();
-        $data['data_prestasi'] = $this->db->where('id_pendaftaran',$id)->get('data_prestasi')->row();
         
         if (!$_POST) {
             $data['input'] = (object) $data_siswa;
@@ -138,15 +136,28 @@ Class Siswa extends OperatorController {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
+        $simpan_ber = array();
         /* Cek FILE Upload gambar */
         if (!empty($_FILES) && $_FILES['pas_photo']['size'] > 0) {
-            $upload_s = $this->upload_foto_user();
-
-            if ($upload_s) {
-                $simpan['pas_photo'] =  $this->upload->data('file_name');; // Data for column "cover".
+            
+            $config['upload_path']      = './uploads/foto_user/';
+            $config['allowed_types']    = 'jpg|png';
+            $config['max_size']         = 2024;                    // 2mb
+            $config['max_width']        = 0;
+            $config['max_height']       = 0;
+            $config['overwrite']        = true;
+            $config['file_ext_tolower'] = true;
+            // proses upload
+            
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('pas_photo')) {
+                // Upload OK, return uploaded file info.
+                $photo = $this->upload->data('file_name');
+            } else {
+                // Add error to $_error_array
+                $this->form_validation->add_to_error_array('pas_photo', $this->upload->display_errors('', ''));
                 
             }
-
         }
 
         if (!$this->Model_siswa->validate() || $this->form_validation->error_array() ) {
@@ -180,12 +191,18 @@ Class Siswa extends OperatorController {
             'seri_skhun_smp'  => $_POST['seri_skhun_smp'],
             'no_un_smp'       => $_POST['no_un_smp'],
             'status'          => 'aktif',
-            'pas_photo' =>  $this->upload->data('file_name') ?? '','',
+            'pas_photo'        => isset($photo) ? $photo : '',
 
         ];
 
+        
+        if ($data_siswa->id_siswa == NULL) {
+            $aksi = $this->Model_siswa->insert($simpan);
+        }else{
+            $aksi = $this->db->where('id_siswa',$data_siswa->id_siswa)->update('tb_siswa',$simpan);
+        }
 
-        if ($this->Model_siswa->insert($simpan)) {
+        if ($aksi) {
             $this->session->set_flashdata('success', 'Data  berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data  gagal disimpan.');
@@ -257,6 +274,27 @@ Class Siswa extends OperatorController {
 
     }
 
+    public function hapusPrestasi($idpenda=null,$id=null)
+    {
+        $page = $idpenda;
+        $prestasi = $this->db->query("select * from tb_prestasi where id_prestasi = $id ")->result();
+        if (!$prestasi ) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('siswa/edit/'.$page);
+        }
+
+        $hapus = $this->db->where('id_prestasi',$id)->delete('tb_prestasi');
+
+        if ($hapus) {
+            flashMessage('success', 'Selamat Data Prestasi berhasil dihapus.');
+        } else {
+            flashMessage('error', 'Data Prestasi gagal dihapus!');
+        }
+
+        redirect('siswa/edit/'.$page);
+        
+    }
+
     public function berkas($id=null)
     {
         $simpan_ber = array();
@@ -289,18 +327,52 @@ Class Siswa extends OperatorController {
         redirect('siswa/edit/'.$id);
     }
 
+    public function hapusBerkas($idpenda=null,$id=null)
+    {
+        $page = $idpenda;
+        $berkas = $this->db->query("select * from tb_berkas_siswa where id_berkas_siswa = $id ")->row();
+        if (!$berkas ) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('siswa/edit/'.$page);
+        }
+
+        // delete_files(base_url().'uploads/berkas/c.jpg');
+        unlink("./uploads/berkas/".$berkas->upload_file);
+
+        // $hapus = $this->db->where('id_berkas_siswa',$id)->delete('tb_berkas_siswa');
+
+        if (true) {
+            flashMessage('success', 'Selamat Data berkas siswa berhasil dihapus.');
+        } else {
+            flashMessage('error', 'Data Berkas gagal dihapus!');
+        }
+
+        redirect('siswa/edit/'.$page);
+        
+    }
+
     public function download($name){				
 		force_download('uploads/berkas/'.$name,NULL);
 	}	
     
-    function delete(){
-        $nim = $this->uri->segment(3);
-        if(!empty($nim)){
-            // proses delete data
-            $this->db->where('nim',$nim);
-            $this->db->delete('tbl_siswa');
+    function delete($id=null){
+        // Hapus data dari pendafaran beserta turunannya
+        $pendaftaran = $this->db->query("select * from tb_pendaftaran where id_pendaftaran = $id ")->result();
+        if (!$pendaftaran ) {
+            flashMessage('error', 'Data tidak ditemukan!');
+            redirect('siswa', 'refresh');
+            return;
         }
-        redirect('siswa');
+
+        $hapus = $this->db->where('id_pendaftaran',$id)->delete('tb_pendaftaran');
+
+        if ($hapus) {
+            flashMessage('success', 'Selamat Data berhasil dihapus.');
+        } else {
+            flashMessage('error', 'Data gagal dihapus!');
+        }
+        
+        redirect('siswa', 'refresh');
     }
     
     
@@ -318,6 +390,7 @@ Class Siswa extends OperatorController {
         if ($this->upload->do_upload('pas_photo')) {
             // Upload OK, return uploaded file info.
             return $this->upload->data();
+            return true;
         } else {
             // Add error to $_error_array
             $this->form_validation->add_to_error_array('pas_photo', $this->upload->display_errors('', ''));

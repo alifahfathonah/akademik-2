@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
             $username  = $this->input->post('username');
             $password  = $this->input->post('password');
             $loginUser = $this->Model_pendaftaran->chekLogin($username, $password);
-            if (!empty($loginUser)) {
+            if (!empty($loginUser) && ($loginUser->status == 'aktif') ) {
                 // sukses login administrator
                 $login = array(
                     'username' => $loginUser->username,
