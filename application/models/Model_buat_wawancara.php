@@ -21,7 +21,7 @@ class Model_buat_wawancara extends MY_Model {
             ],
             [
                 'field' => 'ket_wawancara',
-                'label' => 'Jumlah Soal',
+                'label' => 'Keterangan Wawancara',
                 'rules' => 'trim|required|min_length[1]'
             ],
             [

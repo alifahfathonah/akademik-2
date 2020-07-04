@@ -145,4 +145,11 @@ Class Hasil_wawancara extends OperatorController {
         redirect($this->sub_menu, 'refresh');
     }
 
+    public function nama_siswa($id=null)
+    {
+        $data['nama'] =  $this->db->get_where('tb_pendaftaran',['id_pendaftaran' => $id])->row();
+        // $nama = $this->db->query("select * from tb_pendaftaran a join tb_jurusan b on b.id_jurusan=a.id_jurusan where a.id_pendaftaran = '$id' ")->row();
+        return $this->load->view('hasil_wawancara/jurusan_pilihan',$data);
+    }
+
 }

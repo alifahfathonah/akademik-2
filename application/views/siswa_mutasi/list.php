@@ -9,7 +9,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Tabel Siswa Mutasi
             <div class="panel-tools">
-                <?php echo anchor('pilihkelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
+                <?php echo anchor('siswa_mutasi/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
             <!--    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -44,7 +44,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('siswa_mutasi/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -54,10 +54,16 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "id_pendaftaran"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "tgl_mutasi"
+                    },
+                    {
+                        "data": "isi_mutasi"
+                    },
+                    {
+                        "data": "status_mutasi"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

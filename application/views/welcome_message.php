@@ -20,10 +20,10 @@
                                 <td><strong style="font-size: 1.2em;">TKRO</strong></td>
                             </tr>
                             <tr>
-                                <td>KUOTA {240}</td>
+                                <td>KUOTA {<?=kuota('tb_jurusan','2')?>}</td>
                             </tr>
                             <tr>
-                                <td>DAFTAR {440}</td>
+                                <td>DAFTAR {<?=daftar('tb_pendaftaran','2')?>}</td>
                             </tr>
                             <tr>
                                 <td>DU {243}</td>
@@ -45,10 +45,10 @@
                                 <td><strong style="font-size: 1.2em;">TBSM</strong></td>
                             </tr>
                             <tr>
-                                <td>KUOTA {160}</td>
+                                <td>KUOTA {<?=kuota('tb_jurusan','3')?>}</td>
                             </tr>
                             <tr>
-                                <td>DAFTAR {440}</td>
+                                <td>DAFTAR {<?=daftar('tb_pendaftaran','3')?>}</td>
                             </tr>
                             <tr>
                                 <td>DU {160}</td>
@@ -70,10 +70,10 @@
                                 <td><strong style="font-size: 1.2em;">TBO</strong></td>
                             </tr>
                             <tr>
-                                <td>KUOTA {80}</td>
+                                <td>KUOTA {<?=kuota('tb_jurusan','4')?>}</td>
                             </tr>
                             <tr>
-                                <td>DAFTAR {440}</td>
+                                <td>DAFTAR {<?=daftar('tb_pendaftaran','4')?>}</td>
                             </tr>
                             <tr>
                                 <td>DU {80}</td>
@@ -98,10 +98,10 @@
                                 <td><strong style="font-size: 1.2em;">TEI</strong></td>
                             </tr>
                             <tr>
-                                <td>KUOTA {40}</td>
+                                <td>KUOTA {<?=kuota('tb_jurusan','5')?>}</td>
                             </tr>
                             <tr>
-                                <td>DAFTAR {440}</td>
+                                <td>DAFTAR {<?=daftar('tb_pendaftaran','5')?>}</td>
                             </tr>
                             <tr>
                                 <td>DU {40}</td>
@@ -123,10 +123,10 @@
                                 <td><strong style="font-size: 1.2em;">MM</strong></td>
                             </tr>
                             <tr>
-                                <td>KUOTA {140}</td>
+                                <td>KUOTA {<?=kuota('tb_jurusan','6')?>}</td>
                             </tr>
                             <tr>
-                                <td>DAFTAR {440}</td>
+                                <td>DAFTAR {<?=daftar('tb_pendaftaran','6')?>}</td>
                             </tr>
                             <tr>
                                 <td>DU {40}</td>

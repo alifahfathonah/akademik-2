@@ -10,14 +10,14 @@ Class Buat_wawancara extends OperatorController {
         //chekAksesModule();
         $this->load->library('ssp');
         $this->menu = "wawancara";
-        $this->sub_menu = "buat-wawancara";
+        $this->sub_menu = "buat_wawancara";
         // $this->load->model('Model_gelombang');
     }
 
     
     function data() {
         // nama tabel
-        $table = 'tb_wawancara';
+        $table = 'buat_wawancara';
         // nama PK
         $primaryKey = 'id_wawancara';
         // list field
@@ -26,7 +26,7 @@ Class Buat_wawancara extends OperatorController {
             array('db' => 'nama_wawancara', 'dt' => 'nama_wawancara'),
             array('db' => 'kriteria_wawancara', 'dt' => 'kriteria_wawancara'),
             array('db' => 'ket_wawancara', 'dt' => 'ket_wawancara'),
-            array('db' => 'id_jurusan', 'dt' => 'id_jurusan'),
+            array('db' => 'kompetensi_keahlian', 'dt' => 'id_jurusan'),
             array('db' => 'status', 'dt' => 'status'),
             array(
                 'db' => 'id_wawancara',

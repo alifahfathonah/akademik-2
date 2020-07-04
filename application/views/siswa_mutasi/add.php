@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+            <!-- <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -32,19 +32,73 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    TANGGAL
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    NO PENDAFTARAN
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
                 </div>
             </div>
             
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    NAMA SISWA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
+                </div>
+            </div>
             
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    DITERIMA JURUSAN
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    STATUS MUTASI
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    ISI MUTASI
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
+                </div>
+            </div>
+
+            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
                 <label class="col-sm-2 control-label" for="id_personal">
                     Personal
                 </label>
@@ -54,10 +108,10 @@
                     <?= setValidationIcon('id_personal') ?>
                     <?=form_error('id_personal');?>
                 </div>
-            </div>
+            </div> -->
             
             
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
+            <!-- <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
                 <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
                     <div class="col-sm-10">
                         <div>
@@ -76,7 +130,7 @@
                         
                         
                     </div>
-            </div>
+            </div> -->
 
             
             <div class="form-group">

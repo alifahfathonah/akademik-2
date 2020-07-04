@@ -32,42 +32,24 @@
             ?>
 
 
-            <!-- <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    ID Pendaftaran
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div> -->
             
             <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
                 <label class="col-sm-2 control-label" for="id_pendaftaran">
                     PENDAFTARAN
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_pendaftaran',getDropdownList('tb_pendaftaran',['id_pendaftaran','no_pendaftaran']),$input->id_pendaftaran,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    <?= form_dropdown('id_pendaftaran',getDropdownList('tb_pendaftaran',['id_pendaftaran','no_pendaftaran']),$input->id_pendaftaran,['class' => 'form-control id_pendaftaran', 'autofocus' => 'autofocus']);?>
                     
                     <?= setValidationIcon('id_pendaftaran') ?>
                     <?=form_error('id_pendaftaran');?>
                 </div>
             </div>
 
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    SISWA
-                </label>
-                <div class="col-sm-9">
-                    <?= form_dropdown('id_pendaftaran',getDropdownList('tb_pendaftaran',['id_pendaftaran','nama_siswa']),$input->id_pendaftaran,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
+            <div id="result"></div>
+
             
-            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
+            
+            <div class="form-group <?= setValidationStyle('id_personal') ?>">
                 <label class="col-sm-2 control-label" for="id_personal">
                     PERSONAL
                 </label>
@@ -77,85 +59,68 @@
                     <?= setValidationIcon('id_personal') ?>
                     <?=form_error('id_personal');?>
                 </div>
-            </div> -->
+            </div>
             
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    PILIHAN 1
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
 
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    PILIHAN 2
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    PILIHAN 3
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-
-            <div class="form-group <?= setValidationStyle('id_jurusan') ?>">
-                <label class="col-sm-2 control-label" for="id_jurusan">
+            <div class="form-group <?= setValidationStyle('pil_jur') ?>">
+                <label class="col-sm-2 control-label" for="pil_jur">
                     DITERIMA JURUSAN
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_jurusan',getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),$input->id_jurusan,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    <?= form_dropdown('pil_jur',getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),$input->pil_jur,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
                     
-                    <?= setValidationIcon('id_jurusan') ?>
-                    <?=form_error('id_jurusan');?>
+                    <?= setValidationIcon('pil_jur') ?>
+                    <?=form_error('pil_jur');?>
                 </div>
             </div>
 
-            <div class="form-group <?= setValidationStyle('id_jurusan') ?>">
-                <label class="col-sm-2 control-label" for="id_jurusan">
+            <div class="form-group <?= setValidationStyle('status_wawancara') ?>">
+                <label class="col-sm-2 control-label" for="status_wawancara">
                     DiNYATAKAN
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_jurusan',getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),$input->id_jurusan,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
                     
-                    <?= setValidationIcon('id_jurusan') ?>
-                    <?=form_error('id_jurusan');?>
-                </div>
-            </div>
-
-            <!-- <div class="form-group row <?= setValidationStyle('pil_jur') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Dinyatakan</label>
-                    <div class="col-sm-10">
-                        <div>
+                    <div>
                             <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
+                                <input type="radio" class="grey" value="diterima" name="status_wawancara" <?php echo (!empty($input->status_wawancara) and ($input->status_wawancara == 'diterima') ) ? "checked" :"" ;?> >
+                                DITERIMA
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
+                                <input type="radio" class="grey"  value="tidak diterima" name="status_wawancara" <?php echo (!empty($input->status_wawancara) and ($input->status_wawancara == 'tidak diterima') ) ? "checked" :"" ;?> >
+                                TIDAK DITERIMA
                             </label>
                         </div>
                         
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
-                        
-                        
-                    </div>
-            </div> -->
+                        <?= setValidationIcon('status_wawancara') ?>
+                        <?=form_error('status_wawancara');?>
+                </div>
+            </div>
+
+            
+            <div class="form-group <?= setValidationStyle('isi_wawancara') ?>">
+                <label class="col-sm-2 control-label" for="isi_wawancara">
+                    ISI WAWANCARA
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="isi_wawancara" placeholder="" id="isi_wawancara" class="form-control">
+                    
+                        <?= setValidationIcon('isi_wawancara') ?>
+                        <?=form_error('isi_wawancara');?>
+                </div>
+            </div>
+            
+            <div class="form-group <?= setValidationStyle('catatan') ?>">
+                <label class="col-sm-2 control-label" for="catatan">
+                    CATATAN
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" name="catatan" placeholder="MASUKAN CATATAN" id="catatan" class="form-control">
+                    
+                        <?= setValidationIcon('catatan') ?>
+                        <?=form_error('catatan');?>
+                </div>
+            </div>
+
 
             
             <div class="form-group">
@@ -174,3 +139,19 @@
     </div>
     <!-- end: TEXT FIELDS PANEL -->
 </div>
+
+<script>
+$(document).ready(function(){
+
+    $('select.id_pendaftaran').change(function(){
+        let id = this.value;
+        // alert(this.value);
+        $.post( "<?=base_url('hasil_wawancara/nama_siswa/')?>"+id, function( data ) {
+            $('#result').html(data);
+        });
+    });
+})
+
+
+
+</script>

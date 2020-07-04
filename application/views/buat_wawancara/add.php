@@ -34,7 +34,7 @@
 
             <div class="form-group <?= setValidationStyle('nama_wawancara') ?>">
                 <label class="col-sm-2 control-label" for="nama_wawancara">
-                    NAMA WAWANCARA
+                    NAMA
                 </label>
                 <div class="col-sm-9">
                     <input type="text" value="<?=$input->nama_wawancara?>" name="nama_wawancara" placeholder="Ketik Nama Wawancara" id="nama_wawancara" class="form-control">
@@ -45,7 +45,7 @@
 
             <div class="form-group <?= setValidationStyle('kriteria_wawancara') ?>">
                 <label class="col-sm-2 control-label" for="kriteria_wawancara">
-                    KRITERIA WAWANCARA
+                    KRITERIA
                 </label>
                 <div class="col-sm-9">
                     <input type="text" value="<?=$input->kriteria_wawancara?>" name="kriteria_wawancara" placeholder="Ketik Kriteria Wawancara" id="kriteria_wawancara" class="form-control">
@@ -54,29 +54,27 @@
                 </div>
             </div>
             
-            <div class="form-group <?= setValidationStyle('ket_wawancara') ?>">
-                <label class="col-sm-2 control-label" for="ket_wawancara">
-                    KETERANGAN
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->ket_wawancara?>" name="ket_wawancara" placeholder="Ketik Keterangan" id="ket_wawancara" class="form-control">
-                    <?= setValidationIcon('ket_wawancara') ?>
-                    <?=form_error('ket_wawancara');?>
-                </div>
-            </div>
             
-            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
-                </label>
-                <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
-                </div>
+            <div class="form-group row <?= setValidationStyle('ket_wawancara') ?> ">
+                <label for="nama" class="col-sm-2 control-label">KETERANGAN</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <label class="radio-inline">
+                                <input type="radio" class="grey" value="diterima" name="ket_wawancara" <?php echo (!empty($input->ket_wawancara) and ($input->ket_wawancara == 'diterima') ) ? "checked" :"" ;?> >
+                                DITERIMA
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" class="grey"  value="tidak diterima" name="ket_wawancara" <?php echo (!empty($input->ket_wawancara) and ($input->ket_wawancara == 'tidak diterima') ) ? "checked" :"" ;?> >
+                                TIDAK DITERIMA
+                            </label>
+                        </div>
+                        
+                        <?= setValidationIcon('ket_wawancara') ?>
+                        <?=form_error('ket_wawancara');?>
+                        
+                        
+                    </div>
             </div>
-             -->
             
             <div class="form-group row <?= setValidationStyle('status') ?> ">
                 <label for="nama" class="col-sm-2 control-label">STATUS</label>
@@ -98,6 +96,20 @@
                         
                     </div>
             </div>
+            
+            <div class="form-group row <?= setValidationStyle('id_jurusan') ?>">
+                <label class="col-sm-2 control-label" for="">
+                    JURUSAN
+                </label>
+                <div class="col-sm-5">
+                    
+                    <?= form_dropdown('id_jurusan', getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']), $input->id_jurusan?? '', ['class' => 'form-control', 'autofocus' => 'autofocus']) ?>
+                    
+                    <?= setValidationIcon('id_jurusan') ?>
+                    <?=form_error('id_jurusan');?>
+                </div>
+            </div>
+
 
             
             <div class="form-group">
@@ -108,7 +120,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('buat_wawancara', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

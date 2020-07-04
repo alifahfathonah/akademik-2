@@ -17,21 +17,22 @@ Class Siswa_mutasi extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'tb_mutasi';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_mutasi';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_mutasi', 'dt' => 'id_mutasi'),
+            array('db' => 'id_pendaftaran', 'dt' => 'id_pendaftaran'),
+            array('db' => 'tgl_mutasi', 'dt' => 'tgl_mutasi'),
+            array('db' => 'status_mutasi', 'dt' => 'status_mutasi'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_mutasi',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('siswa_mutasi/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('siswa_mutasi/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,16 +60,16 @@ Class Siswa_mutasi extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_siswa_mutasi->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_siswa_mutasi->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
+            $data['mainView']   = 'siswa_mutasi/add';
+            $data['heading']    = $this->template->link('siswa_mutasi > Tambah');
+            $data['formAction'] = "siswa_mutasi/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
@@ -77,7 +78,7 @@ Class Siswa_mutasi extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_siswa_mutasi->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
@@ -89,22 +90,22 @@ Class Siswa_mutasi extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $siswa_mutasi = $this->Model_siswa_mutasi->find('id_mutasi',$id);
+        if (!$siswa_mutasi) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('siswa_mutasi', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $siswa_mutasi;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_siswa_mutasi->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'siswa_mutasi/add';
+            $data['heading']    = $this->template->link('siswa_mutasi > Edit ');
+            $data['formAction'] = "siswa_mutasi/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,7 +113,7 @@ Class Siswa_mutasi extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_siswa_mutasi->update($id, $data['input'],'id_mutasi');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -124,13 +125,13 @@ Class Siswa_mutasi extends OperatorController {
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $siswa_mutasi = $this->Model_siswa_mutasi->find('id_mutasi',$id);
+        if (!$siswa_mutasi) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('siswa_mutasi', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_siswa_mutasi->where('id_mutasi',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');

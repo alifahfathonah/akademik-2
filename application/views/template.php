@@ -31,6 +31,7 @@
         <link type="text/css" rel="stylesheet" media="print" href="<?=base_url('template');?>/assets/css/print.min.css" />
         <link type="text/css" rel="stylesheet" id="skin_color" href="<?=base_url('template');?>/assets/css/theme/light.min.css" />
         <script src="<?=base_url('template');?>/jquery.min.js"></script>
+        <!-- <script src="<?=base_url('template');?>/jquery-3.5.1.min.js"></script> -->
         <!-- end: MAIN CSS -->
         <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
         <link href="<?=base_url('template');?>/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet" />
@@ -318,6 +319,8 @@ margin-left: 1282px;">
 
             ?>
             </script>
+
+            
 
 
     </body>
