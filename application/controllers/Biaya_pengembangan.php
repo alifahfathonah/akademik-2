@@ -10,14 +10,14 @@ Class Biaya_pengembangan extends OperatorController {
         //chekAksesModule();
         $this->load->library('ssp');
         $this->menu = "pembayaran";
-        $this->sub_menu = "biaya_pengembangan";
+        $this->sub_menu = "biaya-pengembangan";
         // $this->load->model('Model_gelombang');
     }
 
     
     function data() {
         // nama tabel
-        $table = 'tb_pengembangan';
+        $table = 'biaya_pengembangan';
         // nama PK
         $primaryKey = 'id_pengembangan';
         // list field
@@ -25,8 +25,8 @@ Class Biaya_pengembangan extends OperatorController {
             array('db' => 'id_pengembangan', 'dt' => 'id_pengembangan'),
             array('db' => 'nama_pengembangan', 'dt' => 'nama_pengembangan'),
             array('db' => 'biaya_pengembangan', 'dt' => 'biaya_pengembangan'),
-            array('db' => 'id_gelombang', 'dt' => 'id_gelombang'),
-            array('db' => 'id_jurusan', 'dt' => 'id_jurusan'),
+            array('db' => 'nama_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'kompetensi_keahlian', 'dt' => 'id_jurusan'),
             array(
                 'db' => 'id_pengembangan',
                 'dt' => 'aksi',
@@ -69,7 +69,7 @@ Class Biaya_pengembangan extends OperatorController {
         if (!$this->Model_biaya_pengembangan->validate()) {
             // $halaman     = $this->halaman;
             $data['mainView']   = 'biaya_pengembangan/add';
-            $data['heading']    = $this->template->link('Biaya Pengembangan > Tambah');
+            $data['heading']    = $this->template->link('biaya_pengembangan > Tambah');
             $data['formAction'] = "biaya_pengembangan/add";
             $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
@@ -85,7 +85,7 @@ Class Biaya_pengembangan extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('Biaya_pengembangan');
     }
 
     
@@ -121,7 +121,7 @@ Class Biaya_pengembangan extends OperatorController {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_pengembangan', 'refresh');
     }
 
     public function delete($id)
@@ -140,7 +140,7 @@ Class Biaya_pengembangan extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_pengembangan', 'refresh');
     }
 
 }

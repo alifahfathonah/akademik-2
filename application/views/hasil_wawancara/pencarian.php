@@ -3,10 +3,10 @@
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>NAMA WAWANNCARA</th>
-                    <th>KRITERIA WAWANNCARA</th>
-                    <th>KETERANGAN WAWANNCARA</th>
-                    <th>STATUS WAWANNCARA</th>
+                    <th>NAMA WAWANCARA</th>
+                    <th>KRITERIA WAWANCARA</th>
+                    <th>KETERANGAN WAWANCARA</th>
+                    <th>STATUS WAWANCARA</th>
                     <th>JURUSAN</th>
                 </tr>
             </thead>

@@ -54,16 +54,16 @@
                         "orderable": false,
                     },
                     {
-                        "data": "id_pendaftaran"
-                    },
-                    {
                         "data": "tgl_mutasi"
                     },
                     {
-                        "data": "isi_mutasi"
+                        "data": "id_pendaftaran"
                     },
                     {
                         "data": "status_mutasi"
+                    },
+                    {
+                        "data": "isi_mutasi"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

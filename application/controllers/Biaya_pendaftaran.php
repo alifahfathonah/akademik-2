@@ -10,14 +10,15 @@ Class Biaya_pendaftaran extends OperatorController {
         //chekAksesModule();
         $this->load->library('ssp');
         $this->menu = "pembayaran";
-        $this->sub_menu = "biaya_pendaftaran";
+        $this->sub_menu = "biaya-pendaftaran";
         // $this->load->model('Model_gelombang');
     }
 
     
     function data() {
         // nama tabel
-        $table = 'tb_biaya_pendaftaran';
+        $table = "biaya_pendaftaran";
+        // $table = 'tb_biaya_pendaftaran';
         // nama PK
         $primaryKey = 'id_biaya_pendaftaran';
         // list field
@@ -25,8 +26,8 @@ Class Biaya_pendaftaran extends OperatorController {
             array('db' => 'id_biaya_pendaftaran', 'dt' => 'id_biaya_pendaftaran'),
             array('db' => 'nama_pendaftaran', 'dt' => 'nama_pendaftaran'),
             array('db' => 'biaya_pendaftaran', 'dt' => 'biaya_pendaftaran'),
-            array('db' => 'id_gelombang', 'dt' => 'id_gelombang'),
-            array('db' => 'id_jurusan', 'dt' => 'id_jurusan'),
+            array('db' => 'nama_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'kompetensi_keahlian', 'dt' => 'id_jurusan'),
             array(
                 'db' => 'id_biaya_pendaftaran',
                 'dt' => 'aksi',
@@ -85,7 +86,7 @@ Class Biaya_pendaftaran extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('Biaya_pendaftaran');
     }
 
     
@@ -94,7 +95,7 @@ Class Biaya_pendaftaran extends OperatorController {
         $biaya_pendaftaran = $this->Model_biaya_pendaftaran->find('id_biaya_pendaftaran',$id);
         if (!$biaya_pendaftaran) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('biaya_penndaftaran', 'refresh');
+            redirect('biaya_pendaftaran', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
@@ -121,7 +122,7 @@ Class Biaya_pendaftaran extends OperatorController {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_pendaftaran', 'refresh');
     }
 
     public function delete($id)
@@ -129,7 +130,7 @@ Class Biaya_pendaftaran extends OperatorController {
         $biaya_pendaftaran = $this->Model_biaya_pendaftaran->find('id_biaya_pendaftaran',$id);
         if (!$biaya_pendaftaran) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_pendaftaran', 'refresh');
         }
 
         $hapus = $this->Model_biaya_pendaftaran->where('id_biaya_pendaftaran',$id)->delete();
@@ -140,7 +141,7 @@ Class Biaya_pendaftaran extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_pendaftaran', 'refresh');
     }
 
 }

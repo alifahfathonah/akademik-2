@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <table id="" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -32,18 +32,6 @@
                     </tr>
                 </thead>
                 <tbody >
-                    <tr>
-                        <td>1</td>
-                        <td>Gelombang 1</td>
-                        <td>Ujian Akademik</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>100%</td>
-                        <td>aktif</td>
-                        <td>
-                            <a class="btn btn-sm btn-info" href="#">Edit</a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -58,7 +46,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('buat_mapel/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -68,10 +56,22 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "id_gelombang"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "nama_mapel"
+                    },
+                    {
+                        "data": "jml_soal"
+                    },
+                    {
+                        "data": "tampil_soal"
+                    },
+                    {
+                        "data": "bobot_soal"
+                    },
+                    {
+                        "data": "status_soal"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

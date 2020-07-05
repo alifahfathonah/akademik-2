@@ -37,6 +37,24 @@ function getDropdownListKhusus($table, $columns)
 
     return $options = ['' => '- Pilih -'];
 }
+function getDropdownListPendaftaranAktif($table, $columns)
+{
+    $CI =& get_instance();
+    $query = $CI->db->select($columns)->where('status', 'aktif')->from($table)->get();
+
+    if ($query->num_rows() > 0) {
+        $options1 = ['' => '- Pilih -'];
+        $options2 = array_column(
+            $query->result_array(),
+            $columns[1],
+            $columns[0]
+        );
+        $options  = $options1 + $options2;
+        return $options;
+    }
+
+    return $options = ['' => '- Pilih -'];
+}
 
 // Set style in textbox based on validation status.
 function setValidationStyle($field)

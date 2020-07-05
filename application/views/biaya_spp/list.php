@@ -9,7 +9,7 @@
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i> Tabel Biaya Sumbangan Pembinaan Pendidikan
             <div class="panel-tools">
-                <?php echo anchor('pilihkelas/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
+                <?php echo anchor('biaya_spp/add','<i class="fa fa-pencil-square-o" aria-hidden="true">[DATA BARU]</i>',"title='Tambah Data'");?>
             <!--    <a class="btn btn-xs btn-link panel-collapse collapses" href="#"> </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal"> <i class="fa fa-wrench"></i> </a>
                 <a class="btn btn-xs btn-link panel-refresh" href="#"> <i class="fa fa-refresh"></i> </a>
@@ -42,7 +42,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('biaya_spp/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -52,10 +52,16 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "nama_spp"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "biaya_spp"
+                    },
+                    {
+                        "data": "id_jurusan"
+                    },
+                    {
+                        "data": "id_gelombang"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

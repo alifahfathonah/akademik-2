@@ -58,10 +58,10 @@
                         "data": "biaya_pendaftaran"
                     },
                     {
-                        "data": "id_gelombang"
+                        "data": "id_jurusan"
                     },
                     {
-                        "data": "id_jurusan"
+                        "data": "id_gelombang"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

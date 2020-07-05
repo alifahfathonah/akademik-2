@@ -76,7 +76,7 @@
 
             <div class="form-group <?= setValidationStyle('status_wawancara') ?>">
                 <label class="col-sm-2 control-label" for="status_wawancara">
-                    DiNYATAKAN
+                    DINYATAKAN
                 </label>
                 <div class="col-sm-9">
                     

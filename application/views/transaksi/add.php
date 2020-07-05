@@ -8,7 +8,7 @@
             <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
                 ; 
             ?>
-            <div class="panel-tools">
+            <!-- <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -32,62 +32,56 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('no_pembayaran') ?>">
+                <label class="col-sm-2 control-label" for="no_pembayaran">
+                    No Nota
                 </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                <div class="col-sm-4">
+                    <input type="text" value="<?=$input->no_pembayaran?>" name="no_pembayaran" placeholder="" id="no_pembayaran" class="form-control">
+                    <?= setValidationIcon('no_pembayaran') ?>
+                    <?=form_error('no_pembayaran');?>
+                </div>
+                <label class="col-sm-2 control-label" for="tgl_pembayaran">
+                    Tanggal
+                </label>
+                <div class="col-sm-4">
+                    <input type="date" value="<?=$input->tgl_pembayaran?>" name="tgl_pembayaran" placeholder="" id="tgl_pembayaran" class="form-control">
                 </div>
             </div>
             
             
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
+            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="id_pendaftaran">
+                    No Pendaftaran
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
+                    <?= form_dropdown('id_pendaftaran',getDropdownListPendaftaranAktif('tb_pendaftaran',['id_pendaftaran','no_pendaftaran']),$input->id_pendaftaran,['class' => 'form-control id_pencarian', 'autofocus' => 'autofocus']);?>
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
                 </div>
             </div>
-            
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
-                    <div class="col-sm-10">
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
-                            </label>
-                        </div>
-                        
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
-                        
-                        
-                    </div>
+
+            <div id="pencarian">
             </div>
+            
+            <div class="form-group row  ">
+                <label class="col-sm-1 control-label" for="form-field-1">
+
+                </label>
+                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal" type="button">Tambahkan Pembayaran</button>
+            </div>
+
 
             
             <div class="form-group">
-                <label class="col-sm-2 control-label" for="form-field-1">
+                <label class="col-sm-1 control-label" for="form-field-1">
 
                 </label>
                 <div class="col-sm-1">
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('transaksi', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>
@@ -95,3 +89,53 @@
     </div>
     <!-- end: TEXT FIELDS PANEL -->
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Cari Potongan</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+        <?= form_dropdown('id_potongan',getDropdownList('tb_potongan',['id_potongan','nama_potongan']),'',['class' => 'form-control id_pencarian', 'autofocus' => 'autofocus']);?>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script>
+$(document).ready(function(){
+    var gel ;
+    var jur ;
+    $('select.id_pencarian').change(function(){
+        let id = this.value;
+        // alert(this.value);
+        $.post( "<?=base_url('transaksi/pencarian/')?>"+id, function( data ) {
+            $('#pencarian').html(data);
+             gel = $('#data-g').val();
+             jur = $('#data-j').val();
+        });
+    });
+    $('select.jurusan').change(function(){
+        let id = this.value;
+        // alert(this.value);
+        
+    });
+
+    $('#myModal').on('shown.bs.modal', function (e) {
+
+        $.post( "<?=base_url('transaksi/potongan/')?>",{  }, function( data ) {
+            $('#data-biaya').html(data);
+        });
+    })
+
+})
+</script>

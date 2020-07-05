@@ -88,21 +88,21 @@
             </div>
 
             <div class="form-group row <?= setValidationStyle('status_soal') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Soal</label>
+                <label for="nama" class="col-sm-2 control-label">STATUS SOAL</label>
                     <div class="col-sm-10">
                         <div>
                             <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_soal" <?php echo (!empty($input->status_kelas) and ($input->status_soal == 'aktif') ) ? "checked" :"" ;?> >
+                                <input type="radio" class="grey" value="aktif" name="status_soal" <?php echo (!empty($input->status_soal) and ($input->status_soal == 'aktif') ) ? "checked" :"" ;?> >
                                 Aktif
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_soal" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
+                                <input type="radio" class="grey"  value="non aktif" name="status_soal" <?php echo (!empty($input->status_soal) and ($input->status_soal == 'non aktif') ) ? "checked" :"" ;?> >
                                 Tidak Aktif
                             </label>
                         </div>
                         
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
+                        <?= setValidationIcon('status_soal') ?>
+                        <?=form_error('status_soal');?>
                         
                         
                     </div>
@@ -117,7 +117,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('buat_mapel', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

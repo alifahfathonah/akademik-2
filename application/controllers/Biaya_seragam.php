@@ -17,21 +17,23 @@ Class Biaya_seragam extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'biaya_seragam';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_seragam';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_seragam', 'dt' => 'id_seragam'),
+            array('db' => 'nama_seragam', 'dt' => 'nama_seragam'),
+            array('db' => 'biaya_seragam', 'dt' => 'biaya_seragam'),
+            array('db' => 'nama_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'kompetensi_keahlian', 'dt' => 'id_jurusan'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_seragam',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('biaya_seragam/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('biaya_seragam/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,17 +61,17 @@ Class Biaya_seragam extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_biaya_seragam->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_biaya_seragam->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
-            $data['buttonText'] = 'Tambah';
+            $data['mainView']   = 'biaya_seragam/add';
+            $data['heading']    = $this->template->link('biaya_seragam > Tambah');
+            $data['formAction'] = "biaya_seragam/add";
+            $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -77,34 +79,34 @@ Class Biaya_seragam extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_biaya_seragam->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('Biaya_Seragam');
     }
 
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_seragam = $this->Model_biaya_seragam->find('id_seragam',$id);
+        if (!$biaya_seragam) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_seragam', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $biaya_seragam;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_biaya_seragam->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'biaya_seragam/add';
+            $data['heading']    = $this->template->link('biaya_seragam > Edit ');
+            $data['formAction'] = "biaya_seragam/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,25 +114,25 @@ Class Biaya_seragam extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_biaya_seragam->update($id, $data['input'],'id_seragam');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_seragam', 'refresh');
     }
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_seragam = $this->Model_biaya_seragam->find('id_seragam',$id);
+        if (!$biaya_seragam) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_seragam', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_biaya_seragam->where('id_seragam',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');
@@ -138,7 +140,7 @@ Class Biaya_seragam extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_seragam', 'refresh');
     }
 
 }

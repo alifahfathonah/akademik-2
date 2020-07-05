@@ -15,7 +15,7 @@ class Model_siswa_mutasi extends MY_Model {
             [
                 'field' => 'tgl_mutasi',
                 'label' => 'Tanggal Mutasi',
-                'rules' => 'trim|required|min_length[1]|max_length[9]'
+                'rules' => 'trim|required|min_length[1]|max_length[11]'
             ],
             [
                 'field' => 'isi_mutasi',

@@ -22,9 +22,9 @@ Class Siswa_mutasi extends OperatorController {
         $primaryKey = 'id_mutasi';
         // list field
         $columns = array(
-            array('db' => 'id_mutasi', 'dt' => 'id_mutasi'),
             array('db' => 'id_pendaftaran', 'dt' => 'id_pendaftaran'),
             array('db' => 'tgl_mutasi', 'dt' => 'tgl_mutasi'),
+            array('db' => 'isi_mutasi', 'dt' => 'isi_mutasi'),
             array('db' => 'status_mutasi', 'dt' => 'status_mutasi'),
             array(
                 'db' => 'id_mutasi',
@@ -70,7 +70,7 @@ Class Siswa_mutasi extends OperatorController {
             $data['mainView']   = 'siswa_mutasi/add';
             $data['heading']    = $this->template->link('siswa_mutasi > Tambah');
             $data['formAction'] = "siswa_mutasi/add";
-            $data['buttonText'] = 'Tambah';
+            $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -84,7 +84,7 @@ Class Siswa_mutasi extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('siswa_mutasi');
     }
 
     
@@ -120,7 +120,7 @@ Class Siswa_mutasi extends OperatorController {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('siswa_mutasi', 'refresh');
     }
 
     public function delete($id)
@@ -129,7 +129,7 @@ Class Siswa_mutasi extends OperatorController {
         if (!$siswa_mutasi) {
             flashMessage('error', 'Data tidak ditemukan!');
             redirect('siswa_mutasi', 'refresh');
-        }
+        } 
 
         $hapus = $this->Model_siswa_mutasi->where('id_mutasi',$id)->delete();
 
@@ -139,7 +139,16 @@ Class Siswa_mutasi extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('siswa_mutasi', 'refresh');
+    }
+
+    public function pencarian($id=null)
+    {
+        // $data['nama'] = $this->db->get_where('tb_pendaftaran',['id_pendaftaran' => $id])->row();
+        $query = "SELECT a.*,b.nama_siswa as nama_siswa,b.id_gelombang,d.nama_gelombang,c.kompetensi_keahlian FROM tb_hasil_wawancara a join tb_pendaftaran b on b.id_pendaftaran=a.id_pendaftaran join tb_jurusan c on c.id_jurusan=a.pil_jur join tb_gelombang d on b.id_gelombang=d.id_gelombang  where a.id_pendaftaran = $id and b.status='aktif' and a.status_wawancara ='diterima' ";
+        $data['nama'] = $this->db->query($query)->row();
+
+        return $this->load->view('siswa_mutasi/data_siswa',$data);
     }
 
 }

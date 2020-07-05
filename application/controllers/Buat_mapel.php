@@ -71,7 +71,7 @@ Class Buat_mapel extends OperatorController {
         if (!$this->Model_mapel->validate()) {
             // $halaman     = $this->halaman;
             $data['mainView']   = 'buat_mapel/add';
-            $data['heading']    = $this->template->link('Buat Mapel > Tambah');
+            $data['heading']    = $this->template->link('buat_mapel > Tambah');
             $data['formAction'] = "buat_mapel/add";
             $data['buttonText'] = 'Tambah';
             $data['menu']       = $this->menu;
@@ -87,7 +87,7 @@ Class Buat_mapel extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('buat_mapel');
     }
 
     
@@ -108,7 +108,7 @@ Class Buat_mapel extends OperatorController {
         if (! $validate) {
             $data['mainView']   = 'buat_mapel/add';
             $data['heading']    = $this->template->link('buat_mapel > Edit ');
-            $data['formAction'] = "buat/edit/$id";
+            $data['formAction'] = "buat_mapel/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -123,7 +123,7 @@ Class Buat_mapel extends OperatorController {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('buat_mapel', 'refresh');
     }
 
     public function delete($id)
@@ -142,7 +142,7 @@ Class Buat_mapel extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('buat_mapel', 'refresh');
     }
 
 }

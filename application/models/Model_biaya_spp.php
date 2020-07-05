@@ -1,20 +1,20 @@
 <?php
 
-class Model_biaya_pendaftaran extends MY_Model {
+class Model_biaya_spp extends MY_Model {
 
-    public $table ="tb_biaya_pendaftaran";
+    public $table ="tb_spp";
 
     public function getValidationRules()
     {
         $validationRules = [
             [
-                'field' => 'nama_pendaftaran',
-                'label' => 'Nama Pendaftaran',
+                'field' => 'nama_spp',
+                'label' => 'Nama spp',
                 'rules' => 'trim|required|min_length[1]|max_length[30]'
             ],
             [
-                'field' => 'biaya_pendaftaran',
-                'label' => 'Biaya Pendaftaran',
+                'field' => 'biaya_spp',
+                'label' => 'Biaya spp',
                 'rules' => 'trim|required|min_length[1]|max_length[9]'
             ],
             [
@@ -35,8 +35,8 @@ class Model_biaya_pendaftaran extends MY_Model {
     public function getDefaultValues()
     {
         return [
-            'nama_pendaftaran'    => '',
-            'biaya_pendaftaran'    => '',
+            'nama_spp'    => '',
+            'biaya_spp'    => '',
             'id_gelombang'    => '',
             'id_jurusan'    => '',
         ];

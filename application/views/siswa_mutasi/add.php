@@ -31,15 +31,15 @@
             echo form_open_multipart($formAction, 'role="form" class="form-horizontal"');
             ?>
 
-
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
+            <div class="form-group <?= setValidationStyle('tgl_mutasi') ?>">
+                <label class="col-sm-2 control-label" for="tgl_mutasi">
                     TANGGAL
                 </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
+                <div class="col-sm-3">
+                    <input name="tgl_mutasi" type="date" value="<?=$input->tgl_mutasi;?>" placeholder="" id="tgl_mutasi" class="form-control">
+                    
+                    <?= setValidationIcon('tgl_mutasi') ?>
+                    <?=form_error('tgl_mutasi');?>
                 </div>
             </div>
 
@@ -48,89 +48,47 @@
                     NO PENDAFTARAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-            
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    NAMA SISWA
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-            
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    DITERIMA JURUSAN
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    STATUS MUTASI
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
-                    ISI MUTASI
-                </label>
-                <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div>
-            </div>
-
-            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
-                </label>
-                <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    <?= form_dropdown('id_pendaftaran',getDropdownListPendaftaranAktif('tb_pendaftaran',['id_pendaftaran','no_pendaftaran']),$input->id_pendaftaran,['class' => 'form-control id_pencarian', 'autofocus' => 'autofocus']);?>
                     
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
+                    <?= setValidationIcon('id_pendaftaran') ?>
+                    <?=form_error('id_pendaftaran');?>
                 </div>
-            </div> -->
+            </div>
+            <div id="pencarian">
+            </div>
+
             
-            
-            <!-- <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
+            <div class="form-group row <?= setValidationStyle('status_mutasi') ?> ">
+                <label for="nama" class="col-sm-2 control-label">STATUS MUTASI</label>
                     <div class="col-sm-10">
                         <div>
                             <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
+                                <input type="radio" class="grey" value="pindah" name="status_mutasi" <?php echo (!empty($input->status_mutasi) and ($input->status_mutasi == 'pindah') ) ? "checked" :"" ;?> >
+                                PINDAH SWASTA
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
+                                <input type="radio" class="grey"  value="diterima" name="status_mutasi" <?php echo (!empty($input->status_mutasi) and ($input->status_mutasi == 'diterima') ) ? "checked" :"" ;?> >
+                                DITERIMA NEGERI
                             </label>
                         </div>
                         
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
+                        <?= setValidationIcon('status_mutasi') ?>
+                        <?=form_error('status_mutasi');?>
                         
                         
                     </div>
-            </div> -->
+            </div>
+
+            <div class="form-group <?= setValidationStyle('isi_mutasi') ?>">
+                <label class="col-sm-2 control-label" for="isi_mutasi">
+                    ISI MUTASI
+                </label>
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->isi_mutasi?>" name="isi_mutasi" placeholder="" id="isi_mutasi" class="form-control">
+                    <?= setValidationIcon('isi_mutasi') ?>
+                    <?=form_error('isi_mutasi');?>
+                </div>
+            </div>
 
             
             <div class="form-group">
@@ -141,7 +99,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('siswa_mutasi', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>
@@ -149,3 +107,34 @@
     </div>
     <!-- end: TEXT FIELDS PANEL -->
 </div>
+
+
+
+<script>
+$(document).ready(function(){
+    var gel ;
+    var jur ;
+    $('select.id_pencarian').change(function(){
+        let id = this.value;
+        // alert(this.value);
+        $.post( "<?=base_url('siswa_mutasi/pencarian/')?>"+id, function( data ) {
+            $('#pencarian').html(data);
+             gel = $('#data-g').val();
+             jur = $('#data-j').val();
+        });
+    });
+    // $('select.jurusan').change(function(){
+    //     let id = this.value;
+    //     // alert(this.value);
+        
+    // });
+
+    // $('#myModal').on('shown.bs.modal', function (e) {
+
+    //     $.post( "<?=base_url('transaksi/jurusan/')?>",{ jur: jur, gel: gel }, function( data ) {
+    //         $('#data-biaya').html(data);
+    //     });
+    // })
+
+})
+</script>

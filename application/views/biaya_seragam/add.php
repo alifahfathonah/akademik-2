@@ -5,10 +5,10 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-external-link-square"></i>
-            <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." ".$buttonText."</p>"
+            <?php echo "<p class='text-uppercase text-warning'>".$menu." ".$sub_menu." Tambah </p>"
                 ; 
             ?>
-            <div class="panel-tools">
+            <!-- <div class="panel-tools">
                 <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
                 </a>
                 <a class="btn btn-xs btn-link panel-config" href="#panel-config" data-toggle="modal">
@@ -23,7 +23,7 @@
                 <a class="btn btn-xs btn-link panel-close" href="#">
                     <i class="fa fa-times"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="panel-body">
 
@@ -32,50 +32,50 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('nama_kelas') ?>">
-                <label class="col-sm-2 control-label" for="nama_kelas">
-                    Nama Kelas
+            <div class="form-group <?= setValidationStyle('nama_seragam') ?>">
+                <label class="col-sm-2 control-label" for="nama_seragam">
+                    NAMA
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->nama_kelas?>" name="nama_kelas" placeholder="" id="nama_kelas" class="form-control">
-                    <?= setValidationIcon('nama_kelas') ?>
-                    <?=form_error('nama_kelas');?>
+                    <input type="text" value="<?=$input->nama_seragam?>" name="nama_seragam" placeholder="" id="nama_seragam" class="form-control">
+                    <?= setValidationIcon('nama_seragam') ?>
+                    <?=form_error('nama_seragam');?>
                 </div>
             </div>
             
-            
-            <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
+            <div class="form-group <?= setValidationStyle('biaya_seragam') ?>">
+                <label class="col-sm-2 control-label" for="biaya_seragam">
+                    BIAYA
                 </label>
                 <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    <input type="number" value="<?=$input->biaya_seragam?>" name="biaya_seragam" placeholder="" id="biaya_seragam" class="form-control">
+                    <?= setValidationIcon('biaya_seragam') ?>
+                    <?=form_error('biaya_seragam');?>
+                </div>
+            </div>
+
+            <div class="form-group <?= setValidationStyle('id_jurusan') ?>">
+                <label class="col-sm-2 control-label" for="id_jurusan">
+                    JURUSAN
+                </label>
+                <div class="col-sm-9">
+                    <?= form_dropdown('id_jurusan',getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),$input->id_jurusan,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
                     
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
+                    <?= setValidationIcon('id_jurusan') ?>
+                    <?=form_error('id_jurusan');?>
                 </div>
             </div>
-            
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
-                    <div class="col-sm-10">
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
-                            </label>
-                        </div>
-                        
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
-                        
-                        
-                    </div>
+
+            <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
+                <label class="col-sm-2 control-label" for="id_gelombang">
+                    GELOMBANG
+                </label>
+                <div class="col-sm-9">
+                    <?= form_dropdown('id_gelombang',getDropdownList('tb_gelombang',['id_gelombang','nama_gelombang']),$input->id_gelombang,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
+                    
+                    <?= setValidationIcon('id_gelombang') ?>
+                    <?=form_error('id_gelombang');?>
+                </div>
             </div>
 
             
@@ -87,7 +87,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('biaya_seragam', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

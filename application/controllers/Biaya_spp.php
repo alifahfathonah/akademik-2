@@ -17,21 +17,23 @@ Class Biaya_spp extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'biaya_spp';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_spp';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_spp', 'dt' => 'id_spp'),
+            array('db' => 'nama_spp', 'dt' => 'nama_spp'),
+            array('db' => 'biaya_spp', 'dt' => 'biaya_spp'),
+            array('db' => 'nama_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'kompetensi_keahlian', 'dt' => 'id_jurusan'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_spp',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('biaya_spp/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('biaya_spp/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,17 +61,17 @@ Class Biaya_spp extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_biaya_spp->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_biaya_spp->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
-            $data['buttonText'] = 'Tambah';
+            $data['mainView']   = 'biaya_spp/add';
+            $data['heading']    = $this->template->link('biaya_spp > Tambah');
+            $data['formAction'] = "biaya_spp/add";
+            $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -77,34 +79,34 @@ Class Biaya_spp extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_biaya_spp->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('biaya_spp');
     }
 
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_spp = $this->Model_biaya_spp->find('id_spp',$id);
+        if (!$biaya_spp) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_spp', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $biaya_spp;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_biaya_spp->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'biaya_spp/add';
+            $data['heading']    = $this->template->link('biaya_spp > Edit ');
+            $data['formAction'] = "biaya_spp/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,25 +114,25 @@ Class Biaya_spp extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_biaya_spp->update($id, $data['input'],'id_spp');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_spp', 'refresh');
     }
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_spp = $this->Model_biaya_spp->find('id_spp',$id);
+        if (!$biaya_spp) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_spp', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_biaya_spp->where('id_spp',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');
@@ -138,7 +140,7 @@ Class Biaya_spp extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('biaya_spp', 'refresh');
     }
 
 }

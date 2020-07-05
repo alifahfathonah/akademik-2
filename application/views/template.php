@@ -120,7 +120,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="active"><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-tachometer"></i><span class="title">Dashboard</a></li>
+                            <li class="active"><a href="<?php echo base_url() ?>siswa"><i class="fa fa-tachometer"></i><span class="title">Dashboard</a></li>
                             <li><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-user-circle"></i><span class="title">Profile</a></li>
                             <li><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-book"></i><span class="title">Ujian Akademik</a></li>
                             <li><a href="<?php echo base_url() ?>/auth/logout"><i class="fa fa-file-text-o"></i><span class="title">Hasil Seleksi</a></li>
