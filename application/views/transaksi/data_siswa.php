@@ -96,11 +96,11 @@
                             <td colspan="3">Potongan
                                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" type="button">{+}potongan</button> 
                             </td>
-                            <td>20000</td>
+                            <td><div id="potongan"></div></td>
                         </tr>
                         <tr class="text-right">
                             <td colspan="3">Total Akhir</td>
-                            <td>2000000</td>
+                            <td><input class='form-control' readonly value=""></td>
                         </tr>
                         <tr class="text-right">
                             <td colspan="3">Dibayarkan</td>

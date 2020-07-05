@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <table id="" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -29,28 +29,10 @@
                         <th>WAKTU MULAI</th>
                         <th>WAKTU AKHIR</th>
                         <th>STATUS</th>
-                        <th>GELOMBANG</th>
                         <th>MAPEL</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>60</td>
-                        <td>30</td>
-                        <td>2020-06-01</td>
-                        <td>2020-06-02</td>
-                        <td>07.00</td>
-                        <td>16.00</td>
-                        <td>Aktif</td>
-                        <td>Gelombang 1</td>
-                        <td>Ujian Akademik</td>
-                        <td>
-                            <a class="btn btn-sm btn-info" href="#">Edit</a>
-                        </td>
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -64,7 +46,7 @@
   <script>
         $(document).ready(function() {
             var t = $('#mytable').DataTable( {
-                "ajax": '<?php echo site_url('kelas/data'); ?>',
+                "ajax": '<?php echo site_url('atur_ujian/data'); ?>',
                 "order": [[ 2, 'asc' ]],
                 "columns": [
                     {
@@ -74,10 +56,28 @@
                         "orderable": false,
                     },
                     {
-                        "data": "nama_kelas"
+                        "data": "kkm_ujian"
                     },
                     {
-                        "data": "status_kelas"
+                        "data": "durasi_ujian"
+                    },
+                    {
+                        "data": "tgl_buka_ujian"
+                    },
+                    {
+                        "data": "tgl_tutup_ujian"
+                    },
+                    {
+                        "data": "waktu_buka_ujian"
+                    },
+                    {
+                        "data": "waktu_tutup_ujian"
+                    },
+                    {
+                        "data": "status_ujian"
+                    },
+                    {
+                        "data": "id_mapel"
                     },
                     { "data": "aksi","width": "120px" },
                 ]

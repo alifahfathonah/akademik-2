@@ -17,21 +17,27 @@ Class Atur_ujian extends OperatorController {
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'tb_ujian';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_ujian';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_ujian', 'dt' => 'id_ujian'),
+            array('db' => 'id_mapel', 'dt' => 'id_mapel'),
+            array('db' => 'kkm_ujian', 'dt' => 'kkm_ujian'),
+            array('db' => 'durasi_ujian', 'dt' => 'durasi_ujian'),
+            array('db' => 'tgl_buka_ujian', 'dt' => 'tgl_buka_ujian'),
+            array('db' => 'tgl_tutup_ujian', 'dt' => 'tgl_tutup_ujian'),
+            array('db' => 'waktu_buka_ujian', 'dt' => 'waktu_buka_ujian'),
+            array('db' => 'waktu_tutup_ujian', 'dt' => 'waktu_tutup_ujian'),
+            array('db' => 'status_ujian', 'dt' => 'status_ujian'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_ujian',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('atur_ujian/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('atur_ujian/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -69,7 +75,7 @@ Class Atur_ujian extends OperatorController {
             $data['mainView']   = 'atur_ujian/add';
             $data['heading']    = $this->template->link('atur_ujian > Tambah');
             $data['formAction'] = "atur_ujian/add";
-            $data['buttonText'] = 'Tambah';
+            $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -83,28 +89,28 @@ Class Atur_ujian extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('atur_ujian');
     }
 
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $atur_ujian = $this->Model_atur_ujian->find('id_ujian',$id);
+        if (!$atur_ujian) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('atur_ujian', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $atur_ujian;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_atur_ujian->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'atur_ujian/add';
+            $data['heading']    = $this->template->link('atur_ujian > Edit ');
+            $data['formAction'] = "atur_ujian/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,25 +118,25 @@ Class Atur_ujian extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_atur_ujian->update($id, $data['input'],'id_ujian');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('atur_ujian', 'refresh');
     }
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $atur_ujian = $this->Model_atur_ujian->find('id_ujian',$id);
+        if (!$atur_ujian) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('atur_ujian', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_atur_ujian->where('id_ujian',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');
@@ -138,7 +144,7 @@ Class Atur_ujian extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('atur_ujian', 'refresh');
     }
 
 }

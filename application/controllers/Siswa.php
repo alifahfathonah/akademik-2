@@ -73,7 +73,7 @@ Class Siswa extends OperatorController {
         $data['heading']    = $this->template->link('Data Siswa ');
         $data['menu'] = $this->menu;
         $data['sub_menu'] = $this->sub_menu;
-        $this->template->load('template', 'welcome_siswa' ,$data);
+        $this->template->load('template', 'siswa/list' ,$data);
     }
 
     

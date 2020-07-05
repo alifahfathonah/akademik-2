@@ -37,7 +37,7 @@
                     KKM UJIAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->kkm_ujian?>" name="kkm_ujian" placeholder="Ketik KKM Ujian" id="kkm_ujian" class="form-control">
+                    <input type="number" value="<?=$input->kkm_ujian?>" name="kkm_ujian" placeholder="Ketik KKM Ujian" id="kkm_ujian" class="form-control">
                     <?= setValidationIcon('kkm_ujian') ?>
                     <?=form_error('kkm_ujian');?>
                 </div>
@@ -48,7 +48,7 @@
                     DURASI UJIAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" value="<?=$input->kkm_ujian?>" name="durasi_ujian" placeholder="Ketik Durasi Ujian" id="durasi_ujian" class="form-control">
+                    <input type="number" value="<?=$input->kkm_ujian?>" name="durasi_ujian" placeholder="Ketik Durasi Ujian" id="durasi_ujian" class="form-control">
                     <?= setValidationIcon('durasi_ujian') ?>
                     <?=form_error('durasi_ujian');?>
                 </div>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             
-            <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
+            <!-- <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
                 <label class="col-sm-2 control-label" for="id_gelombang">
                     GELOMBANG
                 </label>
@@ -114,10 +114,10 @@
                     <?= setValidationIcon('id_gelombang') ?>
                     <?=form_error('id_gelombang');?>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="form-group <?= setValidationStyle('id_gelombang') ?>">
-                <label class="col-sm-2 control-label" for="id_gelombang">
+            <div class="form-group <?= setValidationStyle('id_mapel') ?>">
+                <label class="col-sm-2 control-label" for="id_mapel">
                     NAMA MAPEL
                 </label>
                 <div class="col-sm-9">
@@ -156,7 +156,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('atur_ujian', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>

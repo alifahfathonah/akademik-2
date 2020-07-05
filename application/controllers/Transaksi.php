@@ -194,13 +194,18 @@ Class Transaksi extends OperatorController {
         $this->cart->insert($data);
     }
 
-    public function potongan()
+    public function potongan($id=null)
     {
-        $data = $this->db->get('tb_potongan')->result();
+        $data = $this->db->where('id_potongan',$id)->get('tb_potongan')->result();
         $str = '';
         foreach ($data as $p ) {
-            $str .= '';
+            
+            $str .=        '<div class="form-group">
+                    <label for="exampleInputEmail1">Total Potongan</label>';
+            $str .= '<input class="form-control" value="'.$p->biaya_potongan.'"></div>';
+
         }
+        echo $str;
     }
 
 }

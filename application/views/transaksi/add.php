@@ -99,7 +99,8 @@
       </div>
       <div class="modal-body">
         <form>
-        <?= form_dropdown('id_potongan',getDropdownList('tb_potongan',['id_potongan','nama_potongan']),'',['class' => 'form-control id_pencarian', 'autofocus' => 'autofocus']);?>
+            <?= form_dropdown('id_potongan',getDropdownList('tb_potongan',['id_potongan','nama_potongan']),'',['class' => 'form-control potongan', 'autofocus' => 'autofocus']);?>
+            <div class="lihat-potongan"></div>
         </form>
       </div>
       <div class="modal-footer">
@@ -124,17 +125,18 @@ $(document).ready(function(){
              jur = $('#data-j').val();
         });
     });
-    $('select.jurusan').change(function(){
+    $('select.potongan').change(function(){
         let id = this.value;
         // alert(this.value);
+        
+        $.post( "<?=base_url('transaksi/potongan/')?>"+id,{  }, function( data ) {
+            $('.lihat-potongan').html(data);
+        });
         
     });
 
     $('#myModal').on('shown.bs.modal', function (e) {
 
-        $.post( "<?=base_url('transaksi/potongan/')?>",{  }, function( data ) {
-            $('#data-biaya').html(data);
-        });
     })
 
 })

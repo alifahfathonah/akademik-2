@@ -8,6 +8,11 @@ class Model_atur_ujian extends MY_Model {
     {
         $validationRules = [
             [
+                'field' => 'id_mapel',
+                'label' => 'ID Mapel',
+                'rules' => 'trim|required|min_length[1]|max_length[30]'
+            ],
+            [
                 'field' => 'kkm_ujian',
                 'label' => 'KKM Ujian',
                 'rules' => 'trim|required|min_length[1]|max_length[30]'
@@ -50,6 +55,7 @@ class Model_atur_ujian extends MY_Model {
     public function getDefaultValues()
     {
         return [
+            'id_mapel'    => '',
             'kkm_ujian'    => '',
             'durasi_ujian'      => '',
             'tgl_buka_ujian'        => '',
