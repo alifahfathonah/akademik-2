@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <table id="mytable" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
+            <table id="" class="table table-striped table-bordered table-hover table-full-width dataTable" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>NO</th>
@@ -27,12 +27,41 @@
                         <th>PIL 1</th>
                         <th>PIL 2</th>
                         <th>PIL 3</th>
-                        <th>TERIMA JURUSAN</th>
+                        <th>DI TERIMA JURUSAN</th>
+                        <th>ISI WAWANCARA</th>
                         <th>DINYATAKAN</th>
                         <th>CATATAN</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
+                <tbody>
+                <?php $no=0; foreach ($list as $l ) { $no++;?>
+                    
+                    <tr>
+                        <td><?=$no;?></td>
+                        <td><?=$l->no;?></td>
+                        <td><?=$l->nama?></td>
+                        <td><?=pilihan_jurusan($l->pil_1);?></td>
+                        <td><?=pilihan_jurusan($l->pil_2)?></td>
+                        <td><?=pilihan_jurusan($l->pil_3)?></td>
+                        <td><?=pilihan_jurusan($l->pil_jur)?></td>
+                        <td><?=$l->isi_wawancara;?></td>
+                        <td><?=$l->status_wawancara;?></td>
+                        <td><?=$l->catatan?></td>
+                        <td>
+                            <?php 
+                                echo 
+                                anchor('hasil_wawancara/edit/'.$l->id_hasil_wawancara,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"'); 
+                                echo 
+                                anchor('hasil_wawancara/delete/'.$l->id_hasil_wawancara,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Edit"  onclick="return confirm(\'Are you sure delete?\')" '); 
+                                
+                                
+                            
+                            ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>

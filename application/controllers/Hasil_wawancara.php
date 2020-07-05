@@ -55,6 +55,7 @@ Class Hasil_wawancara extends OperatorController {
     function index() {
         $data['heading']    = $this->template->link('Wawancara - Hasil Wawancara ');
         $data['menu'] = $this->menu;
+        $data['list'] = $this->db->query("select a.*,b.nama_siswa as nama,b.no_pendaftaran as no,b.pil_1,b.pil_2,b.pil_3 from tb_hasil_wawancara a join tb_pendaftaran b on b.id_pendaftaran=a.id_pendaftaran ")->result();
         $data['sub_menu'] = $this->sub_menu;
         $this->template->load('template', 'hasil_wawancara/list' ,$data);
     }
@@ -74,6 +75,7 @@ Class Hasil_wawancara extends OperatorController {
             $data['heading']    = $this->template->link('hasil_wawancara > Tambah');
             $data['formAction'] = "hasil_wawancara/add";
             $data['buttonText'] = 'Tambah';
+            $data['data_wawancara'] = $this->db->where('status','aktif')->get('tb_wawancara')->result();
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -87,7 +89,7 @@ Class Hasil_wawancara extends OperatorController {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
         }
 
-        redirect($this->sub_menu);
+        redirect('hasil_wawancara');
     }
 
     
@@ -123,7 +125,7 @@ Class Hasil_wawancara extends OperatorController {
             flashMessage('success', 'Data berhasil diupdate.');
         }
 
-        redirect($this->sub_menu, 'refresh');
+        redirect('hasil_wawancara', 'refresh');
     }
 
     public function delete($id)
@@ -142,7 +144,7 @@ Class Hasil_wawancara extends OperatorController {
             flashMessage('success', 'Data berhasil dihapus.');
         }
         
-        redirect($this->sub_menu, 'refresh');
+        redirect('hasil_wawancara', 'refresh');
     }
 
     public function nama_siswa($id=null)
@@ -150,6 +152,12 @@ Class Hasil_wawancara extends OperatorController {
         $data['nama'] =  $this->db->get_where('tb_pendaftaran',['id_pendaftaran' => $id])->row();
         // $nama = $this->db->query("select * from tb_pendaftaran a join tb_jurusan b on b.id_jurusan=a.id_jurusan where a.id_pendaftaran = '$id' ")->row();
         return $this->load->view('hasil_wawancara/jurusan_pilihan',$data);
+    }
+    public function pencarian($id=null)
+    {
+        $data['data_wawancara'] =  $this->db->get_where('tb_wawancara',['id_jurusan' => $id])->result();
+        // $nama = $this->db->query("select * from tb_pendaftaran a join tb_jurusan b on b.id_jurusan=a.id_jurusan where a.id_pendaftaran = '$id' ")->row();
+        return $this->load->view('hasil_wawancara/pencarian',$data);
     }
 
 }

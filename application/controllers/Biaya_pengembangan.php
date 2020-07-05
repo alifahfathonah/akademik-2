@@ -10,28 +10,30 @@ Class Biaya_pengembangan extends OperatorController {
         //chekAksesModule();
         $this->load->library('ssp');
         $this->menu = "pembayaran";
-        $this->sub_menu = "biaya-pengembangan";
+        $this->sub_menu = "biaya_pengembangan";
         // $this->load->model('Model_gelombang');
     }
 
     
     function data() {
         // nama tabel
-        $table = 'tb_kelas';
+        $table = 'tb_pengembangan';
         // nama PK
-        $primaryKey = 'id_kelas';
+        $primaryKey = 'id_pengembangan';
         // list field
         $columns = array(
-            array('db' => 'id_kelas', 'dt' => 'id_kelas'),
-            array('db' => 'nama_kelas', 'dt' => 'nama_kelas'),
-            array('db' => 'status_kelas', 'dt' => 'status_kelas'),
+            array('db' => 'id_pengembangan', 'dt' => 'id_pengembangan'),
+            array('db' => 'nama_pengembangan', 'dt' => 'nama_pengembangan'),
+            array('db' => 'biaya_pengembangan', 'dt' => 'biaya_pengembangan'),
+            array('db' => 'id_gelombang', 'dt' => 'id_gelombang'),
+            array('db' => 'id_jurusan', 'dt' => 'id_jurusan'),
             array(
-                'db' => 'id_kelas',
+                'db' => 'id_pengembangan',
                 'dt' => 'aksi',
                 'formatter' => function( $d) {
                     //return "<a href='edit.php?id=$d'>EDIT</a>";
-                    return anchor('kelas/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
-                        '.anchor('kelas/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
+                    return anchor('biaya_pengembangan/edit/'.$d,'<i class="fa fa-edit"></i>','class="btn btn-xs btn-teal tooltips" data-placement="top" data-original-title="Edit"').' 
+                        '.anchor('biaya_pengembangan/delete/'.$d,'<i class="fa fa-trash"></i>','class="btn btn-xs btn-danger tooltips" data-placement="top" data-original-title="Delete" onclick="return confirm(\'Are you sure delete?\')"');
                 }
             )
         );
@@ -59,17 +61,17 @@ Class Biaya_pengembangan extends OperatorController {
     function add() {
         
         if (!$_POST) {
-            $data['input'] = (object) $this->Model_kelas->getDefaultValues();
+            $data['input'] = (object) $this->Model_biaya_pengembangan->getDefaultValues();
         } else {
             $data['input'] = (object) $this->input->post(null, true);
         }
 
-        if (!$this->Model_kelas->validate()) {
+        if (!$this->Model_biaya_pengembangan->validate()) {
             // $halaman     = $this->halaman;
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Tambah');
-            $data['formAction'] = "kelas/add";
-            $data['buttonText'] = 'Tambah';
+            $data['mainView']   = 'biaya_pengembangan/add';
+            $data['heading']    = $this->template->link('Biaya Pengembangan > Tambah');
+            $data['formAction'] = "biaya_pengembangan/add";
+            $data['buttonText'] = 'Simpan';
             $data['menu']       = $this->menu;
             $data['sub_menu']   = $this->sub_menu;
             $this->template->load('template', $data['mainView'],$data);
@@ -77,7 +79,7 @@ Class Biaya_pengembangan extends OperatorController {
             return;
         }
 
-        if ($this->Model_kelas->insert($data['input'])) {
+        if ($this->Model_biaya_pengembangan->insert($data['input'])) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan.');
         } else {
             $this->session->set_flashdata('error', 'Data gagal disimpan.');
@@ -89,22 +91,22 @@ Class Biaya_pengembangan extends OperatorController {
     
     public function edit($id = null)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_pengembangan = $this->Model_biaya_pengembangan->find('id_pengembangan',$id);
+        if (!$biaya_pengembangan) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_pengembangan', 'refresh');
         }
 
         $data['input'] = (object) $this->input->post(null, true);
         if (! $_POST) {
-            $data['input'] = (object) $kelas;
+            $data['input'] = (object) $biaya_pengembangan;
         }
 
-        $validate = $this->Model_kelas->validate();
+        $validate = $this->Model_biaya_pengembangan->validate();
         if (! $validate) {
-            $data['mainView']   = 'kelas/add';
-            $data['heading']    = $this->template->link('Kelas > Edit ');
-            $data['formAction'] = "kelas/edit/$id";
+            $data['mainView']   = 'biaya_pengembangan/add';
+            $data['heading']    = $this->template->link('Biaya Pengembangan > Edit ');
+            $data['formAction'] = "biaya_pengembangan/edit/$id";
             $data['buttonText'] = 'Update';
             $data['menu'] = $this->menu;
             $data['sub_menu'] = $this->sub_menu;
@@ -112,7 +114,7 @@ Class Biaya_pengembangan extends OperatorController {
             return;
         }
 
-        $update = $this->Model_kelas->update($id, $data['input'],'id_kelas');
+        $update = $this->Model_biaya_pengembangan->update($id, $data['input'],'id_pengembangan');
         if (! $update) {
             flashMessage('error', 'Data gagal diupdate!');
         } else {
@@ -124,13 +126,13 @@ Class Biaya_pengembangan extends OperatorController {
 
     public function delete($id)
     {
-        $kelas = $this->Model_kelas->find('id_kelas',$id);
-        if (!$kelas) {
+        $biaya_pengembangan = $this->Model_biaya_pengembangan->find('id_pengembangan',$id);
+        if (!$biaya_pengembangan) {
             flashMessage('error', 'Data tidak ditemukan!');
-            redirect('kelas', 'refresh');
+            redirect('biaya_pengembangan', 'refresh');
         }
 
-        $hapus = $this->Model_kelas->where('id_kelas',$id)->delete();
+        $hapus = $this->Model_biaya_pengembangan->where('id_pengembangan',$id)->delete();
 
         if (!$hapus) {
             flashMessage('error', 'Data gagal dihapus!');

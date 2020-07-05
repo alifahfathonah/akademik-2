@@ -102,7 +102,7 @@
                     ISI WAWANCARA
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="isi_wawancara" placeholder="" id="isi_wawancara" class="form-control">
+                    <input type="text" value="<?=$input->isi_wawancara;?>" name="isi_wawancara" placeholder="" id="isi_wawancara" class="form-control">
                     
                         <?= setValidationIcon('isi_wawancara') ?>
                         <?=form_error('isi_wawancara');?>
@@ -114,7 +114,7 @@
                     CATATAN
                 </label>
                 <div class="col-sm-9">
-                    <input type="text" name="catatan" placeholder="MASUKAN CATATAN" id="catatan" class="form-control">
+                    <input type="text" value="<?=$input->catatan?>" name="catatan" placeholder="MASUKAN CATATAN" id="catatan" class="form-control">
                     
                         <?= setValidationIcon('catatan') ?>
                         <?=form_error('catatan');?>
@@ -131,14 +131,30 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('hasil_wawancara', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>
+
+            <div class="form-group ">
+                <label class="col-sm-2 control-label" for="id_pencarian">
+                    PENCARIAN
+                </label>
+                <div class="col-sm-9">
+                    <?= form_dropdown('id_pencarian',getDropdownList('tb_jurusan',['id_jurusan','kompetensi_keahlian']),'',['class' => 'form-control id_pencarian', 'autofocus' => 'autofocus']);?>
+                    
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- end: TEXT FIELDS PANEL -->
+    <div class="table-responsive">
+        <div id="pencarian" class="pencarian">
+        </div>
+    </div>
 </div>
+
 
 <script>
 $(document).ready(function(){
@@ -150,6 +166,14 @@ $(document).ready(function(){
             $('#result').html(data);
         });
     });
+    $('select.id_pencarian').change(function(){
+        let id = this.value;
+        // alert(this.value);
+        $.post( "<?=base_url('hasil_wawancara/pencarian/')?>"+id, function( data ) {
+            $('#pencarian').html(data);
+        });
+    });
+
 })
 
 

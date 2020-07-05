@@ -32,26 +32,26 @@
             ?>
 
 
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
+            <div class="form-group <?= setValidationStyle('nama_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="nama_pendaftaran">
                     NAMA
                 </label>
-                <!-- <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div> -->
+                <div class="col-sm-9">
+                    <input type="text" value="<?=$input->nama_pendaftaran?>" name="nama_pendaftaran" placeholder="" id="nama_pendaftaran" class="form-control">
+                    <?= setValidationIcon('nama_pendaftaran') ?>
+                    <?=form_error('nama_pendaftaran');?>
+                </div>
             </div>
 
-            <div class="form-group <?= setValidationStyle('id_pendaftaran') ?>">
-                <label class="col-sm-2 control-label" for="id_pendaftaran">
+            <div class="form-group <?= setValidationStyle('biaya_pendaftaran') ?>">
+                <label class="col-sm-2 control-label" for="biaya_pendaftaran">
                     BIAYA
                 </label>
-                <!-- <div class="col-sm-9">
-                    <input type="text" value="<?=$input->id_pendaftaran?>" name="id_pendaftaran" placeholder="" id="id_pendaftaran" class="form-control">
-                    <?= setValidationIcon('id_pendaftaran') ?>
-                    <?=form_error('id_pendaftaran');?>
-                </div> -->
+                <div class="col-sm-9">
+                    <input type="number" value="<?=$input->biaya_pendaftaran?>" name="biaya_pendaftaran" placeholder="" id="biaya_pendaftaran" class="form-control">
+                    <?= setValidationIcon('biaya_pendaftaran') ?>
+                    <?=form_error('biaya_pendaftaran');?>
+                </div>
             </div>
 
             <div class="form-group <?= setValidationStyle('id_jurusan') ?>">
@@ -77,40 +77,6 @@
                     <?=form_error('id_gelombang');?>
                 </div>
             </div>
-            
-            <!-- <div class="form-group <?= setValidationStyle('id_personal') ?>">
-                <label class="col-sm-2 control-label" for="id_personal">
-                    Personal
-                </label>
-                <div class="col-sm-9">
-                    <?= form_dropdown('id_personal',getDropdownList('tb_personal',['id_personal','nama_personal']),$input->id_personal,['class' => 'form-control', 'autofocus' => 'autofocus']);?>
-                    
-                    <?= setValidationIcon('id_personal') ?>
-                    <?=form_error('id_personal');?>
-                </div>
-            </div>
-            
-            
-            <div class="form-group row <?= setValidationStyle('status_kelas') ?> ">
-                <label for="nama" class="col-sm-2 control-label">Status Kelas</label>
-                    <div class="col-sm-10">
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey" value="aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'aktif') ) ? "checked" :"" ;?> >
-                                On
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" class="grey"  value="non aktif" name="status_kelas" <?php echo (!empty($input->status_kelas) and ($input->status_kelas == 'non aktif') ) ? "checked" :"" ;?> >
-                                Off
-                            </label>
-                        </div>
-                        
-                        <?= setValidationIcon('status_kelas') ?>
-                        <?=form_error('status_kelas');?>
-                        
-                        
-                    </div>
-            </div> -->
 
             
             <div class="form-group">
@@ -121,7 +87,7 @@
                     <button type="submit" class="btn btn-danger  btn-sm"><?=$buttonText?></button>
                 </div>
                 <div class="col-sm-1">
-                    <?php echo anchor('gelombang', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
+                    <?php echo anchor('biaya_pendaftaran', 'Kembali', array('class' => 'btn btn-info btn-sm')); ?>
                 </div>
             </div>
             </form>
