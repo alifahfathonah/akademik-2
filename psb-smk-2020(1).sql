@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02 Jul 2020 pada 15.01
+-- Generation Time: 06 Jul 2020 pada 01.20
 -- Versi Server: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -21,6 +21,86 @@ SET time_zone = "+00:00";
 --
 -- Database: `psb-smk-2020`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `biaya_pendaftaran`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `biaya_pendaftaran` (
+`id_biaya_pendaftaran` int(10)
+,`nama_pendaftaran` varchar(100)
+,`biaya_pendaftaran` int(100)
+,`id_gelombang` int(10)
+,`id_jurusan` int(10)
+,`nama_gelombang` varchar(50)
+,`kompetensi_keahlian` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `biaya_pengembangan`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `biaya_pengembangan` (
+`id_pengembangan` int(10)
+,`nama_pengembangan` varchar(100)
+,`biaya_pengembangan` int(100)
+,`id_gelombang` int(10)
+,`id_jurusan` int(10)
+,`nama_gelombang` varchar(50)
+,`kompetensi_keahlian` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `biaya_seragam`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `biaya_seragam` (
+`id_seragam` int(10)
+,`nama_seragam` varchar(100)
+,`biaya_seragam` int(100)
+,`id_gelombang` int(10)
+,`id_jurusan` int(10)
+,`nama_gelombang` varchar(50)
+,`kompetensi_keahlian` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `biaya_spp`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `biaya_spp` (
+`id_spp` int(10)
+,`nama_spp` varchar(100)
+,`biaya_spp` int(100)
+,`id_gelombang` int(10)
+,`id_jurusan` int(10)
+,`nama_gelombang` varchar(50)
+,`kompetensi_keahlian` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `buat_wawancara`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `buat_wawancara` (
+`id_wawancara` int(10)
+,`nama_wawancara` varchar(100)
+,`kriteria_wawancara` varchar(100)
+,`ket_wawancara` set('diterima','tidak diterima')
+,`status` set('aktif','non aktif')
+,`id_jurusan` int(10)
+,`kompetensi_keahlian` varchar(200)
+);
 
 -- --------------------------------------------------------
 
@@ -146,6 +226,18 @@ CREATE TABLE `tb_biaya_pendaftaran` (
   `id_jurusan` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_biaya_pendaftaran`
+--
+
+INSERT INTO `tb_biaya_pendaftaran` (`id_biaya_pendaftaran`, `nama_pendaftaran`, `biaya_pendaftaran`, `id_gelombang`, `id_jurusan`) VALUES
+(2, 'Biaya Pendaftaran TBSM', 55000, 1, 3),
+(3, 'Biaya Pendaftaran TEI', 90000, 1, 5),
+(4, 'Biaya Pendaftaran MM', 75000, 1, 6),
+(6, 'Biaya Pendaftaran TBO', 50000, 1, 4),
+(7, 'Biaya Pendaftaran TKR', 75000, 1, 2),
+(8, 'Biaya Pendaftaran TKR', 75000, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -204,6 +296,16 @@ CREATE TABLE `tb_hasil_wawancara` (
   `isi_wawancara` varchar(200) NOT NULL,
   `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_hasil_wawancara`
+--
+
+INSERT INTO `tb_hasil_wawancara` (`id_hasil_wawancara`, `id_pendaftaran`, `id_personal`, `status_wawancara`, `pil_jur`, `isi_wawancara`, `catatan`) VALUES
+(3, 4, 4, 'diterima', '5', 'Perilaku Baik, Hafiz Qur\'ann', 'Layak Masuk'),
+(4, 2, 5, 'diterima', '2', 'Bagus', 'Layak Masuk'),
+(5, 6, 4, 'diterima', '6', 'Bagus', 'Ok'),
+(6, 10, 4, 'diterima', '6', 'OK', 'OK');
 
 -- --------------------------------------------------------
 
@@ -300,7 +402,8 @@ CREATE TABLE `tb_mapel` (
 --
 
 INSERT INTO `tb_mapel` (`id_mapel`, `id_gelombang`, `nama_mapel`, `jml_soal`, `tampil_soal`, `bobot_soal`, `status_soal`) VALUES
-(0, 1, 'Ujian Gel 1', 10, 10, 100, 'non aktif');
+(2, 2, 'Ujian Akademik 2', 11, 3, 100, 'aktif'),
+(4, 1, 'Ujian Akademik 1', 20, 10, 100, 'aktif');
 
 -- --------------------------------------------------------
 
@@ -315,6 +418,13 @@ CREATE TABLE `tb_mutasi` (
   `isi_mutasi` text NOT NULL,
   `status_mutasi` set('pindah','diterima') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_mutasi`
+--
+
+INSERT INTO `tb_mutasi` (`id_mutasi`, `id_pendaftaran`, `tgl_mutasi`, `isi_mutasi`, `status_mutasi`) VALUES
+(1, 4, '2020-07-09', 'Pindah Sekolah Swasta SMK Muh 1 Solo', 'pindah');
 
 -- --------------------------------------------------------
 
@@ -425,11 +535,11 @@ CREATE TABLE `tb_pendaftaran` (
 --
 
 INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `id_gelombang`, `tgl_pendaftaran`, `no_pendaftaran`, `status`, `nama_siswa`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `no_hp`, `email`, `agama`, `nik`, `asal_sekolah`, `username`, `password`, `pil_1`, `pil_2`, `pil_3`) VALUES
-(2, 1, '2020-01-08', '2021-01-001', 'aktif', 'ANDIKA DWI SURA SAPUTRA', 'L', 'KARANGANYAR', '2005-03-05', '089765748323', 'andika.dwi@gmail.com', 'Hindu', '4534536364572545', 'MTS NEGERI 5 KARANGANYAR', 'andika', '7e51eea5fa101ed4dade9ad3a7a072bb', 'TEKNIK ELEKTRONIKA INDUSTRI', 'MULTIMEDIA', 'TEKNIK BODI OTOMOTIF'),
-(3, 1, '2020-01-15', '2021-01-010', 'aktif', 'ADI NUGROHO', 'L', 'KARANGANYAR', '2005-02-11', '097834257634', 'adi.nugroho@gmail.com', 'Islam', '436534634654374774', 'SMP NEGERI 2 JATIYOSO', 'adi', 'c46335eb267e2e1cde5b017acb4cd799', 'TEKNIK DAN BISNIS SEPEDA MOTOR', 'MULTIMEDIA', 'TEKNIK BODI OTOMOTIF'),
-(4, 2, '2020-03-16', '2021-02-112', 'aktif', 'GHANY RIZKYA TSANI PUTRA', 'L', 'KARANGANYAR', '2004-06-03', '098745463723', 'ghany.rizkya@gmail.com', 'Islam', '65362632456576534', 'SMP N 5 KARANGANYAR', 'ghany', 'a348bdd441995aef057a66ed8f3b1cc6', 'MULTIMEDIA', 'TEKNIK KENDARAAN RINGAN OTOMOTIF', 'TEKNIK DAN BISNIS SEPEDA MOTOR'),
-(6, 3, '2020-06-09', '2021-03-180', 'aktif', 'NIA NOVY ANA', 'P', 'JEPARA', '2004-11-24', '098734242345', 'nia.novy@gmail.com', 'Islam', '453453643626245634', 'SMP N 4 JATIYOSO', 'nia', '04a481486dd84d7c8bfdfc89d38136a6', 'MULTIMEDIA', 'TEKNIK ELEKTRONIKA INDUSTRI', 'TEKNIK BODI OTOMOTIF'),
-(10, 1, '2020-07-01', '2020-01-010', 'non aktif', 'Galuh', 'L', 'Karanganyar', '2002-07-08', '098745362718', 'galuh@gmail.com', 'Islam', ' 93248892734896', 'SMP N 2 Karanganyar', 'galuh', '7e67f82b2528050191537b600c15f48e', '5', '6', '4');
+(2, 1, '2020-01-08', '2021-01-001', 'aktif', 'ANDIKA DWI SURA SAPUTRA', 'L', 'KARANGANYAR', '2005-03-05', '089765748323', 'andika.dwi@gmail.com', 'Hindu', '4534536364572545', 'MTS NEGERI 5 KARANGANYAR', 'andika', '7e51eea5fa101ed4dade9ad3a7a072bb', '2', '3', '4'),
+(3, 1, '2020-01-15', '2021-01-010', 'aktif', 'ADI NUGROHO', 'L', 'KARANGANYAR', '2005-02-11', '097834257634', 'adi.nugroho@gmail.com', 'Islam', '436534634654374774', 'SMP NEGERI 2 JATIYOSO', 'adi', 'c46335eb267e2e1cde5b017acb4cd799', '4', '3', '6'),
+(4, 2, '2020-03-16', '2021-02-112', 'aktif', 'GHANY RIZKYA TSANI PUTRA', 'L', 'KARANGANYAR', '2004-06-03', '098745463723', 'ghany.rizkya@gmail.com', 'Islam', '65362632456576534', 'SMP N 5 KARANGANYAR', 'ghany', 'a348bdd441995aef057a66ed8f3b1cc6', '5', '2', '3'),
+(6, 3, '2020-06-09', '2021-03-180', 'aktif', 'NIA NOVY ANA', 'P', 'JEPARA', '2004-11-24', '098734242345', 'nia.novy@gmail.com', 'Islam', '453453643626245634', 'SMP N 4 JATIYOSO', 'nia', '04a481486dd84d7c8bfdfc89d38136a6', '6', '2', '4'),
+(10, 1, '2020-07-01', '2020-01-010', 'non aktif', 'Galuh', 'L', 'Karanganyar', '2002-07-08', '098745362718', 'galuh@gmail.com', 'Islam', ' 93248892734896', 'SMP N 2 Karanganyar', 'galuh', '7e67f82b2528050191537b600c15f48e', '6', '6', '4');
 
 -- --------------------------------------------------------
 
@@ -444,6 +554,17 @@ CREATE TABLE `tb_pengembangan` (
   `id_gelombang` int(10) NOT NULL,
   `id_jurusan` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_pengembangan`
+--
+
+INSERT INTO `tb_pengembangan` (`id_pengembangan`, `nama_pengembangan`, `biaya_pengembangan`, `id_gelombang`, `id_jurusan`) VALUES
+(1, 'Biaya Pengembangan TKRO', 3500000, 1, 2),
+(3, 'Biaya Pengembangan TEI', 3211000, 1, 5),
+(5, 'Biaya Pengembangan MM', 3450000, 1, 6),
+(6, 'Biaya Pengembangan TBSM', 2950000, 1, 3),
+(7, 'Biaya Pengembangan TBO', 4320000, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -518,6 +639,13 @@ CREATE TABLE `tb_pilih_kelas` (
   `status_pilih_kelas` set('aktif','non aktif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_pilih_kelas`
+--
+
+INSERT INTO `tb_pilih_kelas` (`id_pilih_kelas`, `nama_pilih_kelas`, `id_kelas`, `id_siswa`, `status_pilih_kelas`) VALUES
+(1, 'TKRO', 3, 1, 'aktif');
+
 -- --------------------------------------------------------
 
 --
@@ -570,6 +698,17 @@ CREATE TABLE `tb_seragam` (
   `id_jurusan` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_seragam`
+--
+
+INSERT INTO `tb_seragam` (`id_seragam`, `nama_seragam`, `biaya_seragam`, `id_gelombang`, `id_jurusan`) VALUES
+(1, 'Biaya Seragam TKRO', 3500000, 1, 2),
+(3, 'Biaya Seragam MM', 2500000, 1, 6),
+(4, 'Biaya Seragam TEI', 4500000, 1, 5),
+(5, 'Biaya Seragam TBSM', 2300000, 1, 3),
+(6, 'Biaya Seragam TBO', 3240000, 1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -601,7 +740,7 @@ CREATE TABLE `tb_siswa` (
 INSERT INTO `tb_siswa` (`id_siswa`, `id_pendaftaran`, `nisn`, `sis_dukuh`, `sis_rt`, `sis_rw`, `sis_kelurahan`, `sis_kecamatan`, `sis_kabupaten`, `sis_provinsi`, `seri_ijasah_smp`, `seri_skhun_smp`, `no_un_smp`, `pas_photo`, `status`) VALUES
 (1, 2, '98789999', 'Gatak', '1', '5', 'Madegondo', 'Grogol', 'Sukoharjo', 'Jateng', '823782376273', '3434', '34638648', '', 'aktif'),
 (5, 3, '909090', 'Jat', '1', '2', 'So', 'M', 'Kr', 'Jateng', '98', '989', '98989', '', 'aktif'),
-(6, 4, '090909', 'baki dd', '1', '3', 'Jaten', 'baru', 'Karanganyar', 'mmnm', '83686', '43434', '', 'read-2841722_640.jpg', 'aktif');
+(6, 4, '090909', 'baki dd', '1', '3', 'Jaten', 'baru', 'Karanganyar', 'mmnm', '83686', '43434', '', '', 'aktif');
 
 -- --------------------------------------------------------
 
@@ -643,6 +782,15 @@ CREATE TABLE `tb_spp` (
   `id_jurusan` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_spp`
+--
+
+INSERT INTO `tb_spp` (`id_spp`, `nama_spp`, `biaya_spp`, `id_gelombang`, `id_jurusan`) VALUES
+(1, 'Biaya SPP TKRO', 1250000, 1, 2),
+(2, 'Biaya SPP MM', 3500000, 1, 6),
+(3, 'Biaya SPP TEI', 2350000, 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -661,6 +809,14 @@ CREATE TABLE `tb_ujian` (
   `status_ujian` set('aktif','non aktif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_ujian`
+--
+
+INSERT INTO `tb_ujian` (`id_ujian`, `id_mapel`, `kkm_ujian`, `durasi_ujian`, `tgl_buka_ujian`, `tgl_tutup_ujian`, `waktu_buka_ujian`, `waktu_tutup_ujian`, `status_ujian`) VALUES
+(1, 4, 75, '00:00:30', '2020-07-06', '2020-07-08', '06:41:00', '06:41:00', 'aktif'),
+(2, 4, 40, '00:00:30', '2020-07-07', '2020-07-20', '07:00:00', '07:00:00', 'non aktif');
+
 -- --------------------------------------------------------
 
 --
@@ -675,6 +831,68 @@ CREATE TABLE `tb_wawancara` (
   `status` set('aktif','non aktif') NOT NULL,
   `id_jurusan` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_wawancara`
+--
+
+INSERT INTO `tb_wawancara` (`id_wawancara`, `nama_wawancara`, `kriteria_wawancara`, `ket_wawancara`, `status`, `id_jurusan`) VALUES
+(2, 'Fisik Bertato', 'Fisik Tubuh', 'tidak diterima', 'aktif', 2),
+(3, 'Buta Warna', 'Buta Warna', 'tidak diterima', 'aktif', 6),
+(4, 'min 165 cm', 'Tinggi Badan', 'diterima', 'aktif', 3),
+(5, 'Buta Warna Parsial', 'Buta Warna', 'diterima', 'aktif', 2),
+(6, 'Tidak Buta Warna', 'Buta Warna', 'diterima', 'aktif', 2),
+(7, 'Tidak Buta Warna', 'Buta Warna', 'diterima', 'aktif', 3),
+(8, 'Patah Tulang Tangan', 'Patah Tulang', 'tidak diterima', 'non aktif', 5),
+(9, 'Tidak Buta Warna', 'Buta Warna', 'diterima', 'aktif', 5),
+(10, 'Tidak Buta Warna', 'Buta Warna', 'diterima', 'aktif', 4),
+(11, 'Badan Bertatto', 'Fisik Tubuh', 'tidak diterima', 'aktif', 6),
+(12, 'Tidak Bertatto', 'Fisik', 'diterima', 'aktif', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `biaya_pendaftaran`
+--
+DROP TABLE IF EXISTS `biaya_pendaftaran`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `biaya_pendaftaran`  AS  select `a`.`id_biaya_pendaftaran` AS `id_biaya_pendaftaran`,`a`.`nama_pendaftaran` AS `nama_pendaftaran`,`a`.`biaya_pendaftaran` AS `biaya_pendaftaran`,`a`.`id_gelombang` AS `id_gelombang`,`a`.`id_jurusan` AS `id_jurusan`,`b`.`nama_gelombang` AS `nama_gelombang`,`c`.`kompetensi_keahlian` AS `kompetensi_keahlian` from ((`tb_biaya_pendaftaran` `a` join `tb_gelombang` `b` on((`a`.`id_gelombang` = `b`.`id_gelombang`))) join `tb_jurusan` `c` on((`c`.`id_jurusan` = `a`.`id_jurusan`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `biaya_pengembangan`
+--
+DROP TABLE IF EXISTS `biaya_pengembangan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `biaya_pengembangan`  AS  select `a`.`id_pengembangan` AS `id_pengembangan`,`a`.`nama_pengembangan` AS `nama_pengembangan`,`a`.`biaya_pengembangan` AS `biaya_pengembangan`,`a`.`id_gelombang` AS `id_gelombang`,`a`.`id_jurusan` AS `id_jurusan`,`b`.`nama_gelombang` AS `nama_gelombang`,`c`.`kompetensi_keahlian` AS `kompetensi_keahlian` from ((`tb_pengembangan` `a` join `tb_gelombang` `b` on((`b`.`id_gelombang` = `a`.`id_gelombang`))) join `tb_jurusan` `c` on((`c`.`id_jurusan` = `a`.`id_jurusan`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `biaya_seragam`
+--
+DROP TABLE IF EXISTS `biaya_seragam`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `biaya_seragam`  AS  select `a`.`id_seragam` AS `id_seragam`,`a`.`nama_seragam` AS `nama_seragam`,`a`.`biaya_seragam` AS `biaya_seragam`,`a`.`id_gelombang` AS `id_gelombang`,`a`.`id_jurusan` AS `id_jurusan`,`b`.`nama_gelombang` AS `nama_gelombang`,`c`.`kompetensi_keahlian` AS `kompetensi_keahlian` from ((`tb_seragam` `a` join `tb_gelombang` `b` on((`b`.`id_gelombang` = `a`.`id_gelombang`))) join `tb_jurusan` `c` on((`c`.`id_jurusan` = `a`.`id_jurusan`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `biaya_spp`
+--
+DROP TABLE IF EXISTS `biaya_spp`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `biaya_spp`  AS  select `a`.`id_spp` AS `id_spp`,`a`.`nama_spp` AS `nama_spp`,`a`.`biaya_spp` AS `biaya_spp`,`a`.`id_gelombang` AS `id_gelombang`,`a`.`id_jurusan` AS `id_jurusan`,`b`.`nama_gelombang` AS `nama_gelombang`,`c`.`kompetensi_keahlian` AS `kompetensi_keahlian` from ((`tb_spp` `a` join `tb_gelombang` `b` on((`b`.`id_gelombang` = `a`.`id_gelombang`))) join `tb_jurusan` `c` on((`c`.`id_jurusan` = `a`.`id_jurusan`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `buat_wawancara`
+--
+DROP TABLE IF EXISTS `buat_wawancara`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `buat_wawancara`  AS  select `a`.`id_wawancara` AS `id_wawancara`,`a`.`nama_wawancara` AS `nama_wawancara`,`a`.`kriteria_wawancara` AS `kriteria_wawancara`,`a`.`ket_wawancara` AS `ket_wawancara`,`a`.`status` AS `status`,`a`.`id_jurusan` AS `id_jurusan`,`b`.`kompetensi_keahlian` AS `kompetensi_keahlian` from (`tb_wawancara` `a` join `tb_jurusan` `b` on((`b`.`id_jurusan` = `a`.`id_jurusan`))) ;
 
 -- --------------------------------------------------------
 
@@ -787,16 +1005,34 @@ ALTER TABLE `tb_mutasi`
   ADD KEY `id_pendaftaran` (`id_pendaftaran`);
 
 --
+-- Indexes for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  ADD PRIMARY KEY (`id_nilai`);
+
+--
 -- Indexes for table `tb_orang_tua`
 --
 ALTER TABLE `tb_orang_tua`
   ADD PRIMARY KEY (`id_orang_tua`);
 
 --
+-- Indexes for table `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`);
+
+--
 -- Indexes for table `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
   ADD PRIMARY KEY (`id_pendaftaran`);
+
+--
+-- Indexes for table `tb_pengembangan`
+--
+ALTER TABLE `tb_pengembangan`
+  ADD PRIMARY KEY (`id_pengembangan`);
 
 --
 -- Indexes for table `tb_pengumuman`
@@ -819,10 +1055,22 @@ ALTER TABLE `tb_pilih_kelas`
   ADD KEY `tb_pilih_kelas_ibfk_4` (`id_siswa`);
 
 --
+-- Indexes for table `tb_potongan`
+--
+ALTER TABLE `tb_potongan`
+  ADD PRIMARY KEY (`id_potongan`);
+
+--
 -- Indexes for table `tb_prestasi`
 --
 ALTER TABLE `tb_prestasi`
   ADD PRIMARY KEY (`id_prestasi`);
+
+--
+-- Indexes for table `tb_seragam`
+--
+ALTER TABLE `tb_seragam`
+  ADD PRIMARY KEY (`id_seragam`);
 
 --
 -- Indexes for table `tb_siswa`
@@ -830,6 +1078,30 @@ ALTER TABLE `tb_prestasi`
 ALTER TABLE `tb_siswa`
   ADD PRIMARY KEY (`id_siswa`),
   ADD KEY `tb_siswa_ibfk_1` (`id_pendaftaran`);
+
+--
+-- Indexes for table `tb_soal`
+--
+ALTER TABLE `tb_soal`
+  ADD PRIMARY KEY (`id_soal`);
+
+--
+-- Indexes for table `tb_spp`
+--
+ALTER TABLE `tb_spp`
+  ADD PRIMARY KEY (`id_spp`);
+
+--
+-- Indexes for table `tb_ujian`
+--
+ALTER TABLE `tb_ujian`
+  ADD PRIMARY KEY (`id_ujian`);
+
+--
+-- Indexes for table `tb_wawancara`
+--
+ALTER TABLE `tb_wawancara`
+  ADD PRIMARY KEY (`id_wawancara`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -842,16 +1114,58 @@ ALTER TABLE `tb_berkas_siswa`
   MODIFY `id_berkas_siswa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tb_biaya_pendaftaran`
+--
+ALTER TABLE `tb_biaya_pendaftaran`
+  MODIFY `id_biaya_pendaftaran` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tb_hasil_wawancara`
+--
+ALTER TABLE `tb_hasil_wawancara`
+  MODIFY `id_hasil_wawancara` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tb_mapel`
+--
+ALTER TABLE `tb_mapel`
+  MODIFY `id_mapel` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_mutasi`
+--
+ALTER TABLE `tb_mutasi`
+  MODIFY `id_mutasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  MODIFY `id_nilai` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tb_orang_tua`
 --
 ALTER TABLE `tb_orang_tua`
   MODIFY `id_orang_tua` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  MODIFY `id_pembayaran` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
   MODIFY `id_pendaftaran` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tb_pengembangan`
+--
+ALTER TABLE `tb_pengembangan`
+  MODIFY `id_pengembangan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_pengumuman`
@@ -869,7 +1183,13 @@ ALTER TABLE `tb_personal`
 -- AUTO_INCREMENT for table `tb_pilih_kelas`
 --
 ALTER TABLE `tb_pilih_kelas`
-  MODIFY `id_pilih_kelas` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pilih_kelas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_potongan`
+--
+ALTER TABLE `tb_potongan`
+  MODIFY `id_potongan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_prestasi`
@@ -878,10 +1198,40 @@ ALTER TABLE `tb_prestasi`
   MODIFY `id_prestasi` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_seragam`
+--
+ALTER TABLE `tb_seragam`
+  MODIFY `id_seragam` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tb_siswa`
 --
 ALTER TABLE `tb_siswa`
   MODIFY `id_siswa` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tb_soal`
+--
+ALTER TABLE `tb_soal`
+  MODIFY `id_soal` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tb_spp`
+--
+ALTER TABLE `tb_spp`
+  MODIFY `id_spp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_ujian`
+--
+ALTER TABLE `tb_ujian`
+  MODIFY `id_ujian` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tb_wawancara`
+--
+ALTER TABLE `tb_wawancara`
+  MODIFY `id_wawancara` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
